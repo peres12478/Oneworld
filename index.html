@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#08192c">
+  <meta name="description" content="Explora las Frutas del Diablo con Luffy o Gol D. Roger usando WASD, búsqueda y datos de Devil Fruits Tracker.">
+  <title>Grand Line Explorer · One Piece</title>
+  <!-- Tailwind vía CDN: la decoración básica también tiene CSS local como respaldo. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/room.css">
+  <link rel="stylesheet" href="css/rig.css">
+  <link rel="stylesheet" href="css/thinking.css">
+  <link rel="stylesheet" href="css/audio.css">
+  <link rel="stylesheet" href="css/islands.css">
+  <link rel="stylesheet" href="css/abilities.css">
+  <link rel="stylesheet" href="css/door-puzzle.css">
+  <!-- Scripts clásicos con defer, NO type=module: funcionan abriendo index.html con file:// -->
+  <script src="js/config.js" defer></script>
+  <script src="js/island-data.js" defer></script>
+  <script src="js/island-art.js" defer></script>
+  <script src="js/characters-api.js" defer></script>
+  <script src="js/character-descriptions.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/media.js" defer></script>
+  <script src="js/world.js" defer></script>
+  <script src="js/room-animation.js" defer></script>
+  <script src="js/abilities.js" defer></script>
+  <script src="js/door-puzzle.js" defer></script>
+  <script src="js/room.js" defer></script>
+  <script src="js/poses.js" defer></script>
+  <script src="js/movement.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/islands.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <div class="ambient-noise" aria-hidden="true"></div>
+  <main id="app">
+    <!-- PANTALLA 1: selección de personaje -->
+    <section id="select-screen" class="select-screen min-h-screen flex flex-col relative overflow-hidden">
+      <div class="selection-stars" aria-hidden="true"></div>
+      <header class="selection-topbar flex items-center justify-between gap-4">
+        <div class="brand-lockup">
+          <span class="brand-emblem">☠</span>
+          <span>GRAND LINE <strong>EXPLORER</strong></span>
+        </div>
+        <div class="edition-pill"><span class="online-spark"></span> EDICIÓN DE AVENTURA · 01</div>
+      </header>
+
+      <div class="selection-content mx-auto w-full">
+        <div class="eyebrow-title"><span class="tiny-line"></span> UNA AVENTURA POR COMENZAR <span class="tiny-line"></span></div>
+        <h1 class="hero-title">ELIGE A TU <em>LEYENDA</em></h1>
+        <p class="hero-subtitle">Dos piratas. Un océano de misterios. Explora las Frutas del Diablo y viaja por las islas de One Piece.</p>
+
+        <div class="character-grid grid grid-cols-1 sm:grid-cols-2 gap-5" id="character-grid">
+          <button class="character-card card-luffy group" type="button" data-character="luffy" aria-label="Jugar con Monkey D. Luffy">
+            <span class="character-ornament">01 / SOMBRERO DE PAJA</span>
+            <span class="character-halo"></span>
+            <img src="assets/luffy.png" alt="Ilustración enviada de Luffy" class="character-preview luffy-preview" draggable="false">
+            <span class="character-card-bottom">
+              <span><small>EL FUTURO REY</small><strong>MONKEY D. LUFFY</strong></span>
+              <span class="character-enter" aria-hidden="true">↗</span>
+            </span>
+          </button>
+          <button class="character-card card-roger group" type="button" data-character="roger" aria-label="Jugar con Gol D. Roger">
+            <span class="character-ornament">02 / EL REY DE LOS PIRATAS</span>
+            <span class="character-halo"></span>
+            <img src="assets/roger.png" alt="Ilustración enviada de Gol D. Roger" class="character-preview roger-preview" draggable="false">
+            <span class="character-card-bottom">
+              <span><small>LA LEYENDA ORIGINAL</small><strong>GOL D. ROGER</strong></span>
+              <span class="character-enter" aria-hidden="true">↗</span>
+            </span>
+          </button>
+        </div>
+        <div class="selection-footer flex flex-wrap items-center justify-center gap-4">
+          <span><span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> Moverse</span>
+          <span class="footer-dot">✦</span>
+          <span><span class="kbd">W</span> Saltar en la sala</span>
+          <span class="footer-dot">✦</span>
+          <span><span class="kbd">E</span> Entrar por la puerta</span>
+          <span class="footer-dot">✦</span>
+          <span><span class="kbd">F</span> Habilidad especial</span>
+        </div>
+      </div>
+      <div class="selection-wave" aria-hidden="true"></div>
+    </section>
+
+
+    <!-- PANTALLA 2: sala lateral de plataformas: solo izquierda/derecha y salto. -->
+    <section id="room-screen" class="room-screen hidden min-h-screen relative overflow-hidden">
+      <header class="room-topbar flex items-center justify-between gap-4">
+        <div class="brand-lockup"><span class="brand-emblem">☠</span><span>GRAND LINE <strong>EXPLORER</strong></span></div>
+        <div class="room-breadcrumb"><span class="room-live-mark"></span> SALA DE LOS EXPLORADORES <span class="room-breadcrumb-divider">/</span> ACTO I</div>
+        <button id="room-change-character" class="ui-button ghost-button" type="button">↩ CAMBIAR PERSONAJE</button>
+      </header>
+      <div class="room-title-panel">
+        <span class="room-eyebrow">CAPÍTULO 01 · EL PRIMER PASO</span>
+        <h2>ENCUENTRA <em>LA PUERTA.</em></h2>
+        <p>Explora la sala y descubre dos puertas: Frutas del Diablo y el nuevo mundo de Islas y Personajes.</p>
+      </div>
+      <div id="room-viewport" class="room-viewport" tabindex="0" aria-label="Escenario lateral 2D. A y D para moverse, W para saltar">
+        <div class="room-moon"></div>
+        <div class="room-distant-mountains"></div>
+        <div class="room-mist"></div>
+        <div id="room-camera" class="room-camera">
+          <div id="room-world" class="room-world">
+            <div class="room-hanging-stars"></div>
+            <div class="room-back-pillars"></div>
+            <div class="room-floor"></div>
+            <div class="room-platform platform-one"></div><div class="room-platform platform-two"></div>
+            <div class="room-platform platform-three"></div><div class="room-platform platform-four"></div>
+            <div class="room-arch room-arch-one"></div><div class="room-arch room-arch-two"></div><div class="room-arch room-arch-three"></div>
+            <div class="room-door-scene room-door-characters" aria-label="Puerta al mundo de islas y personajes">
+              <div class="portal-light"></div>
+              <span class="portal-caption">ISLAS Y PERSONAJES</span>
+              <div class="portal-frame"><div class="portal-inner"><div class="portal-glyph">♜</div></div></div>
+              <div class="portal-step"></div>
+            </div>
+            <div class="room-door-scene room-door-fruits" aria-label="Puerta al mundo de las frutas del diablo">
+              <div class="portal-light"></div>
+              <span class="portal-caption">FRUTAS DEL DIABLO</span>
+              <div class="portal-frame"><div class="portal-inner"><div class="portal-glyph">✧</div></div></div>
+              <div class="portal-step"></div>
+            </div>
+            <div id="room-player" class="room-player rig-idle" data-character="luffy">
+              <div class="room-player-ground-shadow"></div>
+              <div class="room-rig">
+                <img data-rig="leg-left" src="assets/luffy-leg-left.png" alt="" draggable="false">
+                <img data-rig="leg-right" src="assets/luffy-leg-right.png" alt="" draggable="false">
+                <img data-rig="arm-left" src="assets/luffy-arm-left.png" alt="" draggable="false">
+                <img data-rig="arm-right" src="assets/luffy-arm-right.png" alt="" draggable="false">
+                <img data-rig="body" src="assets/luffy-body.png" alt="" draggable="false">
+              </div>
+              <span class="room-player-caption">AVENTURERO</span>
+            </div>
+          </div>
+        </div>
+        <div class="room-hud-bottom">
+          <span><kbd>A</kbd> <kbd>D</kbd> CAMINAR</span>
+          <span><kbd>W</kbd> <kbd>ESPACIO</kbd> SALTAR</span>
+          <span><kbd>SHIFT</kbd> CORRER</span>
+          <span><kbd>F</kbd> HABILIDAD</span>
+          <span class="room-distance">PUERTA A <b id="room-distance">120 m</b></span>
+        </div>
+        <div id="room-door-hint" class="room-door-hint hidden">
+          <span id="room-door-hint-caption">✦ PUERTA DESCUBIERTA</span>
+          <strong id="room-door-title">FRUTAS DEL DIABLO</strong>
+          <button type="button" id="room-enter-button">PULSA E PARA ENTRAR ↗</button>
+        </div>
+        <div class="room-mobile-controls" aria-label="Controles táctiles de la sala">
+          <button data-room-key="a" aria-label="Izquierda">◀</button>
+          <button data-room-key="d" aria-label="Derecha">▶</button>
+          <button data-room-key="w" aria-label="Saltar">↑</button>
+          <button id="room-attack-button" aria-label="Usar habilidad F">F</button>
+        </div>
+      </div>
+<!-- Rompecabezas: dos clics intercambian dos fragmentos de la puerta.
+     Si el jugador cierra, la puerta SIGUE rota hasta repararla. -->
+<div id="door-puzzle-modal" class="door-puzzle-modal hidden" role="dialog" aria-modal="true" aria-labelledby="door-puzzle-title" aria-hidden="true">
+  <div class="door-puzzle-backdrop"></div>
+  <div class="door-puzzle-panel">
+    <button id="door-puzzle-close" class="door-puzzle-close" type="button" aria-label="Cerrar rompecabezas">×</button>
+    <p class="door-puzzle-eyebrow">✦ EASTER EGG DESBLOQUEADO</p>
+    <h2 id="door-puzzle-title">RECONSTRUYE <em>LA PUERTA</em></h2>
+    <p id="door-puzzle-description">El ataque rompió el portal. Ordena los nueve fragmentos para repararlo.</p>
+    <div class="door-puzzle-content">
+      <div id="door-puzzle-grid" class="door-puzzle-grid" aria-label="Rompecabezas de nueve piezas"></div>
+      <div class="door-puzzle-aside">
+        <span>ASÍ DEBE QUEDAR</span>
+        <div class="door-puzzle-reference" aria-label="Imagen de referencia de la puerta"></div>
+        <p>Selecciona una pieza y después otra para intercambiar sus posiciones.</p>
+        <strong id="door-puzzle-moves">0 MOVIMIENTOS</strong>
+        <button id="door-puzzle-shuffle" class="door-puzzle-shuffle" type="button">↻ MEZCLAR DE NUEVO</button>
+        <button id="door-puzzle-later" class="door-puzzle-later" type="button">REPARAR DESPUÉS</button>
+      </div>
+    </div>
+    <p id="door-puzzle-message" class="door-puzzle-message" role="status" aria-live="polite">La puerta permanece cerrada hasta completar el rompecabezas.</p>
+  </div>
+</div>
+<footer class="room-footer"><span>GRAND LINE · EL COMIENZO DE TU HISTORIA</span><span>DOS PORTALES ESPERAN EN LA SALA DE AVENTURAS</span></footer>
+    </section>
+
+
+    <!-- PANTALLA 3: solo ISLAS. Todavía no aparecen personajes. -->
+    <section id="islands-screen" class="islands-screen hidden min-h-screen">
+      <header class="islands-topbar flex items-center justify-between gap-3">
+        <div class="brand-lockup"><span class="brand-emblem">☠</span><span>GRAND LINE <strong>EXPLORER</strong></span></div>
+        <span class="island-header-caption">EL ARCHIPIÉLAGO DE LAS LEYENDAS</span>
+        <button id="islands-leave" class="ui-button ghost-button" type="button">← VOLVER A LA SALA</button>
+      </header>
+      <div class="islands-main">
+        <div class="islands-hero">
+          <div class="islands-eyebrow">✦ ARCHIVO DE VIAJES · MUNDO DE ONE PIECE</div>
+          <h2>ELIGE TU <em>ISLA.</em></h2>
+          <p>Primero elige el destino. Los personajes y sus fichas aparecerán cuando entres a cada territorio.</p>
+          <div class="islands-tools">
+            <label class="islands-search"><span>⌕</span><input id="islands-filter" type="search" placeholder="Busca una isla: Wano, Dressrosa, Egghead..." aria-label="Buscar una isla"></label>
+            <span id="characters-status" class="characters-status loading"><span class="status-dot"></span><span id="characters-status-text">CONSULTANDO LA API...</span></span>
+            <button id="characters-retry" class="ui-button primary-button hidden" type="button">↻ REINTENTAR</button>
+          </div>
+          <p id="islands-error-text" class="islands-small-notice" aria-live="polite">Los nombres y escenarios de las islas organizan el juego; las fichas de personajes se obtienen de la API.</p>
+          <div class="islands-count-line"><span id="island-result-label">24 ISLAS Y TERRITORIOS</span><span>ELIGE UN DESTINO PARA CONOCER A SUS PERSONAJES</span></div>
+        </div>
+        <div id="island-grid" class="island-grid" aria-live="polite"></div>
+      </div>
+      <footer class="islands-footer">GRAND LINE · ARCHIPIÉLAGO INTERACTIVO <span>LAS ASOCIACIONES DE PERSONAJES SON EDITORIALES; LAS FICHAS VIENEN DE LA API</span></footer>
+    </section>
+
+    <!-- PANTALLA 4: dentro de UNA isla. Aquí sí aparecen personajes. -->
+    <section id="island-scene-screen" class="island-scene-screen hidden min-h-screen">
+      <header class="island-scene-topbar flex items-center justify-between gap-3">
+        <div><div class="islands-eyebrow">✦ DESTINO DESCUBIERTO <span id="island-region"></span></div><h2 id="island-name">Wano</h2><p id="island-subtitle"></p></div>
+        <button id="island-scene-back" type="button" class="ui-button ghost-button">← TODAS LAS ISLAS</button>
+      </header>
+      <div class="island-stats-line"><span id="island-characters-counter">CONSULTANDO PERSONAJES...</span><span>CAMINA PARA DESCUBRIR SUS HISTORIAS</span></div>
+      <div id="island-scene-viewport" class="island-scene-viewport" tabindex="0" aria-label="Isla interactiva. A y D para moverte, E para inspeccionar personajes">
+        <div id="island-backdrop-art" class="island-backdrop-art" aria-hidden="true"></div>
+        <div class="island-stage-clouds" aria-hidden="true"></div>
+        <div id="island-walking-track" class="island-walking-track">
+          <div class="island-ground"></div>
+          <div id="character-stand-layer" class="character-stand-layer"></div>
+          <div id="island-explorer" class="island-explorer"><div class="island-explorer-shadow"></div><img id="island-character-avatar" src="assets/luffy.png" alt="Personaje explorador" draggable="false"><span id="island-character-name">LUFFY</span></div>
+        </div>
+        <div class="island-stage-hud"><span><kbd>A</kbd><kbd>D</kbd> CAMINAR</span><span><kbd>SHIFT</kbd> CORRER</span><span><kbd>E</kbd> INSPECCIONAR</span><span><kbd>ESC</kbd> REGRESAR</span></div>
+        <div id="island-inspect-hint" class="island-inspect-hint hidden"><span id="island-near-name"></span><button id="island-inspect-button" type="button">E · CONOCER PERSONAJE ↗</button></div>
+        <div class="island-mobile-controls" aria-label="Controles móviles"><button data-island-key="a" type="button">◀</button><button data-island-key="d" type="button">▶</button></div>
+      </div>
+      <div class="island-underbar"><span id="island-stage-message">Explora la isla.</span><span>PERFILES CONSULTADOS DESDE UNA API REST</span></div>
+      <div id="character-detail" class="character-detail hidden" role="dialog" aria-modal="true" aria-label="Ficha del personaje">
+        <div id="character-detail-backdrop" class="character-detail-backdrop"></div>
+        <aside class="character-detail-panel">
+          <button type="button" id="character-profile-close" class="close-round island-close" aria-label="Cerrar ficha">×</button>
+          <div id="profile-photo" class="profile-photo"></div>
+          <p class="profile-eyebrow">✦ PERSONAJE DE ONE PIECE</p>
+          <h3 id="profile-name">PERSONAJE</h3>
+          <p id="profile-region" class="profile-region"></p>
+          <p id="profile-link-type" class="profile-association"></p>
+          <section class="profile-biography" aria-label="Descripción del personaje">
+            <div class="profile-biography-heading"><span>✦ SOBRE ESTE PERSONAJE</span><span id="profile-description-source" class="profile-biography-source"></span></div>
+            <p id="profile-description" class="profile-biography-text"></p>
+          </section>
+          <div class="profile-data-grid">
+            <div><small>ORIGEN (API)</small><strong id="profile-origin"></strong></div>
+            <div><small>AFILIACIÓN (API)</small><strong id="profile-affiliation"></strong></div>
+            <div><small>OCUPACIÓN (API)</small><strong id="profile-occupation"></strong></div>
+            <div><small>PRIMERA APARICIÓN (API)</small><strong id="profile-debut"></strong></div>
+            <div><small>ESTADO (API)</small><strong id="profile-status"></strong></div>
+            <div><small>EDAD (API)</small><strong id="profile-age"></strong></div>
+            <div class="profile-bounty"><small>RECOMPENSA (API)</small><strong id="profile-bounty"></strong></div>
+          </div>
+          <p class="profile-source-notice">Los datos de esta ficha vienen de One Piece API. Su asociación a la isla es una decisión editorial del juego, excepto cuando el origen coincide con el indicado por la API.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PANTALLA 5: mundo cenital del catálogo de frutas -->
+
+    <section id="game-screen" class="game-screen hidden">
+      <header class="game-header flex items-center justify-between gap-3">
+        <div class="game-brand flex items-center gap-3">
+          <span class="brand-emblem compact">☠</span>
+          <div class="game-brand-copy"><b>GRAND LINE</b><small>DEVIL FRUIT ATLAS</small></div>
+        </div>
+        <div class="game-header-center flex items-center gap-3">
+          <span id="api-status" class="status-chip status-loading" role="status" aria-live="polite"><span class="status-dot"></span><span id="api-status-text">CONECTANDO...</span></span>
+          <span class="count-chip">◈ <span id="fruit-count">0</span> FRUTAS</span>
+        </div>
+        <div class="game-actions flex gap-2">
+          <button id="leave-atlas" type="button" class="ui-button ghost-button">← <span>VOLVER A LA SALA</span></button>
+          <button id="search-button" type="button" class="ui-button primary-button" aria-label="Buscar frutas">⌕ <span>BUSCAR</span> <span class="key-hint">Q</span></button>
+          <button id="change-character" type="button" class="ui-button ghost-button" aria-label="Cambiar personaje">↩ <span>CAMBIAR</span></button>
+        </div>
+      </header>
+
+      <section class="scene-shell">
+        <div id="viewport" class="viewport" tabindex="0" aria-label="Mapa interactivo de frutas, usa WASD para moverte">
+          <div class="viewport-vignette" aria-hidden="true"></div>
+          <div id="world" class="world">
+            <div class="world-waves" aria-hidden="true"></div>
+            <div class="chart-line line-one" aria-hidden="true"></div>
+            <div class="chart-line line-two" aria-hidden="true"></div>
+            <div class="archipelago-title" aria-hidden="true">THE GRAND LINE <span>✳</span> NEW WORLD</div>
+            <div id="island-layer" class="island-layer" aria-hidden="true"></div>
+            <div id="fruit-layer" class="fruit-layer"></div>
+            <div id="player" class="player player-idle" aria-label="Tu personaje">
+              <div class="player-shadow"></div>
+              <div id="player-sprite-wrap" class="player-sprite-wrap">
+                <img id="player-sprite" class="player-sprite" src="assets/luffy.png" alt="" draggable="false">
+                <!-- La pose con hombros, codos y antebrazos se monta desde poses.js -->
+              </div>
+              <span class="question-mark" aria-hidden="true">?</span>
+              <span id="player-name" class="player-name">LUFFY</span>
+              <span class="player-marker" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div id="api-error" class="api-error-panel hidden">
+            <h2>NO SE PUDO CONECTAR CON LA API</h2>
+            <p id="api-error-message">Comprueba tu conexión o intenta de nuevo.</p>
+            <button id="retry-api" type="button" class="ui-button primary-button">↻ REINTENTAR CONEXIÓN</button>
+            <small>No mostramos frutas de demostración ni ilustraciones genéricas como si fueran imágenes documentadas.</small>
+          </div>
+          <div class="scene-top-left">
+            <span class="region-label"><span class="region-symbol">✺</span> EAST BLUE <span class="region-divider">/</span> EXPLORACIÓN LIBRE</span>
+            <span class="hint-subtitle">ACÉRCATE A UNA FRUTA PARA DESCUBRIRLA</span>
+          </div>
+          <div class="scene-right-panel">
+            <div class="compass"><span>N</span><b>✧</b><span>S</span></div>
+            <span id="coords">X 0000 · Y 0000</span>
+          </div>
+          <div id="proximity-notice" class="proximity-notice hidden" aria-live="polite"><span class="notice-symbol">✦</span><span id="proximity-name"></span><span class="notice-action">E · INSPECCIONAR</span></div>
+          <div class="scene-bottom-hud">
+            <div class="hud-portrait"><img id="hud-avatar" src="assets/luffy.png" alt="" /></div>
+            <div class="hud-identity"><small>EXPLORADOR ACTUAL</small><strong id="hud-name">MONKEY D. LUFFY</strong></div>
+            <div class="hud-separator"></div>
+            <div class="hud-controls"><span><kbd>W A S D</kbd> MOVERSE</span><span><kbd>SHIFT</kbd> CORRER</span><span><kbd>Q</kbd> BUSCAR</span><span><kbd>E</kbd> INSPECCIONAR</span></div>
+            <div class="hud-discovered"><small>EXPLORADAS</small><strong id="discovered-count">00</strong></div>
+          </div>
+
+          <!-- Controles para móviles y tabletas -->
+          <div id="touch-controls" class="touch-controls" aria-label="Controles táctiles">
+            <button class="touch-key touch-up" data-key="w" aria-label="Arriba">▲</button>
+            <button class="touch-key touch-left" data-key="a" aria-label="Izquierda">◀</button>
+            <button class="touch-key touch-down" data-key="s" aria-label="Abajo">▼</button>
+            <button class="touch-key touch-right" data-key="d" aria-label="Derecha">▶</button>
+            <button class="touch-key touch-inspect" data-action="inspect" aria-label="Inspeccionar">E</button>
+          </div>
+        </div>
+      </section>
+      <footer class="game-footer"><span>✦ UN MUNDO POR DESCUBRIR</span><span>ONE PIECE · FAN EXPERIENCE</span><button id="reload-api" type="button" aria-label="Volver a cargar los datos">↻ SINCRONIZAR DATOS</button></footer>
+
+      <!-- BÚSQUEDA FLOTANTE: Q la abre y activa el estado de espera del personaje -->
+      <div id="search-backdrop" class="search-backdrop hidden" aria-hidden="true"></div>
+      <div id="search-panel" class="search-panel hidden" role="dialog" aria-modal="true" aria-labelledby="search-heading" aria-hidden="true">
+        <div class="search-panel-heading"><span class="search-eyebrow">✦ CATÁLOGO DE FRUTAS DEL DIABLO</span><button id="close-search" type="button" class="close-round" aria-label="Cerrar búsqueda">×</button></div>
+        <h2 id="search-heading">¿Qué poder estás buscando?</h2>
+        <div class="search-input-wrap"><span class="search-glass">⌕</span><input id="fruit-search" type="search" placeholder="Busca la fruta que quieras..." autocomplete="off" spellcheck="false" aria-label="Busca la fruta que quieras..."><span class="search-esc">ESC</span></div>
+        <div class="search-filters" role="group" aria-label="Filtrar tipos de fruta">
+          <button type="button" class="filter-pill active" data-filter="all">TODAS</button>
+          <button type="button" class="filter-pill" data-filter="Paramecia">PARAMECIA</button>
+          <button type="button" class="filter-pill" data-filter="Zoan">ZOAN</button>
+          <button type="button" class="filter-pill" data-filter="Logia">LOGIA</button>
+        </div>
+        <div class="search-count-line"><span id="search-result-count">0 FRUTAS ENCONTRADAS</span><span>SELECCIONA UNA PARA VIAJAR</span></div>
+        <div id="search-results" class="search-results" aria-live="polite"></div>
+      </div>
+
+      <!-- Duplicado visual pequeño del personaje: mantiene visible el estado "pensando"
+           mientras el buscador tapa el centro del escenario. -->
+      <div id="search-companion" class="search-companion hidden" aria-hidden="true">
+        <span class="companion-question">?</span>
+        <div id="companion-frame" class="companion-frame" data-character="luffy">
+          <img id="companion-sprite" src="assets/luffy.png" alt="">
+          <!-- Avatar real en pose de brazos doblados: poses.js -->
+        </div>
+        <span class="companion-caption">PENSANDO...</span>
+      </div>
+
+      <!-- Información detallada de una fruta -->
+      <div id="detail-backdrop" class="detail-backdrop hidden" aria-hidden="true"></div>
+      <aside id="detail-panel" class="detail-panel hidden" role="dialog" aria-modal="true" aria-label="Información de la fruta" aria-hidden="true">
+        <button id="close-detail" class="close-round detail-close" type="button" aria-label="Cerrar información">×</button>
+        <div class="detail-art"><span class="detail-circle-one"></span><span class="detail-circle-two"></span><div id="detail-image-host" class="detail-image-host"></div></div>
+        <p class="detail-eyebrow">✦ ARCHIVO DE LA GRAND LINE</p>
+        <h2 id="detail-name">Fruta del Diablo</h2>
+        <p id="detail-japanese" class="detail-japanese"></p>
+        <div class="detail-stats"><div><small>CLASIFICACIÓN</small><strong id="detail-type">—</strong></div><div><small>PORTADOR ACTUAL</small><strong id="detail-owner">—</strong></div></div>
+        <div class="detail-extra-stats"><div><small>PORTADOR ANTERIOR</small><strong id="detail-previous-owner">—</strong></div><div><small>PRIMERA APARICIÓN</small><strong id="detail-debut">—</strong></div></div>
+        <div class="detail-description-title">✦ DESCRIPCIÓN DE LA FUENTE (INGLÉS)</div>
+        <p id="detail-description" class="detail-description"></p>
+        <button id="detail-continue" class="detail-continue" type="button">CONTINUAR EXPLORANDO <span>→</span></button>
+      </aside>
+    </section>
+  </main>
+  <!-- Ambient soundtrack retrieved through Wikimedia Commons MediaWiki API.
+       A click is required: no sound automatically starts on page load. -->
+  <aside id="music-dock" class="music-dock" role="group" aria-label="Reproductor de musica ambiental">
+    <button id="music-toggle" class="music-toggle" type="button" aria-label="Reproducir musica" aria-pressed="false">&#9654;</button>
+    <div class="music-info">
+      <div class="music-topline"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span><strong class="music-title">NETHERWORLD SHANTY</strong></div>
+      <small id="music-state" class="music-state" aria-live="polite">Buscando pista en la API...</small>
+      <div class="music-volume-wrap">
+        <span class="music-volume-icon" aria-hidden="true">&#9835;</span>
+        <input id="music-volume" class="music-volume" type="range" min="0" max="100" value="34" aria-label="Volumen de la musica">
+      </div>
+      <a class="music-credit" href="https://commons.wikimedia.org/wiki/File:Netherworld_Shanty_(MacLeod,_Kevin_)_(ISRC_USUAN1100138).oga" target="_blank" rel="noopener noreferrer">Kevin MacLeod &middot; CC BY 3.0</a>
+    </div>
+    <audio id="music-audio" preload="none" loop></audio>
+  </aside>
+</body>
+</html>

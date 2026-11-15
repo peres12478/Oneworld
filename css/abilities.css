@@ -1,0 +1,24 @@
+/* Efectos vectoriales añadidos SOBRE la sala, no son PNGs animados. */
+.room-ability-layer {position:absolute;left:0;top:0;width:3250px;height:560px;z-index:8;pointer-events:none;overflow:visible}
+.rubber-strike {filter:drop-shadow(0 3px 8px #070d1aa8)}
+.sword-strike{filter:drop-shadow(0 0 6px #d5a2f6bb) drop-shadow(0 3px 4px #050e19)}
+.haki-arc{filter:drop-shadow(0 0 12px #a34fff) drop-shadow(0 0 17px #f6d1ff)}
+.haki-core{filter:drop-shadow(0 0 9px #ffe7a4)}
+.haki-spark{filter:drop-shadow(0 0 10px #9156ff)}
+.room-player.luffy-ability .room-rig [data-rig="arm-right"] {opacity:.14;transition:opacity 70ms ease}
+.room-player.roger-ability .room-rig [data-rig="arm-right"] {opacity:.6}
+.room-player.using-ability .room-rig {filter:drop-shadow(0 0 8px #e4c3a633)}
+/* Reacciones visuales y escombros para puertas golpeadas. */
+.room-door-scene .portal-cracks{display:none}
+.room-door-scene.is-broken .portal-frame{
+  filter:brightness(.52) saturate(.45);transform:skew(-5deg) rotate(-5deg);
+  border-color:#5a5a5e!important;box-shadow:0 0 0 7px #1b2837,0 0 18px #fa9a4f69,inset 0 0 40px #09101e!important
+}
+.room-door-scene.is-broken .portal-inner{background:linear-gradient(115deg,#07121f,#213041 52%,#07121f);animation:none}
+.room-door-scene.is-broken .portal-glyph{opacity:.2;animation:none}
+.room-door-scene.is-broken .portal-light{background:#d87c6870;animation:none}
+.room-door-scene.is-broken .portal-cracks{display:block;position:absolute;left:-6px;top:-7px;width:160px;height:245px;z-index:2;filter:drop-shadow(0 0 3px #e49f7a);pointer-events:none}
+.room-door-scene.is-broken .portal-caption{color:#e8a88d!important;text-decoration:line-through}
+.room-door-scene.is-broken::after{content:'PUERTA ROTA · REPARAR CON E';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font:900 13px var(--font-title);color:#ffd1aa;text-shadow:0 3px 10px #000}
+.room-door-scene.just-broken{animation:door-impact .55s ease-out}
+@keyframes door-impact{0%,30%,57%{filter:brightness(2) drop-shadow(0 0 30px #edc4a9);transform:translateX(-8px)}15%,45%{transform:translateX(8px)}100%{filter:none;transform:none}}

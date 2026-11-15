@@ -1,0 +1,140 @@
+/* ===============================================================
+   Mundo de islas y personajes — frontend puro, Tailwind + CSS.
+   El listado presenta ISLAS primero, los personajes solamente
+   aparecen dentro de cada isla.
+   =============================================================== */
+.islands-screen,.island-scene-screen{background:#081b2b;color:#f7e8c9;position:relative;min-height:100dvh}
+.islands-screen:before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 72% 11%,#3e72733c,transparent 50%),radial-gradient(ellipse at 10% 88%,#264f6d51,transparent 50%);z-index:0}
+.islands-topbar,.island-scene-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:4;padding:23px clamp(16px,4.5vw,74px);border-bottom:1px solid #dfc68a21;background:#081929e0}
+.island-header-caption,.islands-eyebrow{font:800 11px var(--font-title);letter-spacing:2px;color:#c8d6c4}
+.islands-eyebrow{color:#ddbb85;letter-spacing:2.5px}
+.islands-main{position:relative;z-index:2;max-width:1540px;margin:0 auto;padding:32px clamp(15px,4vw,60px) 78px}
+.islands-hero{text-align:left;max-width:1200px;margin:0 auto 23px}
+.islands-hero h2{font:900 clamp(44px,6vw,86px)/1.06 var(--font-title);letter-spacing:1.5px;margin:14px 0 8px;text-shadow:0 10px 40px #0006}
+.islands-hero h2 em{font-style:normal;color:#f4cb85}
+.islands-hero>p{font:400 14px/1.65 system-ui,sans-serif;color:#b5d3d3;max-width:770px}
+.islands-tools{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:25px}
+.islands-search{height:51px;min-width:min(100%,420px);flex:1;max-width:660px;display:flex;gap:11px;align-items:center;padding:0 16px;border:1px solid #edd6a657;background:#082339b9;border-radius:10px;box-shadow:0 10px 30px #0002}
+.islands-search span{font-size:26px;color:#f5c477}
+.islands-search input{border:0;outline:0;color:#fcf3de;background:none;width:100%;min-width:0;font:500 13px system-ui,sans-serif}
+.islands-search input::placeholder{color:#8bb0b5}
+.characters-status{display:inline-flex;gap:9px;align-items:center;min-height:44px;background:#0e323f;padding:9px 15px;border:1px solid #acd4c455;border-radius:10px;font:800 11px var(--font-title);letter-spacing:1px;white-space:normal}
+.characters-status.online{color:#a7f6d2;border-color:#8cf6cf68}
+.characters-status.error{color:#ffbf9b;border-color:#ffad8c69}
+.characters-status .status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:#d6bc83;box-shadow:0 0 13px #ffd88d}
+.characters-status.online .status-dot{background:#90f2c2;box-shadow:0 0 12px #74eabd}
+.islands-small-notice{font:400 11px/1.6 system-ui,sans-serif;color:#8caeb2;margin:8px 0 0}
+.islands-count-line,.island-stats-line{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:23px 0 14px;color:#d8c59d;font:800 11px var(--font-title);letter-spacing:1.4px}
+.islands-count-line>span:last-child,.island-stats-line>span:last-child{color:#8db6b8}
+.island-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.island-card{min-width:0;text-align:left;display:flex;flex-direction:column;border:1px solid #d2bc8d41;border-radius:15px;overflow:hidden;background:linear-gradient(160deg,#112c42,#102536);box-shadow:0 13px 34px #0004;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.island-card:hover,.island-card:focus-visible{transform:translateY(-5px);border-color:#f9d897;box-shadow:0 19px 44px #0008,0 0 20px #edd6951b;outline:0}
+.island-card:active{transform:translateY(-1px)}
+.island-art{height:171px;width:100%;position:relative;overflow:hidden;background:#18334c;display:block}
+.island-art .island-scene-svg{width:100%;height:100%;display:block;transition:transform .38s ease;object-fit:cover}
+.island-card:hover .island-scene-svg{transform:scale(1.055)}
+.island-remote-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.19;mix-blend-mode:screen;pointer-events:none}
+.island-art-tag{position:absolute;top:14px;left:14px;padding:5px 9px;color:#f7e9c9;background:#0a243fbd;border:1px solid #e0c9975c;border-radius:6px;letter-spacing:1px;font:800 10px var(--font-title)}
+.island-card-body{padding:17px 18px 18px;display:flex;flex-direction:column;gap:5px;flex:1;min-height:128px}
+.island-card-body strong{font:900 23px var(--font-title);letter-spacing:.2px;color:#fff0ce}
+.island-card-description{font:400 12px/1.55 system-ui,sans-serif;color:#b5cfcd;min-height:34px}
+.island-card-bottom{margin-top:14px;padding-top:11px;border-top:1px solid #f1dea524;display:flex;justify-content:space-between;gap:7px;font:800 10px var(--font-title);letter-spacing:1px;color:#a9d6cf}
+.island-card-bottom>span:last-child{color:#fad797;white-space:nowrap}
+.island-empty{padding:45px 20px;color:#c5d7d3;text-align:center;grid-column:1/-1;border:1px dashed #b1cec74b;border-radius:14px}
+.islands-footer{display:flex;justify-content:space-between;gap:12px;padding:23px clamp(15px,4vw,70px);color:#9cbaba;font:800 10px var(--font-title);letter-spacing:1px;position:relative;z-index:2;background:#091a29}
+/* Aventura dentro de la isla */
+.island-scene-screen{display:flex;flex-direction:column;min-height:100dvh;background:linear-gradient(#07182c,#0d2943)}
+.island-scene-topbar{flex:none;min-height:118px}
+.island-scene-topbar h2{font:900 clamp(30px,5vw,57px)/1 var(--font-title);color:#ffdf9d;margin:3px 0}
+.island-scene-topbar p{font:400 12px/1.5 system-ui,sans-serif;color:#adc6c7}
+.island-stats-line{flex:none;margin:0;padding:12px clamp(15px,4vw,70px);background:#0c2738;border-bottom:1px solid #dfc68a30}
+.island-scene-viewport{position:relative;height:min(610px,calc(100dvh - 230px));min-height:370px;overflow:hidden;flex:1;background:linear-gradient(140deg,#1b4156,#355d64)}
+.island-backdrop-art{position:absolute;inset:-5% -2% 0;opacity:.96;pointer-events:none}
+.island-backdrop-art .island-scene-svg{width:100%;height:100%;display:block}
+.island-backdrop-art:after{content:'';position:absolute;inset:0;background:linear-gradient(#0b293322 0%,#0c273322 45%,#0c243780 100%)}
+.island-stage-clouds{position:absolute;top:15%;left:0;right:0;height:160px;opacity:.15;background:radial-gradient(ellipse at 30% 50%,#fff 0,transparent 41%),radial-gradient(ellipse at 80% 10%,#fff 0,transparent 41%);animation:island-cloud-drift 12s ease-in-out infinite alternate;pointer-events:none}
+@keyframes island-cloud-drift{to{transform:translateX(35px)}}
+.island-walking-track{position:absolute;inset:0 auto 0 0;width:1300px;will-change:transform;pointer-events:none}
+.island-ground{position:absolute;bottom:0;left:0;width:100%;height:90px;background:linear-gradient(#465e60 0 9px,#213a43 10px 100%);border-top:4px solid #d1bd88;box-shadow:0 -7px 35px #092b3b60}
+.island-ground:before{content:'';position:absolute;inset:8px 0 0;background:repeating-linear-gradient(90deg,transparent 0 165px,#86aa9d2c 168px,#17293522 172px);pointer-events:none}
+.island-explorer{position:absolute;left:100px;bottom:91px;width:100px;height:170px;display:flex;justify-content:center;align-items:flex-end;z-index:5;will-change:left}
+.island-explorer img{display:block;width:94px;height:160px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 8px 6px #061c2877);transform-origin:bottom center}
+.island-explorer.walking img{animation:island-walk .25s ease-in-out infinite alternate}
+.island-explorer.is-backwards img{transform:scaleX(-1)}
+.island-explorer.walking.is-backwards img{animation:island-walk-back .25s ease-in-out infinite alternate}
+@keyframes island-walk{to{transform:translateY(-5px) rotate(2deg)}}
+@keyframes island-walk-back{to{transform:scaleX(-1) translateY(-5px) rotate(2deg)}}
+.island-explorer-shadow{position:absolute;bottom:-5px;width:58px;height:10px;border-radius:50%;background:#041a24a9;filter:blur(5px)}
+.island-explorer>span{position:absolute;bottom:-31px;font:900 11px var(--font-title);white-space:nowrap;background:#0a2134d9;padding:5px 8px;border:1px solid #e6c98d7d;border-radius:5px;color:#ffda99}
+.character-stand-layer{position:absolute;inset:0;pointer-events:none}
+.character-stand{position:absolute;bottom:96px;transform:translateX(-50%);width:208px;height:245px;padding:10px 10px 0;border:1px solid #e5d2ac62;border-radius:16px;background:linear-gradient(180deg,#112e45d7 0,#102636da 70%,#0a1f2cea 100%);display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:flex-end;pointer-events:auto;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;box-shadow:0 14px 26px #09172577}
+.character-stand:hover,.character-stand:focus-visible{transform:translateX(-50%) translateY(-8px);border-color:#ffe3a3;box-shadow:0 19px 35px #0009,0 0 24px #ffe2a727;outline:none}
+.island-person-image{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 25%,#c4dcc943,#203d5266 75%);width:100%;border-radius:12px;flex:1;min-height:0}
+.island-person-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 10px #08172b5b)}
+.image-initial{font:900 69px var(--font-title);color:#f1ddaa;opacity:.5}
+.character-stand-caption{height:60px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;text-align:center;width:100%}
+.character-stand-caption strong{color:#ffedc7;font:900 16px/1.1 var(--font-title);letter-spacing:.25px}
+.character-stand-caption small{font:800 9px var(--font-title);letter-spacing:.7px;color:#a7d2cd}
+.island-stage-hud{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;display:flex;align-items:center;gap:15px;padding:9px 15px;background:#091e2bed;border:1px solid #d6b98461;border-radius:9px;white-space:nowrap;font:800 10px var(--font-title);color:#d1d4c5}
+.island-stage-hud kbd{color:#ffe1a3;padding:2px 5px;border:1px solid #e5c78677;border-radius:4px;margin-right:3px}
+.island-inspect-hint{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:8;display:flex;flex-direction:column;gap:5px;align-items:center;background:#0b2437f2;padding:14px 19px;border:1px solid #ffe2a175;border-radius:9px;box-shadow:0 10px 30px #0008}
+.island-inspect-hint>span{font:900 21px var(--font-title);color:#ffe0a5}
+.island-inspect-hint button{padding:8px 13px;border:0;border-radius:5px;font:900 11px var(--font-title);background:#eac486;color:#1a3040}
+.island-underbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 4%;font:800 10px var(--font-title);letter-spacing:1px;color:#a9c8c8}
+.island-underbar span:first-child{color:#f1d49c}
+.island-mobile-controls{position:absolute;right:18px;bottom:75px;z-index:10;display:none;gap:12px}
+.island-mobile-controls button{width:55px;height:53px;background:#0b263bcf;border:1px solid #e4cf9e88;color:#ffde9d;border-radius:10px;touch-action:none;font-size:23px}
+/* Ficha de personaje API */
+.character-detail{position:fixed;inset:0;z-index:55;display:flex;align-items:stretch;justify-content:flex-end}
+.character-detail-backdrop{position:absolute;inset:0;background:#010a14bd;backdrop-filter:blur(5px)}
+.character-detail-panel{position:relative;z-index:2;width:min(470px,100%);height:100%;overflow:auto;background:linear-gradient(155deg,#16364b,#0c1b2d);border-left:1px solid #e3cc9159;padding:34px clamp(17px,4vw,37px);box-shadow:-16px 0 50px #0009}
+.island-close{position:absolute;right:20px;top:15px;z-index:3}
+.profile-photo{height:230px;border:1px solid #dfc69c5c;border-radius:12px;overflow:hidden;background:radial-gradient(circle at 50% 25%,#52889988,#092139);margin-bottom:25px}
+.profile-photo .profile-image{height:100%;width:100%}
+.profile-photo .profile-image .image-initial{font-size:120px}
+.profile-eyebrow{font:800 10px var(--font-title);color:#e9c98e;letter-spacing:2px}
+.character-detail-panel h3{font:900 clamp(28px,5vw,44px)/1.1 var(--font-title);color:#fff0cf;margin:8px 0}
+.profile-region{font:900 14px var(--font-title);color:#a6cfc7}
+.profile-association{font:500 11px system-ui,sans-serif;color:#bfcbca;margin-top:6px}
+.profile-data-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
+.profile-data-grid>div{min-height:83px;display:flex;gap:6px;flex-direction:column;padding:13px;background:#08243799;border:1px solid #d7c69d2c;border-radius:9px;overflow-wrap:anywhere}
+.profile-data-grid small{font:800 10px var(--font-title);letter-spacing:.6px;color:#c0bd9f}
+.profile-data-grid strong{font:700 13px/1.35 system-ui,sans-serif;color:#fff0d9}
+.profile-bounty{grid-column:1/-1}
+.profile-bounty strong{font-size:19px;color:#ffda87}
+.profile-source-notice{margin-top:17px;padding:11px 14px;border-left:3px solid #e9c389;background:#182d3c;font:400 11px/1.6 system-ui,sans-serif;color:#bcd1ce}
+.room-door-characters{left:1360px!important}
+.room-door-characters .portal-inner{background:radial-gradient(ellipse at 55% 75%,#d1b3e9 0,#7468a2 47%,#302e53 82%)}
+.room-door-characters .portal-light{background:#aa86fa69}
+.room-door-characters .portal-caption{color:#e6d2ff}
+.room-door-characters .portal-frame{border-color:#ad9bd5;box-shadow:0 0 0 7px #2c3551,0 0 30px #c6a8fa55,inset 0 0 0 5px #554b62}
+@media(max-width:1000px){.island-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.island-header-caption,.islands-count-line>span:last-child{display:none}}
+@media(max-width:660px){.islands-topbar,.island-scene-topbar{padding:16px 13px}.brand-lockup{font-size:11px}.island-grid{grid-template-columns:1fr}.island-art{height:180px}.islands-main{padding:24px 13px 70px}.islands-hero h2{font-size:50px}.islands-search{min-width:100%}.island-header-caption,.islands-footer>span,.island-stats-line>span:last-child,.island-underbar>span:last-child{display:none}.island-scene-topbar h2{font-size:35px}.island-scene-viewport{min-height:410px}.island-stage-hud{left:9px;transform:none;gap:9px;font-size:9px;padding:7px 9px;bottom:12px}.island-stage-hud span:nth-child(2),.island-stage-hud span:nth-child(4){display:none}.island-mobile-controls{display:flex}.character-stand{width:172px;height:222px}.islands-footer{font-size:9px}.profile-data-grid{grid-template-columns:1fr 1fr;gap:7px}.profile-data-grid>div{padding:11px 8px}.character-detail-panel{padding:36px 16px}}
+@media(prefers-reduced-motion:reduce){.island-card,.character-stand,.island-scene-svg,.island-explorer img{transition:none!important;animation:none!important}}
+/* El reproductor anterior se fijaba arriba en móviles y tapaba títulos.
+   En las vistas nuevas pasa a ser un botón flotante compacto. */
+@media(max-width:580px){
+ body:has(#islands-screen:not(.hidden)) .music-dock,
+ body:has(#island-scene-screen:not(.hidden)) .music-dock{
+   left:9px;right:auto;top:auto;bottom:9px;width:54px;height:54px;
+   padding:6px;gap:0;border-radius:50%;z-index:45;
+ }
+ body:has(#islands-screen:not(.hidden)) .music-dock .music-info,
+ body:has(#island-scene-screen:not(.hidden)) .music-dock .music-info{display:none}
+ body:has(#islands-screen:not(.hidden)) .music-dock .music-toggle,
+ body:has(#island-scene-screen:not(.hidden)) .music-dock .music-toggle{width:40px;height:40px;border-radius:50%}
+}
+
+/* V2.8: descripción breve integrada en la ficha, diferenciando el origen. */
+.profile-biography{
+  margin-top:20px;padding:17px 19px 18px;border-radius:12px;
+  background:linear-gradient(115deg,#133d4a,#0b2b3c 75%);
+  border:1px solid rgba(244,203,131,.28);
+  box-shadow:inset 3px 0 0 #edb85c,0 8px 24px #07131e45;
+}
+.profile-biography-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.profile-biography-heading>span:first-child{font:900 12px var(--font-title);letter-spacing:.65px;color:#f8dba4}
+.profile-biography-source{font:600 10px/1.4 system-ui,sans-serif;color:#a8c9c8}
+.profile-biography-text{margin:12px 0 0;color:#f0f4ed;font:500 14px/1.65 system-ui,sans-serif;overflow-wrap:anywhere}
+.profile-biography + .profile-data-grid{margin-top:14px}
+@media(max-width:660px){.profile-biography{padding:13px 12px;margin-top:13px}.profile-biography-text{font-size:13px;line-height:1.55}}

@@ -1,0 +1,64 @@
+/* Procedural gait. JavaScript computes small angle and lift variables on every
+   frame; CSS applies them to real cropped limbs instead of spinning whole PNGs. */
+.room-player {
+  --rig-leg-l: 0deg; --rig-leg-r: 0deg;
+  --rig-arm-l: 0deg; --rig-arm-r: 0deg;
+  --rig-foot-l: 0px; --rig-foot-r: 0px;
+  --rig-body-y: 0px; --rig-body-tilt: 0deg; --rig-body-scale: 1;
+  --rig-shadow-alpha: 0.85; --rig-shadow-scale: 1;
+  --rig-hip-y: 58%; --rig-shoulder-y: 33%;
+  --rig-hip-left: 38%; --rig-hip-right: 62%;
+  --rig-shoulder-left: 30%; --rig-shoulder-right: 70%;
+}
+.room-player[data-character="roger"] {
+  --rig-hip-y: 47.5%; --rig-shoulder-y: 25%;
+  --rig-hip-left: 43%; --rig-hip-right: 60%;
+  --rig-shoulder-left: 35%; --rig-shoulder-right: 64%;
+}
+.room-rig {
+  position:absolute; inset:0; width:100%;height:100%;
+  transform:scaleX(var(--face,1)) translate3d(0,var(--rig-body-y),0) rotate(var(--rig-body-tilt)) scaleY(var(--rig-body-scale));
+  transform-origin:center 80%;
+  will-change:transform;
+}
+.room-rig img {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
+  pointer-events:none;user-select:none;filter:drop-shadow(0 1px 0 #090f1a);
+  backface-visibility:hidden;will-change:transform;
+}
+.room-rig [data-rig="leg-left"]{
+  transform-origin:var(--rig-hip-left) var(--rig-hip-y);z-index:1;
+  transform:translate3d(0,calc(0px - var(--rig-foot-l)),0) rotate(var(--rig-leg-l));
+}
+.room-rig [data-rig="leg-right"]{
+  transform-origin:var(--rig-hip-right) var(--rig-hip-y);z-index:1;
+  transform:translate3d(0,calc(0px - var(--rig-foot-r)),0) rotate(var(--rig-leg-r));
+}
+.room-rig [data-rig="arm-left"]{
+  transform-origin:var(--rig-shoulder-left) var(--rig-shoulder-y);z-index:4;
+  transform:rotate(var(--rig-arm-l));
+}
+.room-rig [data-rig="arm-right"]{
+  transform-origin:var(--rig-shoulder-right) var(--rig-shoulder-y);z-index:4;
+  transform:rotate(var(--rig-arm-r));
+}
+.room-rig [data-rig="body"]{z-index:2}
+.room-player-ground-shadow {
+  opacity:var(--rig-shadow-alpha);
+  transform:scaleX(var(--rig-shadow-scale));
+  transition:opacity 120ms ease,transform 120ms ease;
+}
+.step-dust {
+  position:absolute;z-index:4;width:var(--dust-size,13px);height:9px;
+  border:1px solid #e3d9bd66;border-radius:50%;
+  background:radial-gradient(ellipse at center,#d6c5a466 0%,#dfd4b81e 55%,transparent 75%);
+  pointer-events:none;animation:step-dust-rise 560ms ease-out forwards;
+}
+@keyframes step-dust-rise {
+  from {opacity:.75;transform:translate3d(0,0,0) scale(.5)}
+  to {opacity:0;transform:translate3d(0,-17px,0) scale(2.1)}
+}
+@media (prefers-reduced-motion:reduce) {
+  .step-dust {display:none}
+  .room-rig,.room-rig img{will-change:auto}
+}

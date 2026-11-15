@@ -1,0 +1,16 @@
+/* Pose auténtica de brazos doblados sobre el pecho (capas + trazos vectoriales). */
+.crossed-arms,.companion-crossed{display:none!important}
+.thinking-rig{position:absolute;z-index:5;bottom:0;left:50%;height:173px;width:calc(173px * .5125);transform:translateX(-50%);pointer-events:none;display:none;filter:drop-shadow(0 6px 4px rgba(0,0,0,.42))}
+.thinking-rig[data-character="roger"]{height:190px;width:calc(190px * .5506)}
+.thinking-part,.thinking-crossed-svg{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;pointer-events:none}
+.thinking-leg-left,.thinking-leg-right{z-index:1}
+.thinking-body{z-index:2}
+.thinking-full{z-index:1}
+.thinking-crossed-svg{z-index:3;overflow:visible}
+.player.is-thinking .player-sprite{display:none}
+.player.is-thinking .thinking-rig{display:block;animation:thinking-pose-breathe 2.5s ease-in-out infinite}
+.companion-frame>img{display:none!important}
+.companion-frame .thinking-rig{display:block;height:195px;width:calc(195px * .5125);animation:thinking-pose-breathe 2.6s ease-in-out infinite}
+.companion-frame .thinking-rig[data-character="roger"]{height:205px;width:calc(205px * .5506)}
+@keyframes thinking-pose-breathe{0%,100%{transform:translateX(-50%) translateY(0) rotate(-.7deg)}50%{transform:translateX(-50%) translateY(-2px) rotate(.7deg)}}
+@media(prefers-reduced-motion:reduce){.thinking-rig{animation:none!important}}
