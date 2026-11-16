@@ -8,9 +8,11 @@ window.MAIN_LOBBY_CONFIG = Object.freeze({
   browserTitle: 'Mi espacio · Mundo principal',
   worldOnePiece: 'one-piece/index.html',
   worldDragonBall: 'dragon-ball/index.html',
-  worldWidth: 3150,
-  doorX: 1450,
-  dragonDoorX: 2200,
-  startX: 1775,
+  worldUniverse: 'universo/index.html',
+  worldWidth: 3800,
+  doorX: 1850,
+  dragonDoorX: 2730,
+  universeDoorX: 980,
+  startX: 550,
   // En futuras versiones se pueden agregar mundos (sin rehacer One Piece).
 });

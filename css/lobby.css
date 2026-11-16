@@ -26,6 +26,7 @@ button{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button:focu
 .portal-arched-frame{position:absolute;inset:8px 9px 0;border-radius:110px 110px 8px 8px;background:repeating-linear-gradient(90deg,transparent 0,transparent 11px,#ffffff07 12px,transparent 13px),radial-gradient(ellipse at 50% 30%,#30414e26,transparent 65%);pointer-events:none}
 .portal-badge{font-weight:900;position:relative;z-index:1;font-size:9px;letter-spacing:.25em;color:#e8c789;margin-top:22px}
 .portal-emblem{height:163px;width:163px;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 9px 8px #0008);transition:transform .28s cubic-bezier(.2,.6,.2,1)}
+#one-piece-portal .portal-emblem{width:187px;height:173px;object-fit:contain;filter:drop-shadow(0 4px 4px #000b)}
 .hub-portal:hover .portal-emblem,.hub-door-zone.is-near .portal-emblem{transform:scale(1.05) rotate(-2deg)}
 .portal-name{position:relative;z-index:1;font-weight:1000;letter-spacing:.12em;font-size:20px;line-height:1.05;color:#fff0c4;text-shadow:0 3px 6px #000}
 .portal-subtitle{position:relative;z-index:1;font-size:8px;letter-spacing:.13em;margin-top:10px;color:#dfc49a;font-weight:850}
@@ -99,3 +100,26 @@ kbd{display:inline-grid;min-width:23px;height:23px;place-items:center;padding:0 
 .dragon-door-zone .portal-badge{color:#ffbca1}
 .dragon-door-zone .portal-subtitle{color:#e2b6ee}
 .dragon-door-zone.is-near .hub-portal,.dragon-door-zone .hub-portal:hover{box-shadow:0 0 0 4px #1d1430,0 0 0 9px #f7c067,0 0 70px #ef9d50aa,inset 0 0 50px #773bb377}
+
+/* Portal Universo: estética astronómica independiente de los demás mundos. */
+.universe-door-zone .hub-portal{background:radial-gradient(circle at 50% 40%,#133d64,#080d29 72%,#070a1c);border-color:#84cfff;box-shadow:0 0 0 4px #061625,0 0 0 8px #53b9dd,0 15px 38px #000a,inset 0 0 65px #3660a88c}
+.universe-door-zone .hub-door-light{background:radial-gradient(ellipse closest-side,#38d5f47c,transparent 80%)}
+.universe-door-zone .portal-emblem{width:172px;height:172px;filter:drop-shadow(0 0 23px #58d9f5a6)}
+.universe-door-zone .portal-badge{color:#83e8fd}
+.universe-door-zone .portal-name{color:#c9f8ff;text-shadow:0 0 17px #15d9f5a7}
+.universe-door-zone .portal-subtitle{color:#c9dffb}
+.universe-door-zone.is-near .hub-portal,.universe-door-zone .hub-portal:hover{box-shadow:0 0 0 4px #08213d,0 0 0 9px #8afaff,0 0 80px #00cfff9e,inset 0 0 57px #4273b3a6}
+
+/* V2.22: el mismo astronauta SVG de ASTRA/LAB, con articulación original. */
+.hub-astronaut{height:174px;width:108px;filter:drop-shadow(0 7px 5px #090b18a0) drop-shadow(0 0 5px #60d9f835)}
+.hub-astronaut .astro-arm,.hub-astronaut .astro-leg{transform-box:view-box;will-change:transform}
+.hub-astronaut .arm-left{transform-origin:30px 81px}.hub-astronaut .arm-right{transform-origin:80px 81px}
+.hub-astronaut .leg-left{transform-origin:42px 126px}.hub-astronaut .leg-right{transform-origin:69px 126px}
+.hub-astronaut.walking .arm-left,.hub-astronaut.running .arm-left,.hub-astronaut.walking .leg-right,.hub-astronaut.running .leg-right{animation:hub-astro-step .38s ease-in-out infinite alternate}
+.hub-astronaut.walking .arm-right,.hub-astronaut.running .arm-right,.hub-astronaut.walking .leg-left,.hub-astronaut.running .leg-left{animation:hub-astro-step .38s ease-in-out infinite alternate-reverse}
+.hub-astronaut.running .astro-arm,.hub-astronaut.running .astro-leg{animation-duration:.23s}
+.hub-astronaut.jumping .arm-left{transform:rotate(23deg)}.hub-astronaut.jumping .arm-right{transform:rotate(-23deg)}
+.hub-astronaut.jumping .leg-left{transform:rotate(-12deg)}.hub-astronaut.jumping .leg-right{transform:rotate(12deg)}
+.hub-astronaut.landing svg{animation:landing .22s ease-out}
+@keyframes hub-astro-step{from{transform:rotate(-24deg)}to{transform:rotate(26deg)}}
+@media(max-width:760px){.hub-astronaut{height:174px;width:108px}}

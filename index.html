@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#241811">
-  <meta name="description" content="Espacio principal de proyectos con un personaje stickman animado y entradas a los universos One Piece y Dragon Ball.">
+  <meta name="description" content="Espacio principal de proyectos con un astronauta animado y entradas a los universos One Piece, Dragon Ball y Universo.">
   <title>Mi espacio · Mundo principal</title>
   <!-- Tailwind CSS es la base de utilidades del diseño; el escenario animado usa CSS propio. -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,7 +23,7 @@
     </header>
 
     <section id="hub-stage" class="hub-stage relative flex-1" tabindex="0" aria-label="Escenario principal. A y D para caminar, W o Espacio para saltar, E para entrar al portal cercano.">
-      <!-- Paredes y escenario con textura de madera; no hay otros mundos ni datos personales todavía. -->
+      <!-- Escenario personal de madera, personaje astronauta compartido con ASTRA/LAB. -->
       <div class="hub-top-fog" aria-hidden="true"></div>
       <div class="hub-stage-heading pointer-events-none" aria-hidden="true">
         <span class="stage-line">TU PUNTO DE PARTIDA</span>
@@ -39,8 +39,8 @@
           <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
           <button id="one-piece-portal" type="button" class="hub-portal" aria-label="Entrar al mundo de One Piece" title="One Piece - pulsar E">
             <span class="portal-arched-frame" aria-hidden="true"></span>
-            <span class="portal-badge">✦ MUNDO 01 ✦</span>
-            <img class="portal-emblem" src="assets/sombrero-paja-emblema.svg" alt="Emblema de los piratas del Sombrero de Paja" draggable="false">
+            <span class="portal-badge">✦ MUNDO 02 ✦</span>
+            <img class="portal-emblem" src="assets/sombrero-paja-emblema-usuario.png" alt="Emblema de los piratas del Sombrero de Paja" draggable="false">
             <strong class="portal-name">ONE PIECE</strong>
             <span class="portal-subtitle">ENTRAR A LA GRAND LINE</span>
             <span class="portal-handle" aria-hidden="true"></span>
@@ -55,7 +55,7 @@
           <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
           <button id="dragon-ball-portal" type="button" class="hub-portal" aria-label="Entrar al mundo de Dragon Ball" title="Dragon Ball - pulsar E">
             <span class="portal-arched-frame" aria-hidden="true"></span>
-            <span class="portal-badge">✦ MUNDO 02 ✦</span>
+            <span class="portal-badge">✦ MUNDO 03 ✦</span>
             <img class="portal-emblem" src="assets/esfera-dragon-4.svg" alt="Bola del Dragón de cuatro estrellas" draggable="false">
             <strong class="portal-name">DRAGON BALL</strong>
             <span class="portal-subtitle">RUMBO A NAMEK</span>
@@ -65,20 +65,36 @@
           <div class="portal-base" aria-hidden="true"></div>
           <span class="door-plaque" aria-hidden="true">EL PODER SAIYAJIN TE ESPERA</span>
         </div>
-        <!-- El piso es una única superficie de madera continua. -->
+        <div class="hub-door-zone universe-door-zone" id="universe-door-zone">
+          <div class="hub-door-light" aria-hidden="true"></div>
+          <div class="hub-lamp left-lamp" aria-hidden="true"><span></span></div>
+          <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
+          <button id="universe-portal" type="button" class="hub-portal" aria-label="Entrar al mundo Universo" title="Universo - pulsar E">
+            <span class="portal-arched-frame" aria-hidden="true"></span>
+            <span class="portal-badge">✦ MUNDO 01 ✦</span>
+            <img class="portal-emblem" src="assets/universe-emblem.svg" alt="Planeta azul rodeado de estrellas y anillos" draggable="false">
+            <strong class="portal-name">UNIVERSO</strong>
+            <span class="portal-subtitle">ASTRONOMÍA · FÍSICA</span>
+            <span class="portal-handle" aria-hidden="true"></span>
+            <span class="portal-floor-light" aria-hidden="true"></span>
+          </button>
+          <div class="portal-base" aria-hidden="true"></div>
+          <span class="door-plaque" aria-hidden="true">EXPLORA LOS MISTERIOS DEL COSMOS</span>
+        </div>
+        <!-- De izquierda a derecha: Universo, One Piece, Dragon Ball. Piso continuo de madera. -->
         <div class="hub-floor" aria-hidden="true"><span class="floor-front"></span></div>
         <div id="hub-player-shadow" class="hub-player-shadow" aria-hidden="true"></div>
-        <div id="hub-stickman" class="hub-stickman" role="img" aria-label="Stickman blanco animado, personaje principal">
-          <svg viewBox="0 0 100 172" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g class="stickman-frame" fill="none" stroke="#f9fcff" stroke-linecap="round" stroke-linejoin="round">
-              <path class="stickman-arm arm-far" d="M49 72 30 92 19 117" stroke-width="10"/>
-              <path class="stickman-leg leg-far" d="M49 119 32 145 22 166" stroke-width="11"/>
-              <path class="stickman-torso" d="M50 69 50 121" stroke-width="13"/>
-              <path class="stickman-leg leg-near" d="M51 119 69 145 79 166" stroke-width="11"/>
-              <path class="stickman-arm arm-near" d="M51 72 72 91 82 114" stroke-width="10"/>
-              <circle class="stickman-head" cx="50" cy="43" r="22" fill="#f9fcff" stroke="#f9fcff" stroke-width="2"/>
-            </g>
-          </svg>
+        <div id="hub-stickman" class="hub-stickman hub-astronaut" role="img" aria-label="Astronauta de traje blanco y visor azul, personaje principal">
+<svg viewBox="0 0 110 178" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+       <defs><linearGradient id="suit"><stop stop-color="#fff"/><stop offset=".65" stop-color="#d4edff"/><stop offset="1" stop-color="#8dbad8"/></linearGradient><linearGradient id="visor"><stop stop-color="#bffaff"/><stop offset=".52" stop-color="#205a89"/><stop offset="1" stop-color="#0c1638"/></linearGradient></defs>
+       <rect x="28" y="72" width="54" height="62" rx="13" fill="url(#suit)" stroke="#698cad" stroke-width="3"/>
+       <g class="astro-arm arm-left"><path d="M30 81 Q9 88 12 111 L9 129" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="9" cy="130" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-arm arm-right"><path d="M80 81 Q101 90 96 111 L101 130" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="100" cy="129" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-leg leg-left"><path d="M42 126 35 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M35 150 25 165 Q24 169 35 169 L47 169 Q47 162 43 155" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <g class="astro-leg leg-right"><path d="M69 126 75 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M75 150 67 165 Q65 169 80 169 L93 169 Q94 162 84 154" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <rect x="42" y="74" width="27" height="39" rx="7" fill="#e2f7ff" stroke="#6e9ebd" stroke-width="2"/><path d="M48 84h14M48 90h14" stroke="#45b9df" stroke-width="3"/><circle cx="56" cy="103" r="4" fill="#ffce55"/>
+       <circle cx="55" cy="42" r="38" fill="url(#suit)" stroke="#8ab1d3" stroke-width="4"/><path d="M27 31Q36 12 56 15Q86 12 89 39Q89 65 55 67Q25 63 27 31Z" fill="url(#visor)" stroke="#426991" stroke-width="3"/><path d="M35 32q12-15 32-9" fill="none" stroke="#efffff" stroke-width="5" stroke-linecap="round" opacity=".85"/><path d="M70 48l7-9" stroke="#9be7ff" stroke-width="2" opacity=".8"/><circle cx="15" cy="47" r="5" fill="#80d9e4"/><circle cx="96" cy="47" r="5" fill="#80d9e4"/>
+      </svg>
         </div>
       </div>
       <div id="portal-prompt" class="portal-prompt" role="status" aria-live="polite">
@@ -93,7 +109,7 @@
         <button type="button" data-key="w" aria-label="Saltar">↑</button>
         <button type="button" id="mobile-enter" aria-label="Entrar al portal cercano">E</button>
       </nav>
-      <div id="enter-transition" class="enter-transition" aria-hidden="true"><img id="transition-emblem" src="assets/sombrero-paja-emblema.svg" alt=""><strong id="transition-title">RUMBO A LA GRAND LINE...</strong></div>
+      <div id="enter-transition" class="enter-transition" aria-hidden="true"><img id="transition-emblem" src="assets/sombrero-paja-emblema-usuario.png" alt=""><strong id="transition-title">RUMBO A LA GRAND LINE...</strong></div>
     </section>
 
     <footer class="home-footer flex flex-wrap items-center justify-between gap-3 px-5 sm:px-10 py-4">
@@ -103,7 +119,7 @@
         <span><kbd>SHIFT</kbd> CORRER</span>
         <span><kbd>E</kbd> ENTRAR</span>
       </div>
-      <small>DOS MUNDOS DISPONIBLES · TERCERO PRÓXIMAMENTE</small>
+      <small>TRES UNIVERSOS DISPONIBLES · EXPLORA Y APRENDE</small>
     </footer>
   </main>
 </body>

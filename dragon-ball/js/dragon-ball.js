@@ -1,16 +1,17 @@
-/* Dragon Ball Explorer V2.19 — ilustraciones del usuario y esfera gravitatoria de Freezer.
+/* Dragon Ball Explorer V2.20 — ilustraciones del usuario, rayo rosado y relámpagos de Freezer.
  * Todo se ejecuta en el navegador: API pública mediante fetch, sin backend local.
  */
 (function () {
  'use strict';
  const $=id=>document.getElementById(id);
  const el={stage:$('db-stage'),world:$('db-world'),hero:$('hero'),heroImg:$('hero-sprite'),boss:$('boss'),bossImg:$('boss-sprite'),fx:$('fx-layer'),select:$('select-screen'),searchLayer:$('catalog-layer'),detailLayer:$('detail-layer'),detail:$('catalog-detail'),search:$('catalog-search'),owner:$('catalog-owner'),ownerBox:$('owner-filter-box'),cards:$('catalog-grid'),source:$('catalog-source'),apiState:$('api-status'),apiCounts:$('api-counts'),banner:$('battle-banner'),toast:$('mode-toast'),hud:$('battle-hud'),interact:$('interact-banner'),interactLabel:$('interact-label'),cinematic:$('cinematic'),beacons:$('explorer-beacons'),capsules:$('capsule-layer'),returnPod:$('explorer-return'),heading:$('scene-heading'),music:$('db-music'),loss:$('loss-message')};
- const H=Object.freeze({hub:3200,battle:2450,base:98,speed:260,run:408,gravity:1710,jump:738}), HP=[5,7,9], PODS=[{x:650,kind:'battle',name:'COMBATIR A FREEZER'},{x:1450,kind:'characters',name:'EXPLORAR PERSONAJES · API'},{x:2200,kind:'transformations',name:'EXPLORAR TRANSFORMACIONES · API'},{x:2850,kind:'home',name:'REGRESAR AL MUNDO INICIAL'}], FIGHTERS={goku:{name:'GOKU',special:'¡KAMEHAMEHA!'},vegeta:{name:'VEGETA',special:'¡MASENKO!'}};
+ const H=Object.freeze({hub:3200,battle:2450,base:98,speed:260,run:408,gravity:1710,jump:738}), HP=[11,24,32], PODS=[{x:650,kind:'battle',name:'COMBATIR A FREEZER'},{x:1450,kind:'characters',name:'EXPLORAR PERSONAJES · API'},{x:2200,kind:'transformations',name:'EXPLORAR TRANSFORMACIONES · API'},{x:2850,kind:'home',name:'REGRESAR AL MUNDO INICIAL'}], FIGHTERS={goku:{name:'GOKU',special:'¡KAMEHAMEHA!'},vegeta:{name:'VEGETA',special:'¡MASENKO!'}};
  const keys=new Set(),shots=[],cache={characters:null,transformations:null};
  let mode='select',returnMode='hub',catalogKind='characters',camera=0,lastTime=0,epoch=0,near=null,nearestRecord=null,records=[],worldWidth=H.hub,musicEnabled=true,selectedCard=null,apiLoading=false;
  let deathBall=null; // Solo fases II y III: carga 3s, atracción y proyectil pesado.
+ let pinkBeam=null, lightning=null; // Ataques nuevos con telegráficas visibles y limpieza por fase/derrota.
  let hero={name:'goku',x:350,y:0,vy:0,facing:1,hp:8,maxHp:8,invincible:0,ssj:false,lastKi:-10,lastSpecial:-12,temporary:false};
- let boss={x:1120,phase:0,hp:HP[0],lastShot:0,lastVolley:0,lastDeathBall:0,stunnedUntil:0};
+ let boss={x:1120,phase:0,hp:HP[0],lastShot:0,lastVolley:0,lastDeathBall:0,lastBeam:0,lastLightning:0,lastContact:0,majorRestUntil:0,stunnedUntil:0};
  let unlocked={goku:false,vegeta:false};
  const keyStorage='dragon-ball-explorer-ssj-v217';
  try{unlocked={...unlocked,...JSON.parse(sessionStorage.getItem(keyStorage)||'{}')};}catch(_){}
@@ -28,7 +29,7 @@
  function note(message){el.toast.textContent=message;el.toast.classList.add('visible');clearTimeout(note.timer);note.timer=setTimeout(()=>el.toast.classList.remove('visible'),2600);}
  function shout(message){el.banner.textContent=message;el.banner.classList.add('show');clearTimeout(shout.timer);shout.timer=setTimeout(()=>el.banner.classList.remove('show'),2600);}
  function cinema(title,sub,caption){text('cinematic-title',title);text('cinematic-sub',sub);text('cinematic-caption',caption);el.cinematic.classList.add('show');clearTimeout(cinema.timer);cinema.timer=setTimeout(()=>el.cinematic.classList.remove('show'),1200);}
- function resetFx(){if(deathBall){deathBall.node.remove();deathBall=null;}el.boss.classList.remove('charging-death-ball');for(const s of shots)s.node.remove();shots.length=0;el.fx.replaceChildren();el.hero.classList.remove('hurt','casting','thinking');el.boss.classList.remove('hurt','attacking','phase-three');el.cinematic.classList.remove('show');el.banner.classList.remove('show');el.toast.classList.remove('visible');clearTimeout(shout.timer);clearTimeout(note.timer);}
+ function resetFx(){if(deathBall){deathBall.node.remove();deathBall=null;}if(pinkBeam){pinkBeam.node.remove();pinkBeam=null;}if(lightning){lightning.node.remove();lightning=null;}el.stage.classList.remove('beam-active','lightning-active');el.boss.classList.remove('charging-death-ball','charging-pink-beam');for(const s of shots)s.node.remove();shots.length=0;el.fx.replaceChildren();el.hero.classList.remove('hurt','casting','thinking');el.boss.classList.remove('hurt','attacking','phase-three');el.cinematic.classList.remove('show');el.banner.classList.remove('show');el.toast.classList.remove('visible');clearTimeout(shout.timer);clearTimeout(note.timer);}
  function updateRig(type,base){const avatar=type==='hero'?el.hero:el.boss;const img=type==='hero'?el.heroImg:el.bossImg;img.src='assets/'+base+'.png';avatar.querySelectorAll('[data-'+type+'-rig]').forEach(part=>{part.hidden=true;part.removeAttribute('src');});}
  function sprite(){updateRig('hero',hero.name+'-'+(hero.ssj?'ssj':'normal'));el.heroImg.alt=FIGHTERS[hero.name].name+(hero.ssj?' Super Saiyajin':'');el.hero.classList.toggle('ssj',hero.ssj);}
  function refreshSelection(){document.querySelectorAll('[data-unlock]').forEach(n=>n.textContent=unlocked[n.dataset.unlock]?'✓ Super Saiyajin conseguido':'Super Saiyajin por conquistar');}
@@ -43,11 +44,11 @@
    text('game-info',next==='hub'?'Exploración libre':next==='battle'?'¡Batalla en Namek!':next==='explore'?'Consulta API en el mapa':'Elige guerrero');updateHud();}
  function select(name){hero.name=name;hero.ssj=false;hero.temporary=!!unlocked[name];el.select.hidden=true;el.loss.hidden=true;el.hero.hidden=false;sprite();audio?.start?.();enterHub(true);verifyAPI();}
  function enterHub(initial=false){epoch++;resetFx();hero.x=initial?340:350;hero.y=0;hero.vy=0;hero.facing=1;hero.hp=8;hero.invincible=0;hero.temporary=!!unlocked[hero.name];if(!unlocked[hero.name])hero.ssj=false;sprite();setWidth(H.hub);setScene('hub');el.select.hidden=true;el.hero.hidden=false;audio?.hub?.();render();if(!initial)note('Puerto de Namek: puedes volver a entrar en la cápsula.');}
- function fight(){epoch++;resetFx();setWidth(H.battle);hero.x=400;hero.y=0;hero.vy=0;hero.facing=1;hero.hp=8;hero.invincible=0;hero.temporary=!!unlocked[hero.name];if(!unlocked[hero.name])hero.ssj=false;sprite();boss={x:1130,phase:0,hp:HP[0],lastShot:seconds()+1.5,lastVolley:seconds(),lastDeathBall:seconds(),stunnedUntil:0};updateRig('boss','freezer-forma-1');el.bossImg.alt='Freezer primera forma, con cuernos';setScene('battle');audio?.effect?.('enter');audio?.fight?.();shout('¡FREEZER TE DESAFÍA EN NAMEK!');render();}
+ function fight(){epoch++;resetFx();setWidth(H.battle);hero.x=400;hero.y=0;hero.vy=0;hero.facing=1;hero.hp=8;hero.invincible=0;hero.temporary=!!unlocked[hero.name];if(!unlocked[hero.name])hero.ssj=false;sprite();boss={x:1130,phase:0,hp:HP[0],lastShot:seconds()+1.5,lastVolley:seconds(),lastDeathBall:seconds(),lastBeam:seconds()-7.4,lastLightning:seconds()-8.5,lastContact:0,majorRestUntil:seconds()+2,stunnedUntil:0};updateRig('boss','freezer-forma-1');el.bossImg.alt='Freezer primera forma, con cuernos';setScene('battle');audio?.effect?.('enter');audio?.fight?.();shout('¡FREEZER TE DESAFÍA EN NAMEK!');render();}
  function endFight(victory){if(mode!=='battle')return;const ownEpoch=++epoch;resetFx();mode='ending';keys.clear();if(victory){unlocked[hero.name]=true;persist();hero.temporary=true;refreshSelection();audio?.effect?.('win');cinema('¡VICTORIA!','SUPER SAIYAJIN PERMANENTE',FIGHTERS[hero.name].name+' VENCE A FREEZER');}else{audio?.effect?.('lose');cinema('¡JA, JA, JA!','FREEZER TE DERROTÓ','VUELVE A LA CÁPSULA PARA INTENTARLO');}
    setTimeout(()=>{if(epoch!==ownEpoch)return;enterHub();shout(victory?'¡SUPER SAIYAJIN DESBLOQUEADO!':'¡HAS PERDIDO! FREEZER TE ESPERA EN SU ARENA.');},victory?1850:1450);
  }
- function nextPhase(){if(boss.phase===2){endFight(true);return;}boss.phase++;boss.hp=HP[boss.phase];resetFx();boss.lastShot=seconds()+1.25;boss.lastVolley=seconds();boss.lastDeathBall=seconds()-7.5;updateRig('boss','freezer-forma-'+(boss.phase+1));el.bossImg.alt=['','Freezer, forma monstruosa con cabeza alargada','Freezer, forma final lisa de Namek'][boss.phase];el.boss.classList.toggle('phase-three',boss.phase===2);audio?.effect?.('transformEnemy');
+ function nextPhase(){if(boss.phase===2){endFight(true);return;}boss.phase++;boss.hp=HP[boss.phase];resetFx();boss.lastShot=seconds()+1.25;boss.lastVolley=seconds();boss.lastDeathBall=seconds()-7.5;boss.lastBeam=seconds()-(boss.phase===1?6.9:5.9);boss.lastLightning=seconds()-(boss.phase===1?7.0:6.5);boss.majorRestUntil=seconds()+1.75;updateRig('boss','freezer-forma-'+(boss.phase+1));el.bossImg.alt=['','Freezer, forma monstruosa con cabeza alargada','Freezer, forma final lisa de Namek'][boss.phase];el.boss.classList.toggle('phase-three',boss.phase===2);audio?.effect?.('transformEnemy');
    if(boss.phase===1){hero.temporary=true;shout('¡FASE II! ¡YA PUEDES TRANSFORMARTE!');note('Pulsa T para activar Super Saiyajin provisional.');}
    else{shout('¡FREEZER FINAL! ¡NECESITAS SUPER SAIYAJIN!');note('Transforma tu personaje con T antes del último combate.');}updateHud();}
  function shock(x,y,color){const n=make('i','impact-effect');n.style.left=x+'px';n.style.bottom=(H.base+y)+'px';if(color)n.style.borderColor=color;el.fx.appendChild(n);setTimeout(()=>n.remove(),380);}
@@ -110,18 +111,90 @@
    audio?.effect?.('deathBallLaunch');
    shout('¡¡ESFERA DE LA MUERTE!!');
  }
+ // Rayo rosa horizontal en TODAS las fases. Un aviso de 1.4 segundos
+ // permite saltar antes de la descarga; el impacto dura menos que un salto.
+ function startPinkBeam(t){
+   if(mode!=='battle'||pinkBeam||deathBall||lightning)return;
+   const face=Math.sign(hero.x-boss.x)||-1;
+   const node=make('div','pink-beam-attack warning');
+   node.dataset.facing=face<0?'left':'right';
+   node.append(make('span','beam-glow'),make('span','beam-warning-label','¡SALTA!'));
+   const origin=boss.x+face*70;
+   node.style.left=(face<0?0:origin)+'px';
+   node.style.width=Math.max(100,face<0?origin:worldWidth-origin)+'px';
+   node.style.bottom=(H.base+66)+'px';
+   el.fx.appendChild(node);
+   pinkBeam={node,face,origin,phase:boss.phase,session:epoch,started:t,active:false,hit:false};
+   boss.lastBeam=t;
+   el.boss.classList.add('charging-pink-beam');
+   shout('¡FREEZER PREPARA EL RAYO ROSADO!');
+   note('¡SALTA! El rayo recorre el suelo tras la advertencia.');
+   audio?.effect?.('pinkBeamCharge');
+ }
+ function updatePinkBeam(t){
+   const a=pinkBeam;if(!a)return;
+   if(mode!=='battle'||epoch!==a.session||boss.phase!==a.phase){a.node.remove();pinkBeam=null;el.boss.classList.remove('charging-pink-beam');el.stage.classList.remove('beam-active');return;}
+   const elapsed=t-a.started;
+   if(elapsed>=1.38&&!a.active){
+     a.active=true;a.node.classList.remove('warning');a.node.classList.add('firing');
+     el.stage.classList.add('beam-active');el.boss.classList.remove('charging-pink-beam');
+     audio?.effect?.('pinkBeamFire');shout('¡¡RAYO DE LA MUERTE!!');
+   }
+   if(a.active&&elapsed<1.75){
+     const inPath=a.face<0?hero.x<a.origin:hero.x>a.origin;
+     // Un salto despeja el haz bajo: más de 94px sobre el suelo es seguro.
+     if(!a.hit&&inPath&&hero.y<94){a.hit=true;shock(hero.x,112,'#ff70df');damageHero(boss.phase===2?3:2);}
+   }
+   if(elapsed>=1.75){a.node.remove();pinkBeam=null;el.stage.classList.remove('beam-active');boss.majorRestUntil=t+1.0;}
+ }
+ // Descarga dirigida: una marca en el suelo avisa dónde caerá el rayo.
+ // Se puede evitar moviéndose fuera de la marca o saltando a tiempo.
+ function startLightning(t){
+   if(mode!=='battle'||lightning||pinkBeam||deathBall)return;
+   const x=clamp(hero.x,110,worldWidth-110),node=make('div','freezer-lightning warning');
+   node.append(make('span','lightning-bolt'),make('span','lightning-ground'),make('span','lightning-label','⚡ ¡CUIDADO!'));
+   node.style.left=x+'px';node.style.bottom=(H.base+2)+'px';
+   el.fx.appendChild(node);
+   lightning={node,x,started:t,phase:boss.phase,session:epoch,active:false,hit:false};
+   boss.lastLightning=t;
+   shout('¡RAYOS EN NAMEK!');audio?.effect?.('lightningWarn');
+ }
+ function updateLightning(t){
+   const a=lightning;if(!a)return;
+   if(mode!=='battle'||epoch!==a.session||a.phase!==boss.phase){a.node.remove();lightning=null;el.stage.classList.remove('lightning-active');return;}
+   const elapsed=t-a.started;
+   if(elapsed>=1.07&&!a.active){a.active=true;a.node.classList.remove('warning');a.node.classList.add('firing');el.stage.classList.add('lightning-active');audio?.effect?.('lightningStrike');}
+   if(a.active&&elapsed<1.54&&Math.abs(hero.x-a.x)<104&&hero.y<108&&!a.hit){a.hit=true;shock(hero.x,78,'#bdc8ff');damageHero(2);}
+   if(elapsed>=1.54){a.node.remove();lightning=null;el.stage.classList.remove('lightning-active');boss.majorRestUntil=t+.7;}
+ }
+ // Si te quedas junto al enemigo, una onda de energía del suelo te hiere.
+ // Elevarte con W o Espacio evita el contacto.
+ function contactShock(t){
+   if(Math.abs(hero.x-boss.x)>139||hero.y>=108||t-boss.lastContact<1.55)return;
+   boss.lastContact=t;
+   hero.x=clamp(hero.x+(hero.x<boss.x?-50:50),55,worldWidth-70);
+   shock(hero.x,57,'#ff97f0');audio?.effect?.('contactShock');damageHero(1);
+ }
  function bossAI(t,dt){
-   if(Math.abs(hero.x-boss.x)>980||t<boss.stunnedUntil)return;
+   if(mode!=='battle')return;
+   // Resolver siempre el efecto activo aunque el jugador se aleje: evita congelarlo.
+   if(pinkBeam){updatePinkBeam(t);return;}
+   if(lightning){updateLightning(t);return;}
    if(deathBall){updateDeathBall(t,dt);return;}
-   if(boss.phase>0&&t-boss.lastDeathBall>(boss.phase===1?11.5:10)){
-     beginDeathBall(t);return;
+   if(Math.abs(hero.x-boss.x)>980||t<boss.stunnedUntil)return;
+   contactShock(t);
+   if(mode!=='battle')return;
+   if(t>boss.majorRestUntil){
+     if(t-boss.lastBeam>[10.7,8.6,7.4][boss.phase]){startPinkBeam(t);return;}
+     if(t-boss.lastLightning>[13.2,10.7,8.5][boss.phase]){startLightning(t);return;}
+     if(boss.phase>0&&t-boss.lastDeathBall>(boss.phase===1?11.5:10)){beginDeathBall(t);return;}
    }
    const cadence=[2.05,1.45,.87][boss.phase];
    if(t-boss.lastShot>cadence){boss.lastShot=t;shot('boss');}
    if(boss.phase>0&&t-boss.lastVolley>(boss.phase===1?6.5:4.4)){
      boss.lastVolley=t;const saved=epoch;
      for(let i=0;i<2+boss.phase;i++)setTimeout(()=>{
-       if(mode==='battle'&&saved===epoch&&!deathBall)
+       if(mode==='battle'&&saved===epoch&&!deathBall&&!pinkBeam&&!lightning)
          spawn('boss',boss.x+(Math.sign(hero.x-boss.x)||-1)*50,65+i*40,Math.sign(hero.x-boss.x)||-1,475+i*60,1,'ki');
      },i*240);
    }
@@ -174,7 +247,7 @@
  $('music-toggle').addEventListener('click',()=>{musicEnabled=!musicEnabled;audio?.enabled?.(musicEnabled);$('music-toggle').textContent=musicEnabled?'♫ Música ON':'♫ Música OFF';$('music-toggle').setAttribute('aria-pressed',String(musicEnabled));});
  refreshSelection();setScene('hub');mode='select';el.hero.hidden=true;el.boss.hidden=true;el.hud.hidden=true;requestAnimationFrame(frame);verifyAPI();
  // Diagnostic only: harmless read-only state + explicit test inputs for browser QA.
- window.DRAGON_BALL_DIAGNOSTIC={getState:()=>({mode,hero:{...hero},boss:{...boss},deathBall:deathBall?{phase:deathBall.phase,elapsed:seconds()-deathBall.started}:null,apiStatus:el.apiState.textContent,records:records.length,near:near?.kind,unlocked:{...unlocked}}),select,enterHub,fight,hitBoss:damageBoss,hitHero:damageHero,transform,special,startExplorer,openSearch:mapSearch,interact,verifyAPI,startDeathBall:()=>beginDeathBall(seconds())};
+ window.DRAGON_BALL_DIAGNOSTIC={getState:()=>({mode,hero:{...hero},boss:{...boss},deathBall:deathBall?{phase:deathBall.phase,elapsed:seconds()-deathBall.started}:null,apiStatus:el.apiState.textContent,records:records.length,near:near?.kind,unlocked:{...unlocked}}),select,enterHub,fight,hitBoss:damageBoss,hitHero:damageHero,transform,special,startExplorer,openSearch:mapSearch,interact,verifyAPI,startDeathBall:()=>beginDeathBall(seconds()),startPinkBeam:()=>startPinkBeam(seconds()),startLightning:()=>startLightning(seconds()),getThreats:()=>({beam:pinkBeam?.active?'firing':pinkBeam?'warning':null,lightning:lightning?.active?'firing':lightning?'warning':null,deathBall:!!deathBall})};
  // La sesión se guarda solo en la pestaña. Detectar una desconexión de Live Server
  // permite resetearla al reconectar. Un reinicio demasiado rápido no es observable
  // desde una página frontend estática, sin modificar el servidor.

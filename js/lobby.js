@@ -14,6 +14,8 @@
  const portal=document.getElementById('one-piece-portal');
  const dbZone=document.getElementById('dragon-ball-door-zone');
  const dbPortal=document.getElementById('dragon-ball-portal');
+ const universeZone=document.getElementById('universe-door-zone');
+ const universePortal=document.getElementById('universe-portal');
  const promptTitle=document.getElementById('portal-prompt-title');
  const promptDescription=document.getElementById('portal-prompt-description');
  const transitionEmblem=document.getElementById('transition-emblem');
@@ -28,9 +30,11 @@
  document.documentElement.style.setProperty('--stage-width',C.worldWidth+'px');
  zone.style.left=C.doorX+'px';
  dbZone.style.left=C.dragonDoorX+'px';
+ universeZone.style.left=C.universeDoorX+'px';
  const doors=[
-  {id:'one-piece',x:C.doorX,zone,button:portal,href:C.worldOnePiece,title:'ONE PIECE',description:'El mundo pirata te espera',transition:'RUMBO A LA GRAND LINE...',emblem:'assets/sombrero-paja-emblema.svg'},
-  {id:'dragon-ball',x:C.dragonDoorX,zone:dbZone,button:dbPortal,href:C.worldDragonBall,title:'DRAGON BALL',description:'¡El desafío de Freezer te espera!',transition:'¡RUMBO AL PLANETA NAMEK!',emblem:'assets/esfera-dragon-4.svg'}
+  {id:'one-piece',x:C.doorX,zone,button:portal,href:C.worldOnePiece,title:'ONE PIECE',description:'El mundo pirata te espera',transition:'RUMBO A LA GRAND LINE...',emblem:'assets/sombrero-paja-emblema-usuario.png'},
+  {id:'dragon-ball',x:C.dragonDoorX,zone:dbZone,button:dbPortal,href:C.worldDragonBall,title:'DRAGON BALL',description:'¡El desafío de Freezer te espera!',transition:'¡RUMBO AL PLANETA NAMEK!',emblem:'assets/esfera-dragon-4.svg'},
+  {id:'universo',x:C.universeDoorX,zone:universeZone,button:universePortal,href:C.worldUniverse,title:'UNIVERSO',description:'Astronomía, física y un cohete espacial',transition:'DESPEGANDO AL UNIVERSO...',emblem:'assets/universe-emblem.svg'}
  ];
  const keys=new Set();
  const state={x:C.startX,y:0,vy:0,facing:1,camera:0,onGround:true,entering:false,near:false,nearWorld:null,last:0};

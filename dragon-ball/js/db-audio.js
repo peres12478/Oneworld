@@ -8,6 +8,11 @@
  function effect(name){if(muted)return;switch(name){
  case 'ki':tone(480,.16,'sawtooth',.12,0,1100);tone(920,.11,'triangle',.06,.03,350);break;
  case 'enemyKi':tone(260,.21,'sawtooth',.095,0,90);noise(.11,.025);break;
+ case 'pinkBeamCharge':for(let i=0;i<9;i++)tone(115+i*43,.18,'sawtooth',.038,i*.13,280+i*40);noise(.45,.055);break;
+ case 'pinkBeamFire':tone(295,.75,'sawtooth',.16,0,75);tone(510,.58,'square',.068,0,130);noise(.5,.15);break;
+ case 'lightningWarn':tone(680,.16,'triangle',.065,0,330);tone(740,.16,'triangle',.06,.21,410);break;
+ case 'lightningStrike':noise(.46,.2);tone(85,.44,'sawtooth',.13,0,55);tone(175,.25,'square',.065,0,90);break;
+ case 'contactShock':tone(115,.25,'sawtooth',.085,0,55);noise(.13,.08);break;
  case 'deathBallCharge':for(let i=0;i<11;i++){tone(72+i*14,.30,'sawtooth',.045,i*.235,170+i*24);if(i%3===0)noise(.16,.045,i*.235);}break;
  case 'deathBallLaunch':tone(125,.8,'sawtooth',.19,0,55);tone(350,.65,'triangle',.12,0,90);noise(.58,.17);break;
  case 'deathBallHit':tone(95,.74,'sawtooth',.18,0,43);noise(.68,.21);break;
