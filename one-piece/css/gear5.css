@@ -1,0 +1,41 @@
+/* Efectos originales del Gear 5: tiras de cómic y ondas elásticas. */
+.gear5-fx-layer{position:absolute;inset:0;width:3250px;height:560px;overflow:visible;z-index:9;pointer-events:none}
+.gear5-fist-cloud ellipse{fill:#fffefa;stroke:#c9eaf0;stroke-width:4;filter:drop-shadow(0 0 8px #ffffff99)}
+.gear5-punch-group{filter:drop-shadow(0 5px 8px #0d193575)}
+.gear5-fist{filter:drop-shadow(0 0 10px #f5f6ff88)}
+.gear5-speed-lines path{fill:none;stroke:#f9f2d5;stroke-width:9;stroke-linecap:round;opacity:.9}
+.gear5-comic-impact{filter:drop-shadow(4px 8px 0 #141e36b3)}
+.room-player.gear5-punching [data-rig="arm-right"]{opacity:.05!important}
+.room-player.gear5-punching .room-rig{filter:drop-shadow(0 0 16px #fff)}
+.gear5-drum-trail circle{fill:#fff;stroke:#c1edfb;stroke-width:4;filter:drop-shadow(0 0 14px #fff)}
+.gear5-ripple-ring,.gear5-ripple-secondary{fill:none;stroke:#fff5c1;stroke-width:12;filter:drop-shadow(0 0 14px #d6ffff)}
+.gear5-ripple-secondary{stroke:#b3eaff;stroke-width:6}
+.gear5-rubber-floor{fill:none;stroke:#faffff;stroke-width:10;stroke-linecap:round;filter:drop-shadow(0 0 10px #99f4ff)}
+.gear5-drum-text{fill:#fff5b8;stroke:#1b2743;stroke-width:5;paint-order:stroke;filter:drop-shadow(3px 4px 0 #ee83ac)}
+.room-player.gear5.drum-active .room-rig{animation:gear5-drum-inflate .6s cubic-bezier(.18,.85,.45,1) infinite alternate}
+.room-player.gear5.drum-landed .room-rig{animation:gear5-drum-land .35s cubic-bezier(.2,.8,.3,1) both}
+@keyframes gear5-drum-inflate{
+  from{transform:scaleX(var(--face,1)) translateY(var(--rig-body-y)) scale(1,.96) rotate(-8deg)}
+  to{transform:scaleX(var(--face,1)) translateY(var(--rig-body-y)) scale(1.22,1.1) rotate(9deg)}
+}
+@keyframes gear5-drum-land{
+  0%{transform:scaleX(var(--face,1)) translateY(var(--rig-body-y)) scale(1.15,.7)}
+  55%{transform:scaleX(var(--face,1)) translateY(var(--rig-body-y)) scale(.87,1.13)}
+  100%{transform:scaleX(var(--face,1)) translateY(var(--rig-body-y)) scale(1,1)}
+}
+.gear5-hud{position:absolute;top:255px;right:clamp(15px,4vw,76px);z-index:11;background:#081b2edb;border:1px solid #dff9ff8c;border-radius:8px;padding:8px 12px;color:#ecfcff;font:900 11px var(--font-title);letter-spacing:1px;text-shadow:0 2px 6px #000;box-shadow:0 4px 20px #0009;pointer-events:none}
+.gear5-hud strong{display:block;color:#ffe9a0;margin-top:3px}
+.gear5-hud.is-cooling strong{color:#b0bec8}
+.room-mobile-controls #room-drum-button{background:linear-gradient(155deg,#ffefa9,#9eefff);color:#1a2840;border:2px solid #fff;box-shadow:0 0 16px #d9faff88}
+.room-mobile-controls #room-drum-button:disabled{opacity:.48;filter:grayscale(.4);cursor:not-allowed}
+.room-mobile-controls #room-drum-button.hidden{display:none}
+.room-boss.boss-cartoon-squashed .room-boss-figure{animation:gear5-boss-squash .7s cubic-bezier(.25,.75,.23,1)}
+@keyframes gear5-boss-squash{
+  0%{transform:translateY(0) scaleX(var(--boss-face,-1)) scale(1,1)}
+  18%{transform:translateY(58px) scaleX(var(--boss-face,-1)) scale(1.45,.48)}
+  48%{transform:translateY(-38px) scaleX(var(--boss-face,-1)) scale(.76,1.18)}
+  72%{transform:translateY(16px) scaleX(var(--boss-face,-1)) scale(1.17,.83)}
+  100%{transform:translateY(0) scaleX(var(--boss-face,-1)) scale(1,1)}
+}
+@media(max-width:800px){.gear5-hud{top:312px;right:9px;max-width:155px;padding:6px 8px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.room-player.gear5.drum-active .room-rig,.room-player.gear5.drum-landed .room-rig{animation:none}.room-boss.boss-cartoon-squashed .room-boss-figure{animation:none}}

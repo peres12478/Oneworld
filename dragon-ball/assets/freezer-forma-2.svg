@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="Freezer fase 2, diseño stickman">
+ <defs><linearGradient id="skin" x1="0" x2=".25" y1="0" y2="1"><stop stop-color="#faf6fc"/><stop offset="1" stop-color="#d7c7e3"/></linearGradient></defs>
+ <ellipse cx="94" cy="242" rx="46" ry="5" fill="#0b2734" opacity=".30"/>
+ <path d="M100 160 Q152 154 163 185 Q167 202 149 212 Q132 224 144 234" stroke="#6e477f" fill="none" stroke-width="17" stroke-linecap="round"/>
+ <path d="M100 160 Q152 154 163 185 Q167 202 149 212 Q132 224 144 234" stroke="#f0dced" fill="none" stroke-width="11" stroke-linecap="round"/>
+ <path d="M143 233 Q135 226 137 216" fill="none" stroke="#a155bb" stroke-width="7" stroke-linecap="round"/>
+ <g id="legs">
+ <g class="limb left-leg"><path d="M82 154 L64 199 L57 226" fill="none" stroke="#6d4d80" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><path d="M82 154 L64 199 L57 226" fill="none" stroke="#f3edf8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M45 227 Q56 225 69 227" stroke="#7d42a3" stroke-width="14" stroke-linecap="round" fill="none"/></g>
+ <g class="limb right-leg"><path d="M101 155 L120 201 L128 226" fill="none" stroke="#6d4d80" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><path d="M101 155 L120 201 L128 226" fill="none" stroke="#f3edf8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M115 227 Q125 225 140 227" stroke="#7d42a3" stroke-width="14" stroke-linecap="round" fill="none"/></g>
+ </g>
+ <g id="arms">
+ <g class="limb left-arm"><path d="M73 115 Q56 133 42 154" stroke="#6b4e87" stroke-width="17" fill="none" stroke-linecap="round"/><path d="M73 116 Q53 133 44 152" stroke="#f3f2f9" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="42" cy="154" r="8" fill="#9855af"/></g>
+ <g class="limb right-arm"><path d="M109 115 Q129 131 144 154" stroke="#6b4e87" stroke-width="17" fill="none" stroke-linecap="round"/><path d="M110 116 Q129 132 142 152" stroke="#f3f2f9" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="144" cy="154" r="8" fill="#9855af"/></g>
+ </g>
+ <path d="M75 110 Q90 103 106 110 L112 155 Q92 165 70 155Z" fill="#f4eff8" stroke="#603e79" stroke-width="3.5"/>
+ <ellipse cx="92" cy="131" rx="18" ry="17" fill="#b664c2" stroke="#76438f" stroke-width="2.5"/>
+ <path d="M72 153 L111 153" stroke="#914cac" stroke-width="7" stroke-linecap="round"/>
+ <path d="M64 55 Q50 34 57 7 Q72 17 74 43 M109 45 Q122 13 136 5 Q144 29 117 58" fill="#f6eef8" stroke="#6d447f" stroke-width="6" stroke-linejoin="round"/>
+ <path d="M73 101 Q52 83 60 56 L69 26 Q86 -6 105 13 L124 59 Q133 86 109 105Z" fill="url(#skin)" stroke="#6a3d88" stroke-width="4"/>
+ <path d="M77 28 Q92 18 107 28 L113 42 Q91 34 73 42Z" fill="#9d57bb" stroke="#6d3d88" stroke-width="3"/>
+ <path d="M68 66 L84 69 M98 69 L113 66" stroke="#39244b" stroke-width="4.5" stroke-linecap="round"/>
+ <path d="M77 88 Q92 105 109 88" stroke="#a75690" stroke-width="4" fill="none"/>
+ <path d="M80 91 l7 8 6-8 6 8 7-8" fill="none" stroke="#593b61" stroke-width="2"/>
+ </svg>

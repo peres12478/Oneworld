@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 380" role="img" aria-labelledby="title desc">
+<title id="title">Emblema inspirado en los Piratas del Sombrero de Paja</title>
+<desc id="desc">Calavera sonriente con sombrero de paja amarillo y banda roja sobre huesos cruzados.</desc>
+<defs>
+  <radialGradient id="glow"><stop stop-color="#fff5d2"/><stop offset="1" stop-color="#cda764"/></radialGradient>
+  <linearGradient id="straw" x1="0" x2="1" y2="1"><stop stop-color="#fff6b0"/><stop offset=".5" stop-color="#eec15a"/><stop offset="1" stop-color="#bd8736"/></linearGradient>
+</defs>
+<circle cx="190" cy="194" r="171" fill="#2a1b1a" stroke="#b8934f" stroke-width="6"/>
+<circle cx="190" cy="194" r="154" fill="#16202b" stroke="#73582f" stroke-width="2" stroke-dasharray="4 10"/>
+<g fill="none" stroke="#ecdcc0" stroke-width="23" stroke-linecap="round">
+  <path d="M88 285 281 129M98 125 288 284"/>
+</g>
+<g fill="#fff3d4" stroke="#513b34" stroke-width="7">
+  <circle cx="84" cy="282" r="19"/><circle cx="284" cy="122" r="19"/>
+  <circle cx="85" cy="120" r="19"/><circle cx="296" cy="282" r="19"/>
+</g>
+<path d="M113 169c-4-63 39-91 81-91 50 0 88 37 87 99 24 15 31 39 17 58-13 18-29 17-46 28v37c-3 19-116 18-122-1v-38c-23-10-45-26-46-52-1-19 8-32 29-40Z" fill="url(#glow)" stroke="#493e36" stroke-width="8"/>
+<path d="M120 205c15-22 48-31 62-6 6 18-15 38-37 35-14-3-23-15-25-29Zm82-4c12-23 45-29 59-7 11 24-12 47-33 40-16-5-24-16-26-33Z" fill="#24202a"/>
+<path d="m191 224-15 28h29Z" fill="#24202a"/>
+<path d="M142 275q47 22 96 0M155 281v17m16-12v17m19-14v18m18-19v17m17-18v13" fill="none" stroke="#382e32" stroke-width="7" stroke-linecap="round"/>
+<!-- Sombrero de paja rojo y amarillo -->
+<path d="M104 164Q126 93 148 76q34-31 75 0c22 19 37 50 52 87-45 18-129 19-171 1Z" fill="url(#straw)" stroke="#785326" stroke-width="8"/>
+<path d="M116 143q76 23 152-1l10 25q-81 22-171 1Z" fill="#bc2939" stroke="#78202a" stroke-width="3"/>
+<path d="M78 156q110 26 224 1c22 3 34 17 21 26-28 21-246 21-270-2-11-10 2-21 25-25Z" fill="url(#straw)" stroke="#74502a" stroke-width="8"/>
+<path d="M87 173q102 32 205 0" fill="none" stroke="#fff3ad" stroke-width="5" opacity=".7"/>
+</svg>

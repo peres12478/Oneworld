@@ -1,0 +1,34 @@
+/* Barbanegra: jefe stickman simple, acorde al lobby, con pelea y recompensa. */
+.room-boss{position:absolute;width:140px;height:224px;z-index:5;pointer-events:none;will-change:left,top;transition:filter .1s}
+.room-boss-figure{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;transform:translateY(var(--boss-bob,0px)) scaleX(var(--boss-face,-1));filter:drop-shadow(0 6px 13px #030b14)}
+.room-boss-caption{position:absolute;left:50%;top:-39px;transform:translateX(-50%);font:900 12px var(--font-title);letter-spacing:1.2px;color:#f9cf96;white-space:nowrap;text-shadow:0 2px 8px #000}
+.room-boss-bar{position:absolute;top:-23px;left:0;width:140px;height:9px;border:1px solid #edc79a;border-radius:8px;background:#1b1a23;overflow:hidden}
+.room-boss-bar>span{height:100%;display:block;background:linear-gradient(90deg,#b5363b,#ff8664);transition:width 120ms linear}
+.room-boss.boss-wounded{animation:boss-shock .3s ease-out}
+.room-boss.boss-vanished{animation:boss-vanish .64s ease-in forwards}
+@keyframes boss-shock{0%,55%{filter:brightness(2.3) drop-shadow(0 0 22px #e8ae85)}100%{filter:none}}
+@keyframes boss-vanish{to{opacity:0;transform:translateY(-40px) scale(.55);filter:blur(13px)}}
+.blackbeard-dark-orb{position:absolute;width:30px;height:30px;border-radius:50%;z-index:8;transform:translate(-50%,-50%);background:radial-gradient(circle at 39% 35%,#c0fbff,#497baa 19%,#090e21 50%,#040512 69%,transparent 74%);box-shadow:0 0 22px #2bc2ff7d,0 0 10px #050618;pointer-events:none;animation:dark-orb-spin .5s linear infinite}
+@keyframes dark-orb-spin{to{filter:hue-rotate(35deg)}}
+.room-boss-hud{position:absolute;top:82px;right:clamp(16px,4vw,75px);z-index:8;background:#091e31eb;border:1px solid #bca47d89;border-radius:9px;padding:10px 15px;box-shadow:0 8px 30px #0007;font:800 11px var(--font-title);letter-spacing:1px;color:#f3d59d;min-width:215px}
+.room-boss-hud small{display:block;color:#cad9d2;font-size:10px;letter-spacing:.4px;margin-bottom:5px}
+#room-player-health{color:#fa797f;font-size:17px;letter-spacing:1px;white-space:nowrap}
+.room-boss-notice{position:absolute;z-index:6;top:197px;right:clamp(16px,4vw,75px);max-width:300px;font:800 11px/1.6 var(--font-title);letter-spacing:1px;color:#f4cf91;text-shadow:0 2px 8px #000;pointer-events:none}
+.hero-hurt .room-rig{animation:hero-hurt-blink .44s steps(2) 2}
+@keyframes hero-hurt-blink{50%{opacity:.2}}
+.room-reward-modal{position:absolute;inset:0;z-index:22;display:flex;align-items:center;justify-content:center;padding:18px;background:#04111cc7;backdrop-filter:blur(7px)}
+.room-reward-panel{width:min(540px,94vw);padding:34px 30px;text-align:center;background:radial-gradient(circle at 50% 0,#274b62,#0c2137 68%);border:2px solid #e0b77a;border-radius:18px;box-shadow:0 25px 70px #000d,0 0 65px #ffdf7b33}
+.room-reward-panel #room-reward-icon{display:block;font-size:70px;line-height:1.2;text-shadow:0 0 25px #ffdf9d}
+.room-reward-panel .reward-eyebrow{font:900 12px var(--font-title);color:#ffdf9f;letter-spacing:3px;margin:12px 0}
+.room-reward-panel h2{font:900 clamp(23px,3.5vw,36px)/1.1 var(--font-title);color:#fff0c4;margin:13px 0}
+.room-reward-panel p{font:500 14px/1.7 sans-serif;color:#d4e6e7;margin:14px auto 24px}
+.room-reward-panel button{border:0;border-radius:7px;background:#ecc57b;color:#172938;font:900 14px var(--font-title);padding:14px 27px;cursor:pointer}
+.room-player.gear5 .room-rig{filter:drop-shadow(0 0 10px #fffafabb) drop-shadow(0 0 15px #ecedff7d)}
+.room-player.gear5 .room-player-caption{color:#f3ffff}
+.room-player.gear5:after{content:'☁ GEAR 5';position:absolute;top:-31px;left:50%;transform:translateX(-50%);color:#fff;white-space:nowrap;font:900 11px var(--font-title);text-shadow:0 2px 10px #8bf2ff}
+.room-player.gear5 .room-rig{animation:gear5-pulse 1.8s ease-in-out infinite alternate}
+@keyframes gear5-pulse{to{filter:drop-shadow(0 0 18px #fffcfc) drop-shadow(0 0 22px #e3e9ff)}}
+.sword-shockwave{filter:drop-shadow(0 0 14px #ffe99d) drop-shadow(0 0 7px #ad85fd)}
+@media(max-width:800px){.room-boss-hud{top:73px;right:12px;min-width:160px;padding:7px 10px;font-size:9px}.room-boss-notice{top:145px;right:13px;font-size:9px;max-width:160px}.room-title-panel{max-width:250px}.room-reward-panel{padding:22px 17px}}
+
+.sword-strike-upgraded{filter:drop-shadow(0 0 10px #ffe799) drop-shadow(0 0 18px #e0a7ff)}

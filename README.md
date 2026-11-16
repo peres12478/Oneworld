@@ -1,62 +1,92 @@
-# Grand Line Explorer V2.9 — Habilidades y puertas reconstruibles
+# Grand Line Explorer V2.18 — Cápsulas de Namek y mapas de Dragon Ball API
 
-Proyecto frontend puro con **HTML, CSS, JavaScript vanilla y Tailwind por CDN**. No necesita Python ni Node.js para ejecutar el juego. Se conserva la versión 2.8 con música, frutas, islas y biografías.
+## Cómo abrir el proyecto
 
-## Ejecutar en Microsoft Edge
+1. Descomprime el ZIP completo sin mover archivos.
+2. En VS Code abre **la carpeta raíz** del proyecto.
+3. Ejecuta **`index.html` de la raíz** con Live Server en Microsoft Edge o Chrome.
+4. Desde el escenario del stickman blanco entra en la puerta de **Dragon Ball** (esfera de cuatro estrellas). La puerta **One Piece** sigue disponible.
 
-1. Extraer `Grand_Line_Explorer_v2_9_Habilidades_Puertas.zip`.
-2. Abrir esta carpeta en VS Code.
-3. Botón derecho en `index.html` → **Open with Live Server**.
-4. Abrir el enlace que muestre Live Server. Normalmente `http://127.0.0.1:5500/`.
-5. Seleccionar Luffy o Gol D. Roger.
+No hace falta Python ni backend para ejecutar el videojuego. HTML, CSS, JavaScript y **Tailwind CSS mediante CDN** se usan en la interfaz.
 
-## NUEVO: habilidades de combate en la sala inicial
+## One Piece: única modificación solicitada
 
-- **F:** habilidad especial, con un pequeño tiempo de recuperación.
-- **Luffy:** un brazo de goma se extiende y lanza un puñetazo horizontal; a continuación se retrae.
-- **Gol D. Roger:** desenfunda una espada con corte animado, estela luminosa y rayos de Haki **estilizados**.
-- **Dirección:** el efecto siempre apunta hacia donde mira el personaje.
-- **Puertas:** al recibir un golpe dentro del alcance, cualquiera de las dos puertas puede romperse. No basta estar lejos o atacar en sentido contrario.
-- **Easter egg:** al romper una puerta aparece un rompecabezas de nueve piezas. Selecciona dos para intercambiarlas; a la derecha hay una referencia visual. Al completarlo se reconstruye el portal y podrás entrar como antes.
-- Puedes cerrar el rompecabezas con la **X**, el botón **REPARAR DESPUÉS** o **Esc**. La puerta sigue rota; acércate y pulsa **E** para volver a abrir la reparación. **El progreso se conserva** dentro de la misma sesión. **MEZCLAR DE NUEVO** cambia el reto.
-- En móvil hay un botón **F** junto a las flechas para activar la habilidad.
+Se eliminaron las cuatro plataformas cafés elevadas del puerto. También se eliminó su lógica de colisión, para que solo se use el suelo del muelle. **El resto de la carpeta `one-piece/` es idéntico a V2.17.** Se verificó por comparación binaria: de sus 74 archivos, únicamente cambiaron `index.html`, `css/room.css` y `js/room.js`.
 
-Las habilidades están limitadas a **la sala principal**, no se lanzan dentro del atlas de frutas ni de las islas. No se modificaron las consultas ni la configuración de APIs.
+## Nuevo mundo de Dragon Ball
 
-## Controles existentes
+- **Goku y Vegeta** seleccionables como stickman, con extremidades animadas en archivos SVG independientes.
+- El puerto de Namek tiene **tres cápsulas Saiyajin**: **Freezer**, **Personajes API** y **Transformaciones API**; a la derecha hay una salida al mundo inicial.
+- **Combate**: entrar en la cápsula de Freezer abre una arena separada. El enemigo tiene tres fases, incluyendo cuernos, cabeza alargada y forma final lisa; las tres ilustraciones se redibujaron con estilo stickman y cola.
+- La fase II habilita el Super Saiyajin provisional (**T**); la III requiere Super Saiyajin para recibir daño.
+- Al vencer, se guarda la transformación de Goku o Vegeta (según el vencedor). Al perder, se regresa **al puerto** y la cápsula permite iniciar otra pelea desde cero, con la vida completa. Una transformación no conseguida permanece bloqueada.
+- **F** dispara Ki; **G** (solo Super Saiyajin) libera **Kamehameha** de Goku o **Masenko** de Vegeta con 10 segundos de recarga.
+- La barra superior indica **API CONECTADA / PARCIAL / SIN CONEXIÓN** y cuenta los registros recibidos realmente. Botón **↻ API** reintenta.
+- Al viajar a Personajes o Transformaciones, sus fichas se distribuyen en un mapa. Se explora con **A/D**, **E** inspecciona el registro cercano y **Q** abre el buscador con la pose de pensar y los brazos cruzados. Elegir un resultado lleva a esa ficha. Las fichas usan la imagen y datos devueltos por la API y un panel emergente, no texto largo debajo de la cuadrícula.
+- **Música instrumental original** distinta para puerto y combate (`namek-adventure.ogg`, `namek-battle.ogg`) y controles de música ON/OFF. **Web Audio API** genera sonidos propios de disparos, golpes, salto, transformaciones y Kamehameha/Masenko. No se incluyó música ni sonidos oficiales de la serie.
 
-| Ubicación | Tecla | Acción |
-|---|---|---|
-| Sala | A/D o flechas | Caminar izquierda/derecha |
-| Sala | W o Espacio | Saltar |
-| Sala | Shift | Correr |
-| Sala | F | Usar habilidad especial |
-| Sala | E cerca de una puerta intacta | Entrar |
-| Sala | E cerca de una puerta rota | Abrir rompecabezas |
-| Atlas de frutas | WASD / E / Q | Moverse / inspeccionar / buscar |
-| Mundo de islas | A/D / E / Esc | Moverse / inspeccionar / volver |
+## Controles
 
-## ¿De dónde proceden las biografías?
+| Tecla | Acción |
+|---|---|
+| A / D | Caminar en mundo horizontal |
+| Shift | Correr |
+| W / Espacio | Saltar |
+| E | Entrar en cápsula, regresar, inspeccionar ficha |
+| Q | Buscar personaje/transformación en mapa |
+| F | Lanzar Ki en combate |
+| T | Activar/desactivar Super Saiyajin desbloqueado |
+| G | Kamehameha / Masenko en modo Super Saiyajin (10 s) |
+| Esc | Cerrar buscador o ficha |
 
-**No todas provienen de la API**:
+También existen controles táctiles para móvil y **⇄ Guerrero** para volver a elegir protagonista fuera del combate.
 
-1. La API puede ofrecer una descripción incluida en `raw.extra_data` (`description`, `biography`, `bio`, `summary`, `about`); se prioriza y etiqueta **Descripción proporcionada por la API**.
-2. El archivo local `js/character-descriptions.js` contiene **122 reseñas editoriales originales escritas para el juego**, etiquetadas **Reseña editorial del juego**. No son respuestas textuales de la API ni citas académicas. Si requieres trazabilidad histórica personaje por personaje, hay que añadir referencias comprobadas.
-3. Para otros personajes se sintetizan los campos de origen, ocupación y afiliación que vienen en la API; aparece **Resumen basado en los datos de la API**.
+## Integración con API real (trabajo académico)
 
-Las fichas principales de personajes se obtienen de **One Piece API REST** y los datos de las frutas del catálogo **Devil Fruits Tracker**, como en V2.8. Las asociaciones entre personajes e islas son editoriales del juego. El frontend usa `fetch` y cuando corresponde un intermediario HTTPS `proxy.cors.dev`; este servicio remoto puede fallar o aplicar límites. Se conservó el manejo de errores de la versión 2.8.
+**URL base:** `https://dragonball-api.com/api`
 
-## Organización de archivos nuevos
+- `GET /characters?limit=100`: listado real de personajes; recorre las páginas `links.next` hasta terminarlas.
+- `GET /transformations?limit=100`: listado real de transformaciones; también recorre la paginación cuando la API la entregue.
+- `GET /characters/{id}`: datos individuales, planeta de origen y transformaciones relacionadas.
+- `GET /transformations/{id}`: determina el **portador confirmado por la API** cuando la ficha individual devuelve `character`. La colección global no asigna necesariamente el portador; no se inventan propietarios a partir de IDs.
+- Los datos se obtienen en tiempo real con `fetch()`, sin muestras precargadas como respuestas ficticias.
+- Nueve fichas complementarias de transformaciones se muestran, si procede, **claramente señaladas como contenido local**, no datos de la API.
+- Si hay errores de red, HTTP o CORS, aparece un estado de error y la opción de reintentar, sin simular una conexión.
 
-- `js/abilities.js`: extensión del puño y corte de Roger; tiempo de recuperación, dirección, hitboxes e impacto.
-- `css/abilities.css`: tratamiento visual del ataque y la puerta dañada.
-- `js/door-puzzle.js`: estado de las dos puertas y rompecabezas de nueve piezas con intercambio de casillas.
-- `css/door-puzzle.css`: menú de reconstrucción responsive.
-- `assets/portal-puzzle.svg`: ilustración original del portal usada como rompecabezas.
-- `js/room.js`: integración con **F**, detección de puerta rota y pausa del movimiento durante el rompecabezas.
+Documentación: https://dragonball-api.com/api-docs
 
-Los demás archivos de la versión 2.8 se mantienen separados por función.
+## Archivos principales
 
-## Pruebas y alcance
+```text
+index.html                                mundo principal: One Piece + Dragon Ball
+js/lobby.js                               puertas e interacción del mundo principal
+one-piece/                                mundo anterior (solo se retiraron las plataformas)
+dragon-ball/index.html                    puerto, arena, explorador y fichas
+ dragon-ball/js/dragon-ball.js            navegación, combate, catálogos, búsqueda, HUD
+ dragon-ball/js/db-api.js                 fetch de la API y datos complementarios
+ dragon-ball/js/db-audio.js               audio original y efectos Web Audio
+ dragon-ball/css/dragon-ball-v218.css     estilo del nuevo mundo, rig stickman y mapas
+ dragon-ball/assets/*-body.svg           capas base del stickman
+ dragon-ball/assets/*-arm-*.svg          brazos animados
+ dragon-ball/assets/*-leg-*.svg          piernas animadas
+ dragon-ball/assets/namek-*.ogg          dos músicas originales, locales
+```
 
-Se validó la sintaxis de todos los módulos JavaScript y se probó en Chromium mediante respuestas externas simuladas: pulsación de **F**, extensión del brazo de Luffy, corte de Roger, rotura de puerta, resolución real de las nueve piezas, restauración y conservación del estado de puerta rota al cerrar el menú. No hubo errores de JavaScript en la prueba completada. La conectividad real de música, personajes y frutas depende de las APIs y debe probarse en Edge con Live Server.
+## Verificación y limitaciones
+
+- Sintaxis JavaScript validada con Node.
+- Pruebas de interacción en **Chromium cargado de manera aislada** con respuestas simuladas de API: selección, entrada a cápsula, tres fases, desbloqueo, transformación, mapa, Q, ficha, derrota, regreso al puerto, nuevo combate y movimiento tras perder; no aparecieron excepciones JS.
+- No se pudo ejecutar Live Server en el navegador del entorno, que bloquea las direcciones locales y `file://`; debes comprobarlo en Edge con tu conexión a internet. La conexión externa a la API tampoco se validó directamente desde ese navegador: los contadores de pruebas simuladas no representan registros reales.
+- El progreso usa `sessionStorage` y detecta desconexiones de Live Server para reiniciar al reconectar. Como Live Server no ofrece un identificador de ejecución, un reinicio demasiado rápido puede pasar inadvertido; el botón **Nueva partida** elimina las recompensas manualmente.
+
+
+## V2.19 — Diseños proporcionados y esfera gravitatoria (Dragon Ball)
+
+- Personajes y naves: se sustituyeron ilustraciones genéricas por las seis imágenes aportadas por el usuario. Los archivos nuevos están en `dragon-ball/assets/` en PNG con fondo transparente.
+- Goku y Vegeta conservan sus trajes; la versión Super Saiyajin tiene pelo dorado y mantiene la silueta del original. Tecla `T` tras desbloqueo.
+- Freezer usa ilustración diferente en cada una de sus tres fases (primera con cuernos laterales, segunda con cuernos grandes y forma final lisa).
+- Tres cápsulas Saiyajin esféricas llevan al combate, catálogo de personajes y catálogo de transformaciones.
+- Nuevo ataque **Esfera de la Muerte**, exclusivo de Freezer fases 2 y 3. Se carga durante 3 segundos, atrae al héroe durante la carga y sale disparado; un impacto causa 3 puntos de daño (sobre 8 de vida inicial). Cadencia aproximada: cada 11,5 s en fase 2 y 10 s en fase 3, con primer ataque adelantado tras la transformación. Audio Web Audio original y señales visuales de aviso. Saltar o escapar del recorrido permite esquivarla.
+- No se ha alterado ningún archivo en `one-piece/` ni los endpoints de Dragon Ball API.
+
+**Ejecución:** abrir `index.html` raíz con Live Server en un navegador, sin Python ni backend local.

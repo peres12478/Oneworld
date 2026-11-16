@@ -1,0 +1,12 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="goku ssj stickman">
+<ns0:defs><ns0:linearGradient id="skin" x2=".3" y2="1"><ns0:stop stop-color="#f4bc94" /><ns0:stop offset="1" stop-color="#d88d6e" /></ns0:linearGradient><ns0:filter id="glow"><ns0:feGaussianBlur stdDeviation="4" /></ns0:filter></ns0:defs>
+<ns0:ellipse cx="91" cy="242" rx="39" ry="6" fill="#071722" opacity=".28" />
+<ns0:path d="M38 199 Q21 166 35 124 Q5 77 39 57 Q26 10 78 20 Q111 -5 140 38 Q176 71 146 116 Q173 168 137 211" fill="none" stroke="#ffe96c" stroke-width="6" opacity=".67" filter="url(#glow)" />
+<ns0:path d="M78 113 Q91 109 102 113 L106 166 Q92 171 74 166 Z" fill="#ee812e" stroke="#3e3652" stroke-width="3" stroke-linejoin="round" />
+<ns0:path d="M76 150 Q91 154 105 150" fill="none" stroke="#1947ac" stroke-width="7" stroke-linecap="round" />
+<ns0:path d="M79 113 L91 126 L101 112" fill="none" stroke="#183aab" stroke-width="5" />
+<ns0:ellipse cx="90" cy="77" rx="30" ry="34" fill="url(#skin)" stroke="#3e3652" stroke-width="3" />
+<ns0:path d="M61 70 L48 45 L63 50 L60 24 L75 39 L83 8 L98 40 L118 18 L113 48 L132 38 L119 65 L112 74 Q87 50 65 76Z" fill="#f5da45" stroke="#a5841e" stroke-width="3" stroke-linejoin="round" />
+<ns0:path d="M76 81 L83 80 M97 80 L105 81" stroke="#243040" stroke-width="4" stroke-linecap="round" />
+<ns0:path d="M85 96 Q91 101 97 96" fill="none" stroke="#984c49" stroke-width="2.6" stroke-linecap="round" />
+</ns0:svg>

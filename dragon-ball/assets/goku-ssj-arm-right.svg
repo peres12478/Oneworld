@@ -1,0 +1,3 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="goku-ssj arm-right"><ns0:defs><ns0:linearGradient id="skin" x2=".3" y2="1"><ns0:stop stop-color="#f4bc94" /><ns0:stop offset="1" stop-color="#d88d6e" /></ns0:linearGradient><ns0:filter id="glow"><ns0:feGaussianBlur stdDeviation="4" /></ns0:filter></ns0:defs>
+<ns0:g class="limb right-arm"><ns0:path d="M107 114 L129 139 L140 156" fill="none" stroke="#dc792c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" /><ns0:circle cx="143" cy="157" r="8" fill="url(#skin)" /></ns0:g>
+</ns0:svg>

@@ -1,0 +1,62 @@
+/* ===================================================================
+   Sala 2D lateral. Tailwind en la interfaz + CSS dedicado al escenario.
+   =================================================================== */
+.room-screen { background:#071622; color:#fff2db; }
+.room-topbar { position:absolute;top:0;left:0;right:0;z-index:9;height:74px;padding:16px clamp(20px,4vw,78px);background:linear-gradient(#051422ef,#0b243900); }
+.room-breadcrumb{font:800 11px var(--font-title);letter-spacing:2.2px;color:#a8ccca}.room-live-mark{display:inline-block;width:7px;height:7px;border-radius:50%;background:#d8af66;margin-right:8px;box-shadow:0 0 16px #e8c674}.room-breadcrumb-divider{color:#bea76b;margin:0 9px}
+.room-title-panel{position:absolute;top:95px;left:clamp(27px,6vw,100px);z-index:5;pointer-events:none}
+.room-eyebrow{font:700 11px var(--font-title);letter-spacing:3px;color:#d3bc86}
+.room-title-panel h2{font:900 clamp(36px,5vw,78px)/.93 var(--font-title);letter-spacing:.1px;margin:12px 0 9px;text-shadow:0 6px 22px #091725}
+.room-title-panel h2 em{font-style:normal;color:#f4c77d}
+.room-title-panel p{font-size:12px;color:#b9d2cd;max-width:410px;line-height:1.7}
+.room-viewport{position:relative;overflow:hidden;width:100%;height:calc(100dvh - 37px);min-height:510px;background:radial-gradient(ellipse 55% 65% at 78% 62%,#27536c 0%,transparent 73%),radial-gradient(ellipse 48% 50% at 30% 70%,#214b58 0%,transparent 80%),linear-gradient(#0a1a33 0%,#16344f 57%,#25465b 100%)}
+.room-viewport:before{content:'';position:absolute;inset:0;z-index:1;opacity:.16;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 98px,#c6dddf17 100px),linear-gradient(0deg,#8dbac510,transparent 48%)}
+.room-moon{position:absolute;right:17%;top:24%;width:180px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 43% 37%,#f5efc9,#cbdab7 75%,#8aa79f);box-shadow:0 0 90px #f1e5b13d,0 0 0 45px #e8f1da07;opacity:.43}
+.room-distant-mountains{position:absolute;left:0;right:0;bottom:75px;height:245px;background:#183447;clip-path:polygon(0 72%,8% 55%,16% 65%,24% 26%,36% 73%,47% 37%,58% 60%,68% 22%,79% 69%,89% 41%,100% 71%,100% 100%,0 100%);opacity:.7}
+.room-mist{position:absolute;bottom:64px;height:180px;width:100%;background:linear-gradient(transparent,#7eaca420);filter:blur(20px)}
+.room-camera{position:absolute;inset:0;z-index:2;will-change:transform;pointer-events:none}
+.room-world{position:absolute;bottom:0;left:0;height:560px;width:3250px;pointer-events:none}
+.room-floor{position:absolute;bottom:0;left:0;right:0;height:114px;background:linear-gradient(#354953 0 9px,#293c45 9px 32px,#182b3b 100%);border-top:4px solid #b49a72;box-shadow:0 -12px 55px #ead6ac12;}
+.room-floor:before{content:'';position:absolute;inset:11px 0 0;background:repeating-linear-gradient(100deg,transparent 0 130px,#eac88b20 132px,#0000 137px),repeating-linear-gradient(0deg,transparent 0 37px,#080f1e5e 39px)}
+.room-floor:after{content:'';position:absolute;top:-17px;left:0;right:0;height:16px;background:repeating-linear-gradient(90deg,#4c6061 0 70px,#405458 72px,#526663 74px);border-top:1px solid #a28c6f;opacity:.72}
+.room-platform{position:absolute;width:185px;height:19px;border-radius:5px 5px 2px 2px;background:linear-gradient(#b8a17a 0 5px,#445e61 6px 100%);box-shadow:0 6px 0 #183243,0 12px 28px #0008;border:1px solid #80765b}
+.platform-one{left:680px;top:345px;width:180px}.platform-two{left:1150px;top:322px}.platform-three{left:1640px;top:340px;width:195px}.platform-four{left:2180px;top:342px;width:170px}
+.room-back-pillars{position:absolute;inset:0;opacity:.35;background:repeating-linear-gradient(90deg,transparent 0 365px,#789a9255 368px,#789a9244 385px,#0000 405px,#0000 650px)}
+.room-hanging-stars{position:absolute;inset:0;opacity:.48;background-image:radial-gradient(2px 2px at 14% 16%,#f1ca8a 98%,transparent),radial-gradient(3px 3px at 46% 23%,#fff3cb 98%,transparent),radial-gradient(2px 2px at 71% 39%,#8ad9cf 98%,transparent),radial-gradient(3px 3px at 90% 12%,#fbd58f 98%,transparent);background-size:490px 330px}
+.room-arch{position:absolute;bottom:113px;width:340px;height:390px;border:25px solid #8f807062;border-bottom:0;border-radius:190px 190px 0 0;box-shadow:inset 0 0 0 4px #decaa51c,0 0 0 1px #e7d19d12;opacity:.42}
+.room-arch-one{left:350px}.room-arch-two{left:1350px}.room-arch-three{left:2330px}
+.room-door-scene{position:absolute;bottom:113px;left:calc(3250px - 335px);width:185px;height:325px;display:flex;align-items:center;flex-direction:column}
+.portal-caption{position:absolute;top:9px;white-space:nowrap;font:900 20px var(--font-title);letter-spacing:2px;color:#ffd68a;text-shadow:0 3px 15px #000}
+.portal-light{position:absolute;top:62px;width:180px;height:235px;border-radius:50%;background:#72dad044;filter:blur(42px);animation:glow 2.5s ease-in-out infinite alternate}
+.portal-frame{position:absolute;bottom:20px;width:150px;height:240px;border:10px solid #b5a078;border-bottom:0;border-radius:79px 79px 4px 4px;box-shadow:0 0 0 7px #293a42,0 0 30px #fbd38b33,inset 0 0 0 5px #554b42;overflow:hidden}
+.portal-inner{width:100%;height:100%;border-radius:80px 80px 0 0;background:radial-gradient(ellipse at 50% 68%,#a5e6d3 0,#437d80 45%,#123a50 80%);display:grid;place-items:center;animation:portal-shimmer 3s ease-in-out infinite alternate}
+.portal-glyph{font:900 66px var(--font-title);color:#ffe8b6;text-shadow:0 0 25px #faf0bc;animation:spin-slow 28s linear infinite}
+.portal-step{position:absolute;bottom:6px;height:16px;width:185px;background:#b49b75;border:2px solid #ecd4a2;border-radius:4px;box-shadow:0 7px 0 #1c2a31}
+.room-player{position:absolute;width:104px;height:190px;z-index:6;will-change:left,top;pointer-events:none}
+.room-player-ground-shadow{position:absolute;bottom:-8px;left:16%;width:69%;height:13px;background:#080f16a3;border-radius:50%;filter:blur(5px)}
+.room-player-caption{position:absolute;white-space:nowrap;bottom:-28px;left:50%;transform:translateX(-50%);font:800 11px var(--font-title);letter-spacing:1.3px;color:#f5deb3;text-shadow:0 3px 8px #111}
+.room-hud-bottom{position:absolute;z-index:7;bottom:36px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:24px;white-space:nowrap;padding:11px 24px;border-radius:8px;background:#0c2538dd;border:1px solid #cdb78047;box-shadow:0 7px 30px #08101d9c;font:900 11px var(--font-title);letter-spacing:1px}
+.room-hud-bottom kbd{border:1px solid #b2af916e;border-radius:4px;padding:3px 6px;color:#ffd694;background:#ffffff09}
+.room-distance{color:#abc4c7}.room-distance b{color:#f5d69b}
+.room-door-hint{position:absolute;top:37%;left:50%;transform:translateX(-50%);z-index:8;text-align:center;min-width:265px;background:#091d30ed;border:1px solid #f7d18d99;border-radius:13px;padding:20px 26px;box-shadow:0 16px 50px #000a,0 0 50px #b9e3c217;display:flex;flex-direction:column;gap:8px;pointer-events:auto}
+.room-door-hint>span{font:800 11px var(--font-title);color:#d2dbcb;letter-spacing:2px}.room-door-hint strong{font:900 25px var(--font-title);color:#ffe2a1;letter-spacing:1px}
+.room-door-hint button{background:#f1cb88;color:#142c3b;border:0;border-radius:6px;font:900 13px var(--font-title);padding:12px 15px;margin-top:6px}
+.room-footer{height:37px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 clamp(18px,4vw,76px);font:800 10px var(--font-title);letter-spacing:1.7px;color:#91aaa9}
+.room-mobile-controls{display:none;position:absolute;bottom:110px;right:14px;z-index:9;gap:7px;pointer-events:auto}
+.room-mobile-controls button{width:48px;height:48px;background:#0b293fcf;border:1px solid #e3d3a38a;border-radius:10px;color:#ffe8af;font-size:19px;touch-action:none}
+.room-mobile-controls button.pressed{background:#eec781;color:#112936}
+@keyframes glow{to{opacity:.4;transform:scale(1.1)}}
+@keyframes portal-shimmer{to{filter:hue-rotate(20deg) brightness(1.2)}}
+@media(max-width:800px){
+  .room-topbar{padding:12px 14px;height:64px}.room-breadcrumb{display:none}
+  .room-topbar .ui-button{font-size:10px}
+  .room-title-panel{top:92px;left:20px}.room-title-panel h2{font-size:42px}.room-title-panel p{font-size:11px;max-width:300px}
+  .room-hud-bottom{gap:8px;left:12px;bottom:30px;transform:none;padding:9px 11px;font-size:10px}
+  .room-hud-bottom span:nth-child(3),.room-hud-bottom .room-distance{display:none}
+  .room-mobile-controls{display:flex}.room-footer span:last-child{display:none}
+}
+.room-mobile-controls #room-attack-button{border-color:#f1c47d;background:#604326;color:#ffebba;font-weight:900;box-shadow:0 0 14px #f1bb683b}
+@media(max-width:800px){.room-hud-bottom>span:nth-child(4){display:none}.room-mobile-controls{right:8px;bottom:95px}.room-mobile-controls button{width:44px;height:44px}}
+
+/* V2.18: puerto sin plataformas elevadas. */
+.room-screen .room-platform{display:none!important}

@@ -1,0 +1,43 @@
+/* Tercera puerta y arena privada de Barbanegra (Hachinosu).
+ * No añade un backend ni altera los mundos/frutas existentes. */
+.room-door-hachinosu{left:428px;filter:drop-shadow(0 0 22px #f8736738)}
+.room-door-hachinosu .portal-caption{color:#ffb7a1;text-shadow:0 0 12px #d62c47}
+.room-door-hachinosu .portal-frame{border-color:#c77f6b;box-shadow:0 0 0 7px #292332,0 0 40px #e44e6d71,inset 0 0 0 5px #462135}
+.room-door-hachinosu .portal-inner{background:radial-gradient(circle at 51% 62%,#a64763,#4b253f 47%,#111626 83%)}
+.room-door-hachinosu .portal-light{background:#f2576567}
+.hachinosu-scenery,.hachinosu-exit{display:none;pointer-events:none}
+.room-screen.hachinosu-mode .room-viewport{background:radial-gradient(ellipse 60% 70% at 65% 60%,#5f2d58 0,transparent 73%),linear-gradient(#0d0f29 0%,#252341 49%,#482d43 85%,#191e32 100%)}
+.room-screen.hachinosu-mode .room-moon{background:#e1a49f;box-shadow:0 0 100px #d35f7577;opacity:.35}
+.room-screen.hachinosu-mode .room-distant-mountains{background:#19182b;opacity:.95}
+.room-screen.hachinosu-mode .room-hanging-stars,.room-screen.hachinosu-mode .room-back-pillars,.room-screen.hachinosu-mode .room-arch,.room-screen.hachinosu-mode .room-door-scene,.room-screen.hachinosu-mode .room-platform{display:none}
+.room-screen.hachinosu-mode .room-floor{background:linear-gradient(#73626a 0 8px,#322e3c 8px 25px,#1b192c 75%);border-top-color:#b27783}
+.room-screen.hachinosu-mode .hachinosu-scenery{display:block;position:absolute;left:600px;bottom:110px;width:2120px;height:465px;overflow:hidden;z-index:1;background:radial-gradient(ellipse at 55% 92%,#dc58642e,transparent 63%)}
+.hachinosu-scenery .hachinosu-moon{position:absolute;left:55%;top:50px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,#f9dabb,#e38591 72%,transparent 73%);box-shadow:0 0 130px #ec78908c;opacity:.48}
+.hachinosu-scenery .hachinosu-fort{position:absolute;left:26%;bottom:7px;width:660px;height:280px;border-radius:160px 160px 0 0;border:17px ridge #1b1932;background:repeating-linear-gradient(90deg,#2e223a 0 70px,#392743 70px 76px,#1d1a32 77px 112px);box-shadow:0 -5px 80px #e86a9852,0 0 0 22px #080b19d6}
+.hachinosu-scenery .hachinosu-fort:before,.hachinosu-scenery .hachinosu-fort:after{content:'';position:absolute;bottom:13px;width:130px;height:300px;background:#121527;border:9px solid #423044;border-radius:50% 50% 5px 5px}
+.hachinosu-scenery .hachinosu-fort:before{left:-114px}.hachinosu-scenery .hachinosu-fort:after{right:-114px}
+.hachinosu-scenery .hachinosu-skull{position:absolute;top:32px;left:43%;font-size:120px;line-height:1;color:#bd7288;text-shadow:0 0 24px #d66778,7px 6px #110e21}
+.hachinosu-scenery .hachinosu-sails{position:absolute;left:12%;bottom:35px;width:210px;height:240px;clip-path:polygon(52% 0,54% 86%,100% 87%,85% 61%,29% 53%,6% 30%,49% 4%,0 9%,0 100%,100% 100%,100% 0);background:#141b2e;opacity:.9}
+.hachinosu-scenery .hachinosu-lava{position:absolute;bottom:0;inset-inline:0;height:32px;background:repeating-linear-gradient(95deg,#9a46524d 0 35px,#d49a9540 45px 53px,transparent 65px 125px);filter:blur(8px)}
+.room-screen.hachinosu-mode .hachinosu-exit{display:flex;position:absolute;left:930px;bottom:113px;width:145px;height:245px;align-items:center;justify-content:center;flex-direction:column;color:#ffdbb6;border:8px solid #b7948a;border-bottom:0;border-radius:90px 90px 0 0;background:radial-gradient(ellipse,#e2a8a26b,#393157a6 70%);box-shadow:0 0 45px #ba65847d;z-index:3}
+.hachinosu-exit span{position:absolute;top:-34px;font:bold 13px system-ui;white-space:nowrap;text-shadow:0 2px 6px #000}
+.hachinosu-exit b{font-size:73px;animation:portal-shimmer 3s infinite alternate}
+.blackbeard-spikes{position:absolute;width:122px;height:96px;z-index:6;pointer-events:none;transition:opacity .2s}
+.blackbeard-spikes .spike-mark{position:absolute;bottom:4px;left:3px;width:116px;height:23px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#ff3b6499;border:3px solid #ffb55a;box-shadow:0 0 28px #ff4d6d;color:#fff0be;font:900 17px system-ui;animation:spike-alert .17s ease-in-out infinite alternate}
+@keyframes spike-alert{to{filter:brightness(1.6);transform:scaleX(.9)}}
+.blackbeard-spikes .spike-needles{position:absolute;bottom:0;left:1px;width:118px;height:91px;transform:scaleY(0);transform-origin:bottom center;clip-path:polygon(0 100%,9% 15%,18% 100%,30% 1%,42% 100%,51% 6%,60% 100%,72% 10%,83% 100%,93% 17%,100% 100%);background:linear-gradient(90deg,#401a36,#b55083 44%,#e797a4 52%,#5d1d4b);filter:drop-shadow(0 0 12px #d14572);}
+.blackbeard-spikes.spike-active .spike-mark{opacity:.13}
+.blackbeard-spikes.spike-active .spike-needles{transform:scaleY(1);transition:transform .18s cubic-bezier(.05,.85,.45,1.25)}
+.blackbeard-spikes.spike-retract .spike-mark{opacity:0}
+.blackbeard-spikes.spike-retract .spike-needles{transform:scaleY(0);transition:transform .35s ease-in}
+.form-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+.form-toggle{border:1px solid #ffdcab;background:linear-gradient(140deg,#fff1cc,#8cd9eb);color:#132238;border-radius:8px;padding:10px 14px;font:900 11px var(--font-title,system-ui);letter-spacing:.4px;box-shadow:0 3px 15px #5ab3db44;cursor:pointer}
+.form-toggle[aria-pressed="true"]{background:linear-gradient(140deg,#f3f6ff,#b5ddf4)}
+.form-toggle.hidden{display:none!important}
+.run-control{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin:16px 0;color:#deceaf;font:700 11px system-ui;text-align:center}
+.run-control button{border:1px solid #e8c393;border-radius:7px;padding:9px 16px;background:#182d40;color:#ffe3a1;font-weight:900;cursor:pointer}
+@media(max-width:720px){.room-topbar{align-items:flex-start}.form-header-actions{gap:4px}.form-toggle{font-size:10px;padding:8px 9px}.room-title-panel h2{font-size:clamp(28px,6vw,50px)}.room-screen.hachinosu-mode .room-title-panel p{max-width:220px}.island-scene-topbar .form-header-actions{flex-direction:column;align-items:stretch}.island-scene-topbar .form-toggle{font-size:9px}.run-control{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.blackbeard-spikes .spike-mark,.hachinosu-exit b{animation:none}}
+
+.game-actions .form-toggle{padding:8px 10px;font-size:10px}
+@media(max-width:720px){.game-actions .form-toggle{font-size:9px;padding:7px 8px}}

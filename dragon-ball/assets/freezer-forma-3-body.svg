@@ -1,0 +1,13 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="Freezer fase 3, diseño stickman">
+ <ns0:defs><ns0:linearGradient id="skin" x1="0" x2=".25" y1="0" y2="1"><ns0:stop stop-color="#faf6fc" /><ns0:stop offset="1" stop-color="#d7c7e3" /></ns0:linearGradient></ns0:defs>
+ <ns0:ellipse cx="94" cy="242" rx="46" ry="5" fill="#0b2734" opacity=".30" />
+ <ns0:path d="M100 160 Q152 154 163 185 Q167 202 149 212 Q132 224 144 234" stroke="#6e477f" fill="none" stroke-width="17" stroke-linecap="round" />
+ <ns0:path d="M100 160 Q152 154 163 185 Q167 202 149 212 Q132 224 144 234" stroke="#f0dced" fill="none" stroke-width="11" stroke-linecap="round" />
+ <ns0:path d="M143 233 Q135 226 137 216" fill="none" stroke="#a155bb" stroke-width="7" stroke-linecap="round" />
+ <ns0:path d="M76 108 Q90 101 105 108 L111 155 Q91 161 73 155Z" fill="#f7f3fb" stroke="#654679" stroke-width="3.5" />
+  <ns0:ellipse cx="91" cy="124" rx="12" ry="17" fill="#9f5ebb" stroke="#76438f" stroke-width="2" /><ns0:path d="M80 152 L104 152" stroke="#b774c1" stroke-width="6" />
+ <ns0:ellipse cx="92" cy="74" rx="31" ry="34" fill="url(#skin)" stroke="#654477" stroke-width="4" />
+ <ns0:path d="M70 56 Q76 35 92 34 Q109 34 114 55 Q92 62 70 56Z" fill="#9b55b2" stroke="#77428e" stroke-width="3" />
+ <ns0:path d="M71 79 L85 75 M99 75 L113 79" stroke="#322047" stroke-width="4.5" stroke-linecap="round" />
+ <ns0:path d="M84 95 Q92 100 102 94" stroke="#995477" stroke-width="3" fill="none" />
+ </ns0:svg>
