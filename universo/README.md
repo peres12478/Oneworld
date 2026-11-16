@@ -46,3 +46,7 @@ No se modificaron archivos dentro de `one-piece/` ni de `dragon-ball/`.
 ## V2.22 — Revisión y conservación de datos
 
 El laboratorio **mantiene las 43 fórmulas de `js/physics.js`** sin cambios de idioma ni simbología. Las prácticas nuevas son simulaciones educativas locales; NO se presentan como datos obtenidos desde una API. Se mantienen las consultas `fetch` a SpaceCatalog y Wikipedia. Los mundos `one-piece/` y `dragon-ball/` no han sido modificados. Las pruebas en Chromium se hicieron con carga aislada porque el navegador de este entorno bloquea `localhost`, por lo que hay que verificar Live Server en el PC del usuario.
+
+## V2.24 — Comprobación real de las APIs del laboratorio
+
+Se añadió `js/physics-live-api.js`: al ingresar en «Laboratorio» realiza consultas `fetch` a Wikipedia y Wikidata, comprueba la respuesta y presenta «API conectada», «consultando» o «API sin conexión». Un botón permite reintentar. Se utilizan `origin=*` para peticiones CORS anónimas. Cuando Wikidata proporciona una expresión `P2534`, se muestra en una sección separada, con enlace al registro original. Las 43 fórmulas educativas de `js/physics.js` **siguen siendo locales**; no deben atribuirse a una API. El número de expresiones externas depende de los registros disponibles. Las cinco prácticas son cálculos locales, no una API.

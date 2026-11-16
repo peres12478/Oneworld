@@ -123,3 +123,20 @@ kbd{display:inline-grid;min-width:23px;height:23px;place-items:center;padding:0 
 .hub-astronaut.landing svg{animation:landing .22s ease-out}
 @keyframes hub-astro-step{from{transform:rotate(-24deg)}to{transform:rotate(26deg)}}
 @media(max-width:760px){.hub-astronaut{height:174px;width:108px}}
+
+/* V2.23: cuarta puerta personal y ambiente sonoro. */
+.bedroom-door-zone .hub-portal{background:radial-gradient(ellipse at 50% 33%,#9f6f67 0%,#493852 52%,#221d38 100%);border-color:#f7c7a1;box-shadow:0 0 0 4px #2d1d2d,0 0 0 8px #c79e7d,0 15px 40px #000a,inset 0 0 70px #e5a8a433}
+.bedroom-door-zone .hub-door-light{background:radial-gradient(ellipse closest-side,#f4b0c674,transparent 85%)}
+.bedroom-door-zone .portal-emblem{width:168px;height:160px;filter:drop-shadow(0 0 19px #ffc8d0a1)}
+.bedroom-door-zone .portal-badge{color:#ffe7b1}
+.bedroom-door-zone .portal-name{font-size:18px;letter-spacing:.08em;color:#ffedcf}
+.bedroom-door-zone .portal-subtitle{color:#ffcfdd}
+.bedroom-door-zone.is-near .hub-portal,.bedroom-door-zone .hub-portal:hover{box-shadow:0 0 0 4px #3d263b,0 0 0 9px #ffcead,0 0 74px #f2a3ad9c,inset 0 0 65px #d899993a}
+.hub-top-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;justify-content:flex-end}
+.home-music-controls{display:flex;align-items:center;gap:9px;border:1px solid #b28c6273;background:#120d0b9e;padding:7px 11px;border-radius:16px}
+.home-music-button{cursor:pointer;border:0;border-radius:9px;background:#b58b57;color:#17120e;font-weight:900;padding:8px 11px;font-size:11px;min-width:100px}
+.home-music-button[aria-pressed="true"]{background:#d7af75}
+.home-volume-label{display:flex;align-items:center;gap:6px;color:#e3cba7;font-size:10px;font-weight:800}
+.home-volume-label input{width:76px;accent-color:#e6bf82;cursor:pointer}
+@media(max-width:760px){.hub-top-actions{gap:5px}.home-music-controls{padding:5px 7px;gap:5px}.home-music-button{font-size:10px;min-width:76px;padding:7px}.home-volume-label input{width:46px}}
+@media(max-width:420px){.home-brand h1{font-size:14px}.home-brand small{font-size:7px}.home-music-button{min-width:67px}.home-volume-label{display:none}}

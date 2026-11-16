@@ -1,44 +1,85 @@
-# Grand Line Explorer V2.22 — Mi espacio + One Piece + Dragon Ball + Universo
+# Grand Line Explorer V2.25 — Mi habitación primero y GitHub simplificado
 
-Proyecto web completo: HTML, CSS, JavaScript nativo y Tailwind CSS mediante CDN. No requiere Python ni backend local para funcionar.
+Sitio web con **cuatro puertas** y un astronauta animado. Construido con HTML, CSS, JavaScript y **Tailwind CSS por CDN**, sin backend ni Python. Continúa desde la V2.22, preservando los mundos de One Piece y Dragon Ball.
 
-## Inicio
+## Para ejecutar
 
-1. Descomprime **todo** el ZIP manteniendo la estructura de carpetas.
-2. Abre la **carpeta principal** en Visual Studio Code.
-3. Abre el `index.html` de la **raíz** usando Live Server en Microsoft Edge o Chrome.
-4. Usa **A / D** para caminar, **W / Espacio** para saltar, **Shift** para correr y **E** cerca de una puerta. También puedes pulsar directamente en los accesos.
+1. Descomprime todo el ZIP sin cambiar los nombres ni la estructura.
+2. Abre la carpeta principal en Visual Studio Code.
+3. Abre el **`index.html` de la raíz** usando Live Server en Edge o Chrome.
+4. Pulsa **A/D** para caminar, **W / Espacio** para saltar, **Shift** para correr y **E** para entrar. También puedes hacer clic en las puertas.
+5. La **música comienza después de un clic o de una tecla**, por las políticas de reproducción automática de los navegadores. Hay botones de Música y controles de volumen independientes.
 
-## Orden de las puertas (izquierda → derecha)
+## Las cuatro puertas (de izquierda a derecha)
 
-1. **UNIVERSO** (`universo/`): astronomía, laboratorio de física y arcade de asteroides.
-2. **ONE PIECE** (`one-piece/`): Luffy, Roger, puertos, Hachinosu y API.
-3. **DRAGON BALL** (`dragon-ball/`): Goku, Vegeta, Freezer y API.
+1. **Mi habitación** → `mi-habitacion/`: información personal; **no usa API**.
+2. **Universo** → `universo/`: cohete, API astronómica, laboratorio de 43 fórmulas, cinco prácticas y arcade.
+3. **One Piece** → `one-piece/`: Luffy, Roger, barcos, Hachinosu y APIs.
+4. **Dragon Ball** → `dragon-ball/`: Goku, Vegeta, Freezer y APIs.
 
-El personaje del mundo principal es **el mismo astronauta de traje blanco y visor azul** que se usa en el hangar de ASTRA/LAB. Su SVG está incrustado en `index.html`, y la animación está en `css/lobby.css`.
+## Cómo editar tu información: UN SOLO ARCHIVO
 
-## Novedades en Universo V2.22
+Abre: **`mi-habitacion/js/datos-personales.js`**. Puedes editarlo con Visual Studio Code y guardar. No necesitas modificar el HTML, ni las animaciones, ni los tres mundos.
 
-- **Regreso a Mi Espacio:** portal físico situado a la izquierda del hangar; puedes acercarte y pulsar E. El enlace superior también se conserva.
-- **Ambiente sonoro:** notas y efectos originales sintetizados en el navegador con Web Audio API, control de ON/OFF y sonidos de interacción, saltos, inspección y arcade. Por las restricciones de los navegadores, el sonido se inicia tras el primer clic o tecla.
-- **Laboratorio → Prácticas:** nueva puerta dentro del laboratorio de fórmulas. Lleva a una sala con cinco experimentos interactivos: tiro parabólico, segunda ley de Newton, ley de Hooke, péndulo y ley de Ohm. Cada experimento incluye magnitudes ajustables, ecuación, visualización en Canvas, resultados calculados y botones Iniciar / Pausar / Reiniciar.
-- **Fórmulas:** el catálogo de 43 fórmulas escolares sigue igual (sin traducciones), en `universo/js/physics.js`; las prácticas son modelos didácticos locales, no registros de una API.
+- **GitHub:** escribe el nombre visible en `github.nombre` y el único enlace en `github.url` (ejemplo: `https://github.com/tu-usuario?tab=repositories`). No se muestran proyectos destacados ni tarjetas adicionales. El enlace abre tus repositorios en GitHub.
+- **Mis pasiones:** escribe el texto inicial en `pasiones.introduccion` y objetos en `pasiones.intereses`: `{ nombre: 'Mi pasión', descripcion: 'Por qué me gusta' }`. Esta sección se abre al pulsar el recuadro de Saturno.
+- **Sobre mí:** completa `sobreMi.nombre`, `sobreMi.fechaNacimiento` (`AAAA-MM-DD`, opcional), `sobreMi.presentacion`. Esta sección se abre al pulsar el reloj.
 
-## API y fuentes
+**No se incluyen datos personales reales de ejemplo.** Si publicas el proyecto en GitHub Pages u otro alojamiento, todos los datos del archivo serán públicos. No escribas cédula, teléfonos, contraseñas ni información privada.
 
-Se mantienen las conexiones `fetch()` existentes: `universo/js/space-api.js` para SpaceCatalog y Wikipedia; `dragon-ball/js/db-api.js` y los módulos API de One Piece. Ninguna de las consultas se reemplazó por respuestas falsas. Si no hay red, los servicios pueden indicar falta de conexión.
+## Controles en la habitación
 
-## Archivos principales
+- **A/D:** caminar; **W/Espacio:** saltar; **Shift:** correr.
+- **E:** interactuar con el elemento cercano; **Esc:** cerrar una ficha.
+- También puedes hacer **clic** en el computador, Saturno, reloj o puerta de salida.
+- El portal **MI ESPACIO** devuelve al mundo principal.
 
-- `index.html` / `css/lobby.css` / `js/lobby.js` / `js/lobby-config.js`: mundo personal y las tres puertas.
-- `universo/index.html` / `universo/css/universo.css`: interfaces y estilos de ASTRA/LAB.
-- `universo/js/main.js`: navegación y controles del universo.
-- `universo/js/physics-practices.js`: cálculos y dibujos de las cinco prácticas.
-- `universo/js/astro-audio.js`: sonido ambiental original y efectos.
-- `universo/js/physics.js`: las 43 fórmulas escolares preexistentes.
-- `universo/js/space-api.js`: APIs externas del Universo.
-- `one-piece/` y `dragon-ball/`: proyectos integrados **sin modificaciones respecto a V2.21**.
+## Sonido de cada mundo
 
-## Comprobaciones
+- `assets/mi-espacio-original.ogg` — tema original del lobby principal.
+- `assets/mi-habitacion-original.ogg` — tema cálido de la habitación.
+- `universo/assets/cosmos-original.ogg` — música espacial continua de ASTRA/LAB.
+- `js/personal-music.js` — reproductor compartido de Mi espacio y Mi habitación.
+- `universo/js/space-music.js` — reproductor y volumen de la música del Universo.
+- `universo/js/astro-audio.js` — mantiene los efectos de salto e interacción. Se evitó solapar las antiguas notas de ambiente con la nueva música.
 
-Se verificó sintaxis JavaScript, integridad del ZIP y equivalencia binaria de las carpetas de One Piece y Dragon Ball respecto a la V2.21. Las pruebas de interacción en Chromium fueron **aisladas** (sin navegación a servidor local, bloqueada por el entorno) y confirmaron cinco prácticas, ajustes de parámetros, regreso al laboratorio, botones y orden de puertas. **Debes validar la ejecución con Live Server y las llamadas reales a las APIs en tu computador.**
+Todas las pistas fueron sintetizadas para este proyecto; no requieren API, archivos externos ni música comercial. Las conexiones de las **APIs de los otros mundos no se han modificado**.
+
+## Títulos / diseño
+
+Se redujeron los encabezados de Universo, especialmente «El universo te espera» y los títulos de paneles. Se mantiene Tailwind CSS por CDN, complementado con CSS de escenarios (`css/lobby.css`, `universo/css/universo.css` y `mi-habitacion/css/habitacion.css`).
+
+## Notas de verificación
+
+- One Piece y Dragon Ball se conservan **idénticos a la V2.22**.
+- Las fichas personales muestran avisos cuando faltan datos; no inventan información ni enlaces.
+- Los enlaces externos admiten `http` y `https`; se abren con `rel="noopener noreferrer"`.
+- La prueba del navegador fue **aislada**, usando contenido inyectado y datos locales; el acceso de Chromium a `localhost` está bloqueado en este entorno. Verifica el flujo completo y las APIs reales con Live Server en tu computador.
+
+## Cambios V2.24 — Mi habitación
+
+- Se rediseñó la ventana: cielo nocturno continuo, luna, estrellas, montañas y marco arqueado con travesaños integrados.
+- El reloj de «Sobre mí» se centró más abajo en su cuadro.
+- Se eliminaron los encabezados «PROYECTOS DESTACADOS» y «MI HISTORIA», así como el campo `sobreMi.historia`. La ficha de GitHub se simplificó en V2.25 a un nombre y un enlace; «Sobre mí» conserva nombre, fecha y presentación.
+
+## Cambios V2.24 — API del laboratorio
+
+**Aclaremos el origen:** las 43 fórmulas del catálogo de décimo y once siguen siendo datos escolares locales (`universo/js/physics.js`). No se presentan como contenido descargado de una API.
+
+- Al **entrar al laboratorio** se consulta automáticamente Wikipedia API mediante `fetch()` y se busca la vinculación de sus temas con **Wikidata**.
+- Se consultan en Wikidata las expresiones matemáticas registradas con la propiedad `P2534` («defining formula»). Si existe una expresión, se muestra como contenido **obtenido desde Wikidata**, separado de la fórmula escolar original.
+- El estado visible muestra «consultando», «API conectada» o «API sin conexión». El botón **COMPROBAR API** repite la prueba.
+- Se muestra cuántas fórmulas tienen referencia externa y cuántas expresiones matemáticas devuelve realmente Wikidata. El número puede ser cero; no se inventan resultados ni registros.
+- Al abrir una ficha continúa la consulta real del resumen enciclopédico mediante Wikipedia API.
+- Todas las fichas locales y las cinco prácticas siguen disponibles sin internet.
+
+**Módulo nuevo:** `universo/js/physics-live-api.js` implementa las peticiones a Wikipedia y Wikidata. No usa Python ni backend. El CDN de Tailwind permanece incluido.
+
+**Pruebas:** verificación sintáctica y pruebas aisladas en Chromium con respuestas de API **simuladas** (éxito y contenido). No fue posible comprobar tráfico real de Wikimedia desde este entorno: valida el resultado con Live Server en Edge.
+
+## Cambios V2.25
+
+- Mi habitación pasa a ser la **primera puerta**, seguida de Universo, One Piece y Dragon Ball. El orden visual, los números y el orden de navegación por teclado coinciden.
+- En **Mi GitHub** aparecen únicamente `github.nombre` y `github.url`. Se eliminó por completo la lista de proyectos destacados (`proyectos`).
+- Se mantienen las secciones **Mis pasiones**, introducción, intereses y **Sobre mí**.
+- Los archivos de `one-piece/`, `dragon-ball/` y `universo/` no se modificaron.

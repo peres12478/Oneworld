@@ -8,7 +8,7 @@ export class AstroAudio{
  }
  updateButton(){this.button.textContent=this.enabled?'🔊 SONIDO ON':'🔇 SONIDO OFF';this.button.setAttribute('aria-pressed',String(this.enabled));}
  unlock(){if(!this.enabled)return;try{if(!this.ctx)this.ctx=new (window.AudioContext||window.webkitAudioContext)();this.resume();}catch(e){this.button.title='El navegador no permite audio en este momento.';}}
- resume(){if(!this.ctx||!this.enabled)return;this.ctx.resume().catch(()=>{});if(!this.timer){this.timer=setInterval(()=>this.ambient(),720);this.ambient();}}
+ resume(){if(!this.ctx||!this.enabled)return;this.ctx.resume().catch(()=>{});/* Las notas ambientales antiguas no se mezclan con la nueva pista continua. */}
  suspend(){if(this.timer){clearInterval(this.timer);this.timer=null;}if(this.ctx&&this.ctx.state==='running')this.ctx.suspend().catch(()=>{});}
  setScene(scene){this.scene=scene;this.i=0;}
  note(freq,duration=.5,volume=.025,type='sine',start=0){if(!this.ctx||!this.enabled||this.ctx.state==='closed')return;try{let now=this.ctx.currentTime+start;let osc=this.ctx.createOscillator();let gain=this.ctx.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,now);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),now+.07);gain.gain.exponentialRampToValueAtTime(.0001,now+duration);osc.connect(gain);gain.connect(this.ctx.destination);osc.start(now);osc.stop(now+duration+.03);}catch(e){}}

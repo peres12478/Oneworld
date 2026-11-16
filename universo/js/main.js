@@ -1,5 +1,6 @@
 import {readSpaceCategory,readSpaceDetail,readWikipediaArticle,SPACE_API} from './space-api.js';
 import {formulas,categories} from './physics.js';
+import {consultPhysicsAPIs} from './physics-live-api.js';
 import {AsteroidsGame} from './asteroids.js';
 import {PhysicsPractices} from './physics-practices.js';
 import {AstroAudio} from './astro-audio.js';
@@ -8,7 +9,7 @@ const $=id=>document.getElementById(id);
 const dom={app:$('app'),hangar:$('screen-hangar'),world:$('hangar-world'),astro:$('astronaut'),shadow:$('astronaut-shadow'),prompt:$('hangar-prompt'),near:$('near-label'),
  api:$('api-state'), modal:$('detail-modal'),help:$('help-modal'),detailTitle:$('detail-title'),detailKind:$('detail-kind'),detailContent:$('detail-content'),detailSource:$('detail-source'),
  categoryCount:$('sky-count'),objectName:$('object-name'),objectType:$('object-type'),objectSequence:$('object-sequence'),art:$('celestial-art'),empty:$('empty-space'),
- formulaGrid:$('formula-grid'),formulaSearch:$('formula-search'),labCategories:$('lab-categories'), formulaCount:$('formula-count')};
+ formulaGrid:$('formula-grid'),formulaSearch:$('formula-search'),labCategories:$('lab-categories'), formulaCount:$('formula-count'),labApiStatus:$('lab-api-status'),labApiDetails:$('lab-api-details'),labRetry:$('lab-retry-api')};
 const astroSound=new AstroAudio($('sound-button'));
 const practices=new PhysicsPractices({canvas:$('practice-canvas'),selector:$('practice-selector'),inputs:$('practice-inputs'),results:$('practice-results'),title:$('practice-title'),topic:$('practice-topic'),equation:$('practice-equation'),description:$('practice-description'),note:$('practice-note'),play:$('practice-play'),reset:$('practice-reset'),time:$('practice-time')});
 const keys=new Set();const sites=[{x:92,el:$('site-home'),screen:'home',title:'MI ESPACIO'},{x:365,el:$('site-explore'),screen:'explore',title:'COHETE EXPLORADOR'},{x:1120,el:$('site-lab'),screen:'lab',title:'LABORATORIO DE FÍSICA'},{x:1880,el:$('site-arcade'),screen:'arcade',title:'ARCADE DE ASTEROIDES'}];
@@ -16,6 +17,7 @@ const SPACE_WIDTH=2310;let scene='hangar',modalOpen=false,helpOpen=false,nearSit
 const pilot={x:530,y:0,vy:0,ground:true,facing:1,camera:0,last:0};
 const sky={category:'planet',records:[],offset:0,index:0,loading:false,hasMore:false,cache:new Map(),request:0};
 let selectedFormulaCategory='todas',labRendered=false;
+const labLive={loaded:false,pending:false,online:false,linked:new Map(),version:0};
 const esc=str=>String(str??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const typeName={planet:'Planeta',moon:'Luna',black_hole:'Agujero negro'};
 const nf=(n,decimals=2)=>typeof n==='number'&&Number.isFinite(n)?new Intl.NumberFormat('es-CO',{maximumFractionDigits:decimals}).format(n):'No registrado';
@@ -24,7 +26,7 @@ function signal(kind,text){dom.api.className='connection '+kind;dom.api.textCont
 function goto(where){if(where==='home'){astroSound.play('door');window.location.assign(new URL('../index.html',document.baseURI).href);return;}if(scene==='practices'&&where!=='practices')practices.deactivate();astroSound.setScene(where);astroSound.play('select');if(modalOpen)closeModal();if(helpOpen)closeHelp();if(scene==='arcade'&&where!=='arcade')game.stop();keys.clear();scene=where;dom.app.dataset.scene=where;
  document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id==='screen-'+where));
  $('control-hint').innerHTML=where==='hangar'?'<span><kbd>A</kbd><kbd>D</kbd> MOVER</span><span><kbd>W</kbd> SALTAR</span><span><kbd>E</kbd> ENTRAR</span><span><kbd>Q</kbd> INVESTIGAR</span>':where==='explore'?'<span><kbd>A</kbd><kbd>D</kbd> VIAJAR</span><span><kbd>Q</kbd><kbd>E</kbd> INSPECCIONAR</span><span><kbd>1–3</kbd> TIPO</span><span><kbd>ESC</kbd> REGRESAR</span>':where==='lab'?'<span><kbd>Q</kbd> BUSCAR</span><span><kbd>ESC</kbd> REGRESAR</span>':where==='practices'?'<span><kbd>CLIC</kbd> AJUSTAR PARÁMETROS</span><span><kbd>▶</kbd> INICIAR/PAUSAR</span><span><kbd>ESC</kbd> LABORATORIO</span>':'<span><kbd>A</kbd><kbd>D</kbd> MOVER</span><span><kbd>F</kbd> DISPARAR</span><span><kbd>ESC</kbd> REGRESAR</span>';
- if(where==='explore')loadSky(false);else if(where==='lab')renderLab();else if(where==='practices'){practices.activate();}else if(where==='arcade'){showGameOverlay('ASTEROID DEFENDER','Controla tu cohete de juguete y protege la órbita.');game.draw(0);}
+ if(where==='explore')loadSky(false);else if(where==='lab'){renderLab();connectLabAPI();}else if(where==='practices'){practices.activate();}else if(where==='arcade'){showGameOverlay('ASTEROID DEFENDER','Controla tu cohete de juguete y protege la órbita.');game.draw(0);}
 }
 function enterSite(site){if(!site)return;astroSound.unlock();astroSound.play('door');goto(site.screen);}
 sites.forEach(site=>site.el.addEventListener('click',()=>enterSite(site)));
@@ -143,13 +145,45 @@ async function inspectSky(){const current=skyRecord();if(!current||modalOpen)ret
  dom.detailSource.textContent=status;
 }
 
+async function connectLabAPI(force=false){
+ if(labLive.pending||labLive.loaded&&!force)return;
+ labLive.pending=true;labLive.version++;
+ const version=labLive.version;
+ dom.labApiStatus.textContent='◌ CONSULTANDO WIKIPEDIA Y WIKIDATA…';
+ dom.labApiStatus.className='lab-api-status checking';
+ dom.labApiDetails.textContent='Verificando las páginas científicas y sus expresiones matemáticas disponibles…';
+ dom.labRetry.disabled=true;
+ signal('loading','LABORATORIO · CONSULTANDO API');
+ try{
+  const result=await consultPhysicsAPIs(formulas);
+  if(version!==labLive.version)return;
+  labLive.loaded=true;labLive.online=true;labLive.linked=result.linked;
+  dom.labApiStatus.textContent='● API CONECTADA · WIKIPEDIA';
+  dom.labApiStatus.className='lab-api-status online';
+  dom.labApiDetails.textContent=`${result.wikiPages} / ${formulas.length} temas escolares vinculados con Wikipedia; ${result.wikidataFormulas} expresiones matemáticas obtenidas de Wikidata${result.wikidataFailure?' (Wikidata parcialmente disponible)':''}. Las 43 fórmulas escolares se conservan localmente.`;
+  signal('online','LABORATORIO · API CONECTADA · WIKIPEDIA');
+  updateFormulas();
+ }catch(err){
+  if(version!==labLive.version)return;
+  labLive.online=false;labLive.loaded=false;labLive.linked=new Map();
+  dom.labApiStatus.textContent='● API SIN CONEXIÓN';
+  dom.labApiStatus.className='lab-api-status offline';
+  dom.labApiDetails.textContent='No llegó una respuesta válida desde Wikipedia. Las 43 fórmulas siguen disponibles sin Internet. Reintenta la conexión.';
+  signal('offline','LABORATORIO · API NO DISPONIBLE');
+  console.warn('ASTRA LAB: verificación externa fallida:',err);
+  updateFormulas();
+ }finally{if(version===labLive.version){labLive.pending=false;dom.labRetry.disabled=false;}}
+}
+dom.labRetry.addEventListener('click',()=>connectLabAPI(true));
 function renderLab(){if(!labRendered){dom.labCategories.innerHTML=categories.map(([key,label])=>`<button class="lab-cat ${key===selectedFormulaCategory?'chosen':''}" data-labcat="${key}" type="button">${esc(label)}</button>`).join('');dom.labCategories.addEventListener('click',e=>{const btn=e.target.closest('[data-labcat]');if(btn){selectedFormulaCategory=btn.dataset.labcat;dom.labCategories.querySelectorAll('button').forEach(b=>b.classList.toggle('chosen',b===btn));updateFormulas();}});dom.formulaSearch.addEventListener('input',updateFormulas);dom.formulaGrid.addEventListener('click',e=>{const btn=e.target.closest('[data-formula]');if(btn)inspectFormula(btn.dataset.formula);});labRendered=true;}updateFormulas();}
 function updateFormulas(){const query=dom.formulaSearch.value.trim().toLowerCase();const filtered=formulas.filter(x=>(selectedFormulaCategory==='todas'||x.cat===selectedFormulaCategory)&&(!query||[x.title,x.formula,x.cat,x.concept,x.variables].join(' ').toLowerCase().includes(query)));
  dom.formulaCount.textContent=`${filtered.length} / ${formulas.length} FÓRMULAS`;
- dom.formulaGrid.innerHTML=filtered.map((x,i)=>`<button type="button" class="formula-card" data-formula="${esc(x.id)}"><span class="formula-number">FÓRMULA ${String(i+1).padStart(2,'0')} · ${esc(categories.find(c=>c[0]===x.cat)?.[1]||'')}</span><strong>${esc(x.title)}</strong><span class="formula-equation">${esc(x.formula)}</span><p>${esc(x.concept)}</p><span class="formula-open">CONSULTAR ↗</span></button>`).join('')||'<div class="no-formula">No se encontraron fórmulas con ese filtro.</div>';
+ dom.formulaGrid.innerHTML=filtered.map((x,i)=>`<button type="button" class="formula-card" data-formula="${esc(x.id)}"><span class="formula-number">FÓRMULA ${String(i+1).padStart(2,'0')} · ${esc(categories.find(c=>c[0]===x.cat)?.[1]||'')}</span><strong>${esc(x.title)}</strong><span class="formula-equation">${esc(x.formula)}</span><p>${esc(x.concept)}</p><span class="formula-source">${labLive.linked.get(x.id)?.wikidata?'● ECUACIÓN API · WIKIDATA':labLive.linked.get(x.id)?'● REFERENCIA API · WIKIPEDIA':'○ FÓRMULA ESCOLAR · LOCAL'}</span><span class="formula-open">CONSULTAR ↗</span></button>`).join('')||'<div class="no-formula">No se encontraron fórmulas con ese filtro.</div>';
 }
 async function inspectFormula(id){const x=formulas.find(x=>x.id===id);if(!x)return;
- showModal(x.title,'LABORATORIO · '+categories.find(c=>c[0]===x.cat)?.[1],`<div class="big-equation">${esc(x.formula)}</div><div class="formula-section"><h3>¿Qué representa?</h3><p>${esc(x.concept)}</p><h3>Variables y unidades</h3><p>${esc(x.variables)}</p><h3>Ejemplo resuelto</h3><p>${esc(x.example)}</p></div><div class="wiki-section" id="wiki-live"><span class="loading-text">Consultando explicación complementaria en Wikipedia API…</span></div>`,'FÓRMULA: catálogo educativo local · consulta externa: pendiente');
+ const remote=labLive.linked.get(x.id)?.wikidata;
+ const extraFormula=remote?`<div class="formula-section api-equation"><h3>Expresión matemática publicada en Wikidata (API)</h3><code>${esc(remote.tex)}</code><p>Expresión original en notación TeX, consultada mediante la propiedad P2534. Puede variar de la versión escolar simplificada.</p><a href="${esc(remote.url)}" target="_blank" rel="noopener noreferrer">Ver registro original de Wikidata ↗</a></div>`:'';
+ showModal(x.title,'LABORATORIO · '+categories.find(c=>c[0]===x.cat)?.[1],`<div class="big-equation">${esc(x.formula)}</div><div class="formula-section"><h3>¿Qué representa?</h3><p>${esc(x.concept)}</p><h3>Variables y unidades</h3><p>${esc(x.variables)}</p><h3>Ejemplo resuelto</h3><p>${esc(x.example)}</p></div>${extraFormula}<div class="wiki-section" id="wiki-live"><span class="loading-text">Consultando explicación complementaria en Wikipedia API…</span></div>`,'FÓRMULA: catálogo educativo local · consulta externa: pendiente');
  try{const doc=await readWikipediaArticle(x.wiki);const container=$('wiki-live');if(!container||!modalOpen)return;
   container.innerHTML=`<h3>Contexto enciclopédico · API EN LÍNEA</h3><p>${esc(doc.summary.slice(0,1350))}${doc.summary.length>1350?'…':''}</p><a href="${esc(doc.link)}" target="_blank" rel="noopener noreferrer">Leer artículo completo ↗</a>`;
   dom.detailSource.textContent='Fórmula curricular local · explicación consultada EN VIVO en Wikipedia API';

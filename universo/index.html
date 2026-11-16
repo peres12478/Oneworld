@@ -7,12 +7,13 @@
  <script src="https://cdn.tailwindcss.com"></script>
  <link rel="stylesheet" href="css/universo.css">
  <script type="module" src="js/main.js"></script>
+ <script src="js/space-music.js" defer></script>
 </head>
 <body>
  <div class="app flex flex-col min-h-screen" id="app">
   <header class="topbar flex items-center justify-between gap-3 flex-wrap">
    <a href="../index.html" class="brand" id="home-link" aria-label="Regresar al mundo principal"><span class="brand-logo">✧</span><span><small>UNIVERSO 01</small><strong>ASTRA<span class="tint">/</span>LAB</strong></span></a>
-   <div class="top-right"><span id="api-state" class="connection waiting" role="status">● API: pendiente</span><span class="top-pill">MISIÓN EXPLORADOR <span class="asterisk">✳</span> 01</span><button class="mini-button sound-button" id="sound-button" type="button" aria-pressed="true" title="Activar o desactivar el sonido del universo">🔊 SONIDO ON</button><button class="mini-button" id="help-button" type="button">? CONTROLES</button></div>
+   <div class="top-right"><span id="api-state" class="connection waiting" role="status">● API: pendiente</span><span class="top-pill">MISIÓN EXPLORADOR <span class="asterisk">✳</span> 01</span><button class="mini-button sound-button" id="sound-button" type="button" aria-pressed="true" title="Activar o desactivar el sonido del universo">🔊 SONIDO ON</button><div class="space-music-controls" aria-label="Música del universo"><button id="space-music-toggle" class="mini-button space-music-btn" type="button" aria-pressed="false">▶ MÚSICA</button><label title="Volumen de música">Vol.<input type="range" id="space-music-volume" min="0" max="100" value="32" aria-label="Volumen de la música"></label></div><button class="mini-button" id="help-button" type="button">? CONTROLES</button></div>
   </header>
   <main class="content">
    <section class="screen hangar active" id="screen-hangar" aria-label="Hangar espacial explorable">
@@ -69,10 +70,14 @@
       <span class="practice-door-copy"><small>NUEVA SALA · APRENDIZAJE INTERACTIVO</small><strong>PRÁCTICAS DE FÍSICA</strong><span>5 experimentos con controles, gráficas y resultados calculados</span></span>
       <span class="practice-door-cta">ENTRAR ↗</span>
     </button>
+    <div class="lab-api-banner" aria-live="polite" aria-label="Conexión a las APIs del laboratorio">
+      <div><strong id="lab-api-status">○ API: sin comprobar</strong><small id="lab-api-details">Las 43 fórmulas son material escolar local. Wikipedia y Wikidata se consultan en línea.</small></div>
+      <button id="lab-retry-api" type="button" class="outline-button">↻ COMPROBAR API</button>
+    </div>
     <div class="lab-top"><div class="lab-signal"><span class="lab-pulse">⌬</span><div><strong>ARCHIVO CIENTÍFICO</strong><small>Fórmulas curriculares + documentación adicional en Wikipedia API</small></div></div><div class="lab-count" id="formula-count">0 FÓRMULAS</div></div>
     <div class="lab-toolbar"><label class="search-box"><span>⌕</span><input id="formula-search" type="search" placeholder="Q · Buscar: Newton, velocidad, ondas..." aria-label="Buscar fórmulas"></label><div class="lab-categories" id="lab-categories" aria-label="Categorías de física"></div></div>
     <div class="formula-grid" id="formula-grid"></div>
-    <div class="lab-legend">CONTENIDO DIDÁCTICO ORGANIZADO LOCALMENTE · LA CONSULTA ENCICLOPÉDICA SE REALIZA AL INSPECCIONAR UNA FÓRMULA</div>
+    <div class="lab-legend">43 FÓRMULAS EDUCATIVAS LOCALES · CONSULTAS EN VIVO A WIKIPEDIA Y EXPRESIONES DE WIKIDATA (P2534) SI ESTÁN DISPONIBLES</div>
    </section>
    <section class="screen practice-screen" id="screen-practices" aria-label="Prácticas y simuladores de física">
     <div class="panel-header"><div><span class="eyebrow">ASTRA LAB · AULA EXPERIMENTAL</span><h2>PRÁCTICAS <em>DE FÍSICA</em></h2><p>Modifica las magnitudes y observa las leyes físicas en movimiento. Todos los cálculos son locales y educativos.</p></div><button class="back-button" data-back="lab" type="button">← VOLVER AL LABORATORIO</button></div>

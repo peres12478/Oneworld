@@ -4,22 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#241811">
-  <meta name="description" content="Espacio principal de proyectos con un astronauta animado y entradas a los universos One Piece, Dragon Ball y Universo.">
+  <meta name="description" content="Mi espacio personal: tres universos con APIs y una habitación con proyectos, pasiones y presentación.">
   <title>Mi espacio · Mundo principal</title>
   <!-- Tailwind CSS es la base de utilidades del diseño; el escenario animado usa CSS propio. -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/lobby.css">
   <script src="js/lobby-config.js" defer></script>
   <script src="js/lobby.js" defer></script>
+  <script src="js/personal-music.js" defer></script>
 </head>
-<body>
+<body data-music-src="assets/mi-espacio-original.ogg">
   <main class="home-shell min-h-screen flex flex-col" id="personal-hub">
     <header class="home-topbar flex flex-wrap items-center justify-between gap-4 px-5 sm:px-10 py-4">
       <div class="home-brand flex items-center gap-3">
         <span class="home-brand-icon" aria-hidden="true">✦</span>
         <div><small>BIENVENIDO A</small><h1 id="hub-title">MI ESPACIO</h1></div>
       </div>
-      <span class="home-header-tag hidden sm:inline-flex">ESCENARIO PRINCIPAL <span class="tag-dot">◆</span> 01</span>
+      <div class="hub-top-actions flex items-center gap-3">
+        <span class="home-header-tag hidden sm:inline-flex">ESCENARIO PRINCIPAL <span class="tag-dot">◆</span> 01</span>
+        <div class="home-music-controls" aria-label="Música del mundo principal">
+          <button type="button" id="music-toggle" class="home-music-button" aria-pressed="false">▶ Música</button>
+          <label class="home-volume-label" title="Volumen de música">Vol.
+            <input id="music-volume" type="range" min="0" max="100" value="35" aria-label="Volumen de la música" />
+          </label>
+        </div>
+      </div>
     </header>
 
     <section id="hub-stage" class="hub-stage relative flex-1" tabindex="0" aria-label="Escenario principal. A y D para caminar, W o Espacio para saltar, E para entrar al portal cercano.">
@@ -33,13 +42,45 @@
       <div id="hub-world" class="hub-world" aria-hidden="false">
         <div class="hub-wall-beams" aria-hidden="true"></div>
         <div class="hub-wall-panels" aria-hidden="true"></div>
+        <div class="hub-door-zone bedroom-door-zone" id="bedroom-door-zone">
+          <div class="hub-door-light" aria-hidden="true"></div>
+          <div class="hub-lamp left-lamp" aria-hidden="true"><span></span></div>
+          <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
+          <button id="bedroom-portal" type="button" class="hub-portal" aria-label="Entrar a Mi habitación" title="Mi habitación - pulsar E">
+            <span class="portal-arched-frame" aria-hidden="true"></span>
+            <span class="portal-badge">✦ ESPACIO 01 ✦</span>
+            <img class="portal-emblem" src="assets/mi-habitacion-emblema.svg" alt="Habitación con una ventana de estrellas" draggable="false">
+            <strong class="portal-name">MI HABITACIÓN</strong>
+            <span class="portal-subtitle">CONOCE MÁS SOBRE MÍ</span>
+            <span class="portal-handle" aria-hidden="true"></span>
+            <span class="portal-floor-light" aria-hidden="true"></span>
+          </button>
+          <div class="portal-base" aria-hidden="true"></div>
+          <span class="door-plaque" aria-hidden="true">UN RINCÓN CON MIS HISTORIAS</span>
+        </div>
+        <div class="hub-door-zone universe-door-zone" id="universe-door-zone">
+          <div class="hub-door-light" aria-hidden="true"></div>
+          <div class="hub-lamp left-lamp" aria-hidden="true"><span></span></div>
+          <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
+          <button id="universe-portal" type="button" class="hub-portal" aria-label="Entrar al mundo Universo" title="Universo - pulsar E">
+            <span class="portal-arched-frame" aria-hidden="true"></span>
+            <span class="portal-badge">✦ MUNDO 02 ✦</span>
+            <img class="portal-emblem" src="assets/universe-emblem.svg" alt="Planeta azul rodeado de estrellas y anillos" draggable="false">
+            <strong class="portal-name">UNIVERSO</strong>
+            <span class="portal-subtitle">ASTRONOMÍA · FÍSICA</span>
+            <span class="portal-handle" aria-hidden="true"></span>
+            <span class="portal-floor-light" aria-hidden="true"></span>
+          </button>
+          <div class="portal-base" aria-hidden="true"></div>
+          <span class="door-plaque" aria-hidden="true">EXPLORA LOS MISTERIOS DEL COSMOS</span>
+        </div>
         <div class="hub-door-zone" id="one-piece-door-zone">
           <div class="hub-door-light" aria-hidden="true"></div>
           <div class="hub-lamp left-lamp" aria-hidden="true"><span></span></div>
           <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
           <button id="one-piece-portal" type="button" class="hub-portal" aria-label="Entrar al mundo de One Piece" title="One Piece - pulsar E">
             <span class="portal-arched-frame" aria-hidden="true"></span>
-            <span class="portal-badge">✦ MUNDO 02 ✦</span>
+            <span class="portal-badge">✦ MUNDO 03 ✦</span>
             <img class="portal-emblem" src="assets/sombrero-paja-emblema-usuario.png" alt="Emblema de los piratas del Sombrero de Paja" draggable="false">
             <strong class="portal-name">ONE PIECE</strong>
             <span class="portal-subtitle">ENTRAR A LA GRAND LINE</span>
@@ -55,7 +96,7 @@
           <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
           <button id="dragon-ball-portal" type="button" class="hub-portal" aria-label="Entrar al mundo de Dragon Ball" title="Dragon Ball - pulsar E">
             <span class="portal-arched-frame" aria-hidden="true"></span>
-            <span class="portal-badge">✦ MUNDO 03 ✦</span>
+            <span class="portal-badge">✦ MUNDO 04 ✦</span>
             <img class="portal-emblem" src="assets/esfera-dragon-4.svg" alt="Bola del Dragón de cuatro estrellas" draggable="false">
             <strong class="portal-name">DRAGON BALL</strong>
             <span class="portal-subtitle">RUMBO A NAMEK</span>
@@ -65,23 +106,7 @@
           <div class="portal-base" aria-hidden="true"></div>
           <span class="door-plaque" aria-hidden="true">EL PODER SAIYAJIN TE ESPERA</span>
         </div>
-        <div class="hub-door-zone universe-door-zone" id="universe-door-zone">
-          <div class="hub-door-light" aria-hidden="true"></div>
-          <div class="hub-lamp left-lamp" aria-hidden="true"><span></span></div>
-          <div class="hub-lamp right-lamp" aria-hidden="true"><span></span></div>
-          <button id="universe-portal" type="button" class="hub-portal" aria-label="Entrar al mundo Universo" title="Universo - pulsar E">
-            <span class="portal-arched-frame" aria-hidden="true"></span>
-            <span class="portal-badge">✦ MUNDO 01 ✦</span>
-            <img class="portal-emblem" src="assets/universe-emblem.svg" alt="Planeta azul rodeado de estrellas y anillos" draggable="false">
-            <strong class="portal-name">UNIVERSO</strong>
-            <span class="portal-subtitle">ASTRONOMÍA · FÍSICA</span>
-            <span class="portal-handle" aria-hidden="true"></span>
-            <span class="portal-floor-light" aria-hidden="true"></span>
-          </button>
-          <div class="portal-base" aria-hidden="true"></div>
-          <span class="door-plaque" aria-hidden="true">EXPLORA LOS MISTERIOS DEL COSMOS</span>
-        </div>
-        <!-- De izquierda a derecha: Universo, One Piece, Dragon Ball. Piso continuo de madera. -->
+        <!-- De izquierda a derecha: Mi habitación, Universo, One Piece, Dragon Ball. Piso continuo de madera. -->
         <div class="hub-floor" aria-hidden="true"><span class="floor-front"></span></div>
         <div id="hub-player-shadow" class="hub-player-shadow" aria-hidden="true"></div>
         <div id="hub-stickman" class="hub-stickman hub-astronaut" role="img" aria-label="Astronauta de traje blanco y visor azul, personaje principal">
@@ -99,7 +124,7 @@
       </div>
       <div id="portal-prompt" class="portal-prompt" role="status" aria-live="polite">
         <span class="prompt-key">E</span>
-        <div><strong id="portal-prompt-title">ENTRAR A ONE PIECE</strong><small id="portal-prompt-description">El mundo pirata te espera</small></div>
+        <div><strong id="portal-prompt-title">ENTRAR A MI HABITACIÓN</strong><small id="portal-prompt-description">Tu espacio personal</small></div>
         <button id="prompt-enter" class="prompt-enter" type="button" aria-label="Entrar al portal cercano">↗</button>
       </div>
       <div class="hub-stage-mark" aria-hidden="true">CAPÍTULO 00 <span>·</span> EL COMIENZO</div>
@@ -109,7 +134,7 @@
         <button type="button" data-key="w" aria-label="Saltar">↑</button>
         <button type="button" id="mobile-enter" aria-label="Entrar al portal cercano">E</button>
       </nav>
-      <div id="enter-transition" class="enter-transition" aria-hidden="true"><img id="transition-emblem" src="assets/sombrero-paja-emblema-usuario.png" alt=""><strong id="transition-title">RUMBO A LA GRAND LINE...</strong></div>
+      <div id="enter-transition" class="enter-transition" aria-hidden="true"><img id="transition-emblem" src="assets/mi-habitacion-emblema.svg" alt=""><strong id="transition-title">ENTRANDO A MI HABITACIÓN...</strong></div>
     </section>
 
     <footer class="home-footer flex flex-wrap items-center justify-between gap-3 px-5 sm:px-10 py-4">
@@ -119,7 +144,7 @@
         <span><kbd>SHIFT</kbd> CORRER</span>
         <span><kbd>E</kbd> ENTRAR</span>
       </div>
-      <small>TRES UNIVERSOS DISPONIBLES · EXPLORA Y APRENDE</small>
+      <small>PRIMERO MI HABITACIÓN · LUEGO TRES MUNDOS CON APIs</small>
     </footer>
   </main>
 </body>
