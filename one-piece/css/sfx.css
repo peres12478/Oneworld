@@ -1,0 +1,16 @@
+/* Controles de efectos: independientes de la musica ambiental. */
+.sfx-controls {
+  display:flex;gap:7px;align-items:center;margin-top:5px;
+  padding-top:5px;border-top:1px solid #e9d7ac36;
+}
+.sfx-toggle {
+  padding:4px 7px;flex:none;border:1px solid #e6c37d88;border-radius:6px;
+  background:#1b4455;color:#f7dbaa;font:800 9px/1 system-ui,sans-serif;
+  letter-spacing:.04em;transition:background .16s ease;
+}
+.sfx-toggle:hover{background:#265d70}
+.sfx-toggle.sfx-muted{color:#aeb9c5;border-color:#73899570;background:#1b2d3c}
+.sfx-toggle:focus-visible,.sfx-volume:focus-visible {outline:2px solid #a6d8ff;outline-offset:2px}
+.sfx-label{color:#cbd4d7;white-space:nowrap;font:600 9px/1 system-ui,sans-serif}
+.sfx-volume{flex:1;min-width:35px;height:4px;cursor:pointer;accent-color:#ecca86}
+@media(max-width:580px){.sfx-controls{margin-top:2px;padding-top:4px}.sfx-label{font-size:8px}}

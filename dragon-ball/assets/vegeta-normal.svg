@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="vegeta normal stickman">
+<defs><linearGradient id="skin" x2=".3" y2="1"><stop stop-color="#f4bc94"/><stop offset="1" stop-color="#d88d6e"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<ellipse cx="91" cy="242" rx="39" ry="6" fill="#071722" opacity=".28"/>
+
+<g id="legs">
+ <g class="limb left-leg"><path d="M83 158 L69 194 L58 225" fill="none" stroke="#273f98" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 227 L68 227" fill="none" stroke="#f3efdf" stroke-width="14" stroke-linecap="round"/></g>
+ <g class="limb right-leg"><path d="M97 159 L113 193 L124 225" fill="none" stroke="#273f98" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M113 228 L133 228" fill="none" stroke="#f3efdf" stroke-width="14" stroke-linecap="round"/></g>
+</g>
+<g id="arms">
+ <g class="limb left-arm"><path d="M73 115 L52 140 L39 154" fill="none" stroke="#254aa6" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="155" r="8" fill="url(#skin)"/></g>
+ <g class="limb right-arm"><path d="M107 114 L129 139 L140 156" fill="none" stroke="#254aa6" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><circle cx="143" cy="157" r="8" fill="url(#skin)"/></g>
+</g>
+<path d="M78 113 Q91 109 102 113 L106 166 Q92 171 74 166 Z" fill="#284caa" stroke="#3e3652" stroke-width="3" stroke-linejoin="round"/>
+<path d="M76 150 Q91 154 105 150" fill="none" stroke="#efc751" stroke-width="7" stroke-linecap="round"/>
+<path d="M75 115 Q90 109 106 115 L102 136 Q90 142 78 136Z" fill="#f7ede0" stroke="#354b86" stroke-width="2"/>
+<ellipse cx="90" cy="77" rx="30" ry="34" fill="url(#skin)" stroke="#3e3652" stroke-width="3"/>
+<path d="M63 70 L55 41 L67 44 L67 17 L79 33 L91 6 L103 32 L122 12 L117 47 L129 41 L115 70 Q90 57 63 70Z" fill="#141b2c" stroke="#21243a" stroke-width="3" stroke-linejoin="round"/>
+<path d="M76 81 L83 80 M97 80 L105 81" stroke="#243040" stroke-width="4" stroke-linecap="round"/>
+<path d="M85 96 Q91 101 97 96" fill="none" stroke="#984c49" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

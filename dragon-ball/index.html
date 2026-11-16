@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#09283b"><meta name="description" content="Dragon Ball Explorer: mundo interactivo y datos reales de Dragon Ball API.">
+  <title>Dragon Ball Explorer · Mundo 02 · V2.19</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/dragon-ball.css">
+  <link rel="stylesheet" href="css/dragon-ball-v218.css">
+  <link rel="stylesheet" href="css/dragon-ball-v219.css">
+  <link rel="stylesheet" href="css/dragon-ball-v220.css">
+  <script defer src="js/db-api.js"></script>
+  <script defer src="js/db-audio.js"></script>
+  <script defer src="js/dragon-ball.js"></script>
+</head>
+<body>
+<div class="db-shell min-h-screen flex flex-col">
+  <header class="db-top flex flex-wrap items-center justify-between gap-3 px-5 py-3">
+    <div class="flex items-center gap-3"><img src="../assets/esfera-dragon-4.svg" alt="Esfera del Dragón con cuatro estrellas" class="brand-ball"><div><small>MUNDO 02 · DRAGON BALL</small><h1>NAMEK <span>EXPLORER</span></h1></div></div>
+    <div class="db-connection flex flex-wrap items-center gap-2" role="status" aria-live="polite">
+      <span id="api-status" class="api-badge pending">◌ API: comprobando...</span>
+      <span id="api-counts" class="api-counts">Personajes — · Transformaciones —</span>
+      <button id="api-retry" class="btn-outlined" type="button" title="Volver a consultar la API">↻ API</button>
+    </div>
+    <div class="header-actions flex items-center gap-2"><span class="chip" id="game-info">Escoge un guerrero</span><button id="switch-fighter" class="btn-outlined" type="button">⇄ Guerrero</button><button id="music-toggle" class="btn-outlined" type="button" aria-pressed="true">♫ Música ON</button><button id="top-home" class="btn-outlined" type="button">◀ Mundo inicial</button></div>
+  </header>
+  <main class="db-main flex-1 flex flex-col" id="db-main">
+   <section id="db-stage" class="db-stage mode-hub" tabindex="0" aria-label="Dragon Ball: A D moverse, W saltar, E interactuar, Q buscar, F Ki, T Super Saiyajin, G ataque especial">
+     <div class="db-sky"><span class="sun-aura"></span><span class="namek-planet"></span><span class="namek-planet second"></span></div>
+     <div class="db-clouds"></div>
+     <div id="db-world" class="db-world">
+       <div class="namek-background"></div><div class="far-ridges"></div><div class="near-ridges"></div><div class="namek-lake"></div><div class="namek-floor"></div>
+       <div class="rock rock-a"></div><div class="rock rock-b"></div><div class="rock rock-c"></div><div class="rock rock-d"></div>
+       <div id="scene-heading" class="battle-marker">EL PUERTO DE NAMEK · ELIGE TU DESTINO</div>
+       <div class="battle-banner" id="battle-banner" aria-live="polite"></div>
+       <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+       <div id="capsule-layer" class="capsule-layer">
+         <div class="saiyan-pod" data-kind="battle" style="left:650px"><img src="assets/capsule-saiyajin.png" alt="Nave esférica Saiyajin para combatir"><span class="pod-name">COMBATE CONTRA FREEZER</span><small>E · VIAJAR A LA ARENA</small></div>
+         <div class="saiyan-pod" data-kind="characters" style="left:1450px"><img src="assets/capsule-saiyajin.png" alt="Nave esférica Saiyajin al catálogo de personajes"><span class="pod-name">PERSONAJES · API</span><small>E · EXPLORAR</small></div>
+         <div class="saiyan-pod" data-kind="transformations" style="left:2200px"><img src="assets/capsule-saiyajin.png" alt="Nave esférica Saiyajin al catálogo de transformaciones"><span class="pod-name">TRANSFORMACIONES · API</span><small>E · EXPLORAR</small></div>
+         <div class="saiyan-pod escape-pod" data-kind="home" style="left:2850px"><span class="home-hatch">⌂</span><span class="pod-name">MUNDO PRINCIPAL</span><small>E · VOLVER</small></div>
+       </div>
+       <div id="explorer-beacons" class="explorer-beacons"></div>
+       <div id="explorer-return" class="explorer-return" hidden><div class="return-orb">↩</div><span>REGRESAR AL PUERTO</span><small>PULSA E</small></div>
+       <div id="boss" class="fighter boss" hidden aria-label="Freezer, enemigo"><span class="boss-aura"></span><div class="rig-frame"><img id="boss-sprite" class="rig-body" src="assets/freezer-forma-1.png" alt="Freezer primera forma según referencia del usuario"><img data-boss-rig="arm-left" class="rig-arm-left" alt=""><img data-boss-rig="arm-right" class="rig-arm-right" alt=""><img data-boss-rig="leg-left" class="rig-leg-left" alt=""><img data-boss-rig="leg-right" class="rig-leg-right" alt=""></div><span class="fighter-shadow"></span></div>
+       <div id="hero" class="fighter hero" hidden aria-label="Guerrero seleccionado"><span class="hero-aura"></span><div class="rig-frame"><img id="hero-sprite" class="rig-body" src="assets/goku-normal.png" alt="Goku"><img data-hero-rig="arm-left" class="rig-arm-left" alt=""><img data-hero-rig="arm-right" class="rig-arm-right" alt=""><img data-hero-rig="leg-left" class="rig-leg-left" alt=""><img data-hero-rig="leg-right" class="rig-leg-right" alt=""></div><span class="fighter-shadow"></span><span class="thinking-question">?</span></div>
+     </div>
+     <div class="battle-hud" id="battle-hud" hidden><div class="hud-card hero-hud"><div class="hud-line"><span id="hero-name">GOKU</span><span id="hero-form-label">NORMAL</span></div><div class="health-track"><div id="hero-health" class="health-fill"></div></div><div class="hud-foot"><span id="hero-health-text">8/8</span><span id="power-hint">F · KI</span></div></div><div class="hud-card enemy-hud"><div class="hud-line"><span id="boss-name">FREEZER · FASE I</span><span id="boss-stage-label">1 / 3</span></div><div class="health-track"><div id="boss-health" class="health-fill"></div></div><div class="hud-foot"><span id="boss-health-text">5/5</span><span id="boss-hint">EMPERADOR DEL MAL</span></div></div></div>
+     <div class="mode-toast" id="mode-toast" role="status" aria-live="polite"></div>
+     <div class="interact-banner" id="interact-banner"><strong>TECLA E</strong><span id="interact-label">ABRIR</span><button id="interact-button" type="button">ENTRAR</button></div>
+     <div class="cinematic-overlay" id="cinematic"><span id="cinematic-sub">¡PODER SAIYAJIN!</span><strong id="cinematic-title">KAMEHAMEHA!</strong><span id="cinematic-caption">LA ENERGÍA SACUDE NAMEK</span></div>
+     <div class="scene-indicator"><span id="location-label">PUERTO DE NAMEK</span><span id="scene-hint">Acércate a una cápsula y pulsa E.</span></div>
+     <div class="mobile-controls" aria-label="Controles táctiles"><button data-press="a" type="button">◀</button><button data-press="d" type="button">▶</button><button data-press="w" type="button">↑</button><button data-press="f" type="button">KI</button><button data-press="t" type="button">SSJ</button><button data-press="g" type="button">G</button><button data-press="q" type="button">Q</button><button data-press="e" type="button">E</button></div>
+   </section>
+   <footer class="db-footer flex flex-wrap justify-between items-center gap-2"><div><b>A / D</b> MOVER &nbsp; <b>W / ESPACIO</b> SALTAR &nbsp; <b>E</b> ENTRAR / INSPECCIONAR &nbsp; <b>Q</b> BUSCAR &nbsp; <b>F</b> KI &nbsp; <b>T</b> SSJ &nbsp; <b>G</b> ESPECIAL</div><span id="skill-status">Selecciona un guerrero</span></footer>
+  </main>
+  <section class="screen selection-screen" id="select-screen" aria-label="Elegir guerrero"><div class="screen-backdrop"></div><div class="selection-panel"><div class="eyebrow">MUNDO 02 / DRAGON BALL</div><h2>ELIGE A TU <em>GUERRERO</em></h2><p>Explora personajes reales de Dragon Ball API, descubre transformaciones y vence a Freezer en Namek.</p><div class="fighter-cards"><button class="fighter-choice" type="button" data-pick="goku"><img src="assets/goku-normal.png" alt="Ilustración de Goku aportada por el usuario"><strong>SON GOKU</strong><span>KI · KAMEHAMEHA</span><small data-unlock="goku">Super Saiyajin bloqueado</small></button><button class="fighter-choice" type="button" data-pick="vegeta"><img src="assets/vegeta-normal.png" alt="Ilustración de Vegeta aportada por el usuario"><strong>VEGETA</strong><span>KI · MASENKO</span><small data-unlock="vegeta">Super Saiyajin bloqueado</small></button></div><div class="selection-actions"><button id="selection-home" type="button" class="btn-outlined">← Mundo inicial</button><button id="reset-db-progress" type="button" class="btn-outlined">↺ Nueva partida</button><span>La pelea comienza al entrar en la cápsula de Freezer.</span></div><div class="loss-message" id="loss-message" hidden></div></div></section>
+  <section class="catalog-layer db-search-layer" id="catalog-layer" hidden aria-label="Buscador Dragon Ball"><div class="catalog-panel"><header class="catalog-header"><div><small>GOKU O VEGETA · POSE DE PENSAR</small><h2 id="catalog-title">BUSCAR PERSONAJES</h2><p id="catalog-description">Selecciona un resultado para encontrarlo en el mapa.</p></div><button id="catalog-close" class="btn-outlined" type="button">✕ Cerrar · Esc</button></header><div class="catalog-filters"><label class="filter-search"><span>BUSCAR EN LOS DATOS DE LA API</span><input type="search" id="catalog-search" autocomplete="off" placeholder="Escribe un nombre..."></label><label class="filter-owner" id="owner-filter-box"><span>PORTADOR</span><select id="catalog-owner"><option value="">Todos</option></select></label><span class="result-count" id="catalog-count"></span></div><div class="catalog-state" id="catalog-state" role="status"></div><div class="catalog-grid" id="catalog-grid"></div><footer class="catalog-footer"><span id="catalog-source">Fichas obtenidas de la API, contenido local identificado.</span><button id="catalog-retry" type="button" class="btn-small">Actualizar datos</button></footer></div></section>
+  <section id="detail-layer" class="db-detail-layer" hidden aria-label="Ficha del personaje o transformación"><div class="db-detail-modal"><button id="detail-close" class="btn-outlined db-detail-close" type="button">✕ Cerrar · Esc</button><div id="catalog-detail" class="catalog-detail"></div><p class="detail-tip">Pulsa Esc o cerrar para regresar al mapa.</p></div></section>
+  <audio id="db-music" src="assets/namek-adventure.ogg" preload="none" loop></audio>
+</div>
+</body>
+</html>

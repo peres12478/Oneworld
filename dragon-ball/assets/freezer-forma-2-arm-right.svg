@@ -1,0 +1,3 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 180 250" role="img" aria-label="freezer-forma-2 arm-right"><ns0:defs><ns0:linearGradient id="skin" x1="0" x2=".25" y1="0" y2="1"><ns0:stop stop-color="#faf6fc" /><ns0:stop offset="1" stop-color="#d7c7e3" /></ns0:linearGradient></ns0:defs>
+ <ns0:g class="limb right-arm"><ns0:path d="M109 115 Q129 131 144 154" stroke="#6b4e87" stroke-width="17" fill="none" stroke-linecap="round" /><ns0:path d="M110 116 Q129 132 142 152" stroke="#f3f2f9" stroke-width="12" fill="none" stroke-linecap="round" /><ns0:circle cx="144" cy="154" r="8" fill="#9855af" /></ns0:g>
+ </ns0:svg>

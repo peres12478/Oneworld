@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#f5f7fa">
+ <meta name="description" content="OneWorld: consulta One Piece, Dragon Ball, el Universo y un portafolio personal sin jugar. Búsqueda con APIs reales.">
+ <title>OneWorld · Explora las APIs</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="css/pagina.css">
+ <script src="../mi-habitacion/js/datos-personales.js" defer></script>
+ <script src="../one-piece/js/config.js" defer></script>
+ <script src="../one-piece/js/api.js" defer></script>
+ <script src="../one-piece/js/characters-api.js" defer></script>
+ <script src="../dragon-ball/js/db-api.js" defer></script>
+ <script type="module" src="js/app.js"></script>
+</head>
+<body>
+ <div class="app-shell">
+  <aside class="sidebar" aria-label="Navegación principal">
+   <a class="side-brand flex items-center gap-3" href="../index.html" title="Volver a seleccionar modo"><span class="brand-icon">◈</span><span><strong>ONEWORLD<span>·</span></strong><small>THE KNOWLEDGE ATLAS</small></span></a>
+   <p class="side-eyebrow">TU BIBLIOTECA</p>
+   <nav class="side-links flex flex-col gap-1" id="side-links">
+    <button class="side-link active" data-section="inicio"><span class="side-icon">⌂</span><span>Descubrir</span><span class="nav-chevron">↗</span></button>
+    <button class="side-link" data-section="habitacion"><span class="side-icon">◫</span><span>Mi habitación</span></button>
+    <button class="side-link" data-section="universo"><span class="side-icon">◎</span><span>Universo</span></button>
+    <button class="side-link" data-section="onepiece"><span class="side-icon">☠</span><span>One Piece</span></button>
+    <button class="side-link" data-section="dragonball"><span class="side-icon">✳</span><span>Dragon Ball</span></button>
+   </nav>
+   <div class="sidebar-bottom"><div class="side-note"><span class="note-orbit">✧</span><strong>Explora sin controles</strong><p>Todo lo que necesitas está a un clic de distancia.</p></div><a class="switch-link" href="../modo-interactivo.html"><span>◈</span> Cambiar al modo interactivo <b>↗</b></a></div>
+  </aside>
+  <div class="mobile-topbar"><a href="../index.html" class="mobile-brand">◈ ONEWORLD</a><a href="../modo-interactivo.html" class="mobile-switch">Modo juego ↗</a></div>
+  <div class="mobile-nav" aria-label="Navegación de secciones"><button class="active" data-section="inicio">Inicio</button><button data-section="habitacion">Habitación</button><button data-section="universo">Universo</button><button data-section="onepiece">One Piece</button><button data-section="dragonball">Dragon Ball</button></div>
+  <main class="main-content" id="main-content">
+   <div class="topline flex flex-wrap items-center justify-between gap-2"><div class="breadcrumb"><span>ONEWORLD</span><span class="slash">/</span><strong id="breadcrumb-name">EXPLORAR</strong></div><div class="top-actions"><span class="live-kicker"><i></i> DATOS DE APIs REALES</span><a href="../modo-interactivo.html" class="top-switch">↗ Modo interactivo</a></div></div>
+   <section id="hero" class="hero" aria-labelledby="hero-title"><div class="hero-copy"><span id="hero-eyebrow" class="hero-kicker">DESCUBRE ONEWORLD</span><h1 id="hero-title">Curiosidad sin límites<span>.</span></h1><p id="hero-subtitle">Consulta mundos, descubre historias y aprende a tu ritmo. Una biblioteca de datos y experiencias en un solo lugar.</p><div id="hero-highlights" class="hero-highlights"><span>✦ 4 DESTINOS</span><span>✦ 3 UNIVERSOS DE CONOCIMIENTO</span></div></div><div id="hero-art" class="hero-art" aria-hidden="true"><span class="orb orb-one"></span><span class="orb orb-two"></span><span class="orb orb-three"></span><span class="hero-cross">✧</span></div></section>
+   <section id="intro-section" class="intro-section"><div class="section-header"><div><p class="section-kicker">ESCOGE POR DÓNDE EMPEZAR</p><h2>¿Qué quieres descubrir?</h2></div><p>Todo con clics, búsquedas y desplazamiento vertical.</p></div><div class="destination-grid" id="destination-grid">
+    <button class="dest-card dest-room" data-section="habitacion"><span class="dest-number">01 / PERSONAL</span><span class="dest-visual">✦</span><span class="dest-bottom"><strong>Mi habitación</strong><small>Proyectos, pasiones y sobre mí</small><b>↗</b></span></button>
+    <button class="dest-card dest-space" data-section="universo"><span class="dest-number">02 / ASTRONOMÍA</span><span class="dest-visual">🪐</span><span class="dest-bottom"><strong>Universo</strong><small>Planetas, lunas y agujeros negros</small><b>↗</b></span></button>
+    <button class="dest-card dest-pirates" data-section="onepiece"><span class="dest-number">03 / AVENTURAS</span><span class="dest-visual"><img src="../assets/sombrero-paja-emblema-usuario.png" alt=""></span><span class="dest-bottom"><strong>One Piece</strong><small>Frutas, personajes e islas</small><b>↗</b></span></button>
+    <button class="dest-card dest-dragon" data-section="dragonball"><span class="dest-number">04 / ENERGÍA</span><span class="dest-visual"><img src="../assets/esfera-dragon-4.svg" alt=""></span><span class="dest-bottom"><strong>Dragon Ball</strong><small>Guerreros y transformaciones</small><b>↗</b></span></button>
+   </div><div class="method-note"><span class="method-icon">⌁</span><div><strong>Dos maneras de explorar, un mismo proyecto</strong><p>Este modo consulta fuentes externas mediante <code>fetch()</code>. Tu habitación es información personal local. El modo interactivo sigue disponible y conserva sus aventuras.</p></div><a href="../modo-interactivo.html">Ir al juego ↗</a></div></section>
+   <section id="collection-section" class="collection-section hidden" aria-label="Catálogos consultables">
+     <div class="section-header"><div><p class="section-kicker">EXPLORA LA COLECCIÓN</p><h2 id="collection-title">Catálogo</h2></div><div id="connection-pill" class="connection-pill pending" role="status" aria-live="polite"><i></i><span>Por consultar</span></div></div>
+     <div id="category-tabs" class="category-tabs" role="tablist" aria-label="Categoría del catálogo"></div>
+     <div class="toolbar" id="toolbar"><form id="search-form" class="search-form" role="search"><span aria-hidden="true">⌕</span><input type="search" id="search-input" placeholder="Buscar por nombre, tipo o atributo..." aria-label="Buscar en el catálogo" autocomplete="off"><kbd>/</kbd><button type="submit">Buscar</button></form><label class="filter-select"><span>Filtrar</span><select id="category-filter" aria-label="Filtrar resultados"><option value="all">Todos</option></select></label><button id="refresh-button" class="refresh-button" type="button" title="Consultar de nuevo la API">↻ <span>Actualizar</span></button></div>
+     <div id="results-line" class="results-line" role="status" aria-live="polite">Elige una colección para comenzar.</div>
+     <div id="results-grid" class="results-grid" aria-live="off"></div>
+     <div id="results-footer" class="results-footer"><button type="button" id="load-more" class="load-more hidden">Cargar más <span>↓</span></button></div>
+     <div id="source-note" class="source-note">Las fichas con estado «API» provienen de consultas en vivo; las secciones locales están identificadas.</div>
+   </section>
+   <section id="room-section" class="room-section hidden" aria-label="Información personal"><div class="section-header"><div><p class="section-kicker">UN POCO MÁS PERSONAL</p><h2>Conoce a la persona detrás del proyecto</h2></div><span class="editorial-tag">CONTENIDO PERSONAL · NO API</span></div><div id="personal-content"></div></section>
+   <footer class="page-footer"><span>◈ ONEWORLD DEVELOP</span><span>Proyecto frontend · HTML · JavaScript · Tailwind CSS</span><a href="../index.html">Cambiar modo ↑</a></footer>
+  </main>
+ </div>
+ <div id="detail-overlay" class="detail-overlay hidden" aria-hidden="true"><div id="detail-backdrop" class="detail-backdrop"></div><section id="detail-drawer" class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1"><div class="drawer-top"><span id="detail-source">FICHA DE INFORMACIÓN</span><button id="detail-close" type="button" aria-label="Cerrar detalle">✕</button></div><div id="detail-body"></div></section></div>
+ <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>

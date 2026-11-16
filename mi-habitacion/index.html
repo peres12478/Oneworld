@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#291e32">
+  <meta name="description" content="Mi habitación: mi GitHub, mis pasiones y presentación personal. Este contenido no utiliza APIs.">
+  <title>Mi habitación · Espacio personal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/habitacion.css">
+  <script src="js/datos-personales.js" defer></script>
+  <script src="js/habitacion.js" defer></script>
+  <script src="../js/personal-music.js" defer></script>
+</head>
+<body data-music-src="../assets/mi-habitacion-original.ogg">
+ <div class="bedroom-app min-h-screen flex flex-col">
+  <header class="room-header flex justify-between items-center gap-3 px-4 sm:px-8 py-3">
+   <div class="room-brand flex items-center gap-3"><span class="brand-mark">✦</span><div><small>UN ESPACIO PERSONAL</small><h1>MI HABITACIÓN</h1></div></div>
+   <div class="flex gap-2 items-center flex-wrap justify-end">
+     <span class="personal-label hidden lg:inline-flex">CONTENIDO PERSONAL · SIN API</span>
+     <div class="room-music" aria-label="Música de la habitación"><button id="music-toggle" type="button" aria-pressed="false">▶ Música</button><label class="music-slider">Vol. <input id="music-volume" type="range" min="0" max="100" value="30" aria-label="Volumen de música"></label></div>
+     <a class="back-link" href="../index.html">← MI ESPACIO</a>
+   </div>
+  </header>
+  <div class="intro-banner px-4 sm:px-8 py-3 flex gap-3 items-start"><span>✧</span><p><strong>Sobre este lugar:</strong> aquí comparto mi perfil de GitHub, mis pasiones y algunos datos personales. Es una sección que decidí agregar a mi sitio; <strong>no usa ninguna API</strong>. Las APIs están en los mundos de Universo, One Piece y Dragon Ball.</p></div>
+  <main class="room-stage flex-1 relative" id="room-stage" tabindex="0" aria-label="Camina con A y D. Presiona E cerca de una sección, W para saltar y Escape para cerrar">
+   <div class="room-fog"></div>
+   <div class="room-heading"><span>BIENVENIDO A MI RINCÓN</span><strong>EXPLORA MI HABITACIÓN</strong><small>Camina y pulsa E, o toca los objetos.</small></div>
+   <div id="bedroom-world" class="bedroom-world">
+    <div class="wallpaper"></div><div class="wall-trim"></div>
+    <div class="string-lights"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span><span>✧</span></div>
+    <div class="window-frame" aria-hidden="true"><div class="night-sky"><span class="window-stars">✧　·　✦　·　✧</span><span class="window-moon">☾</span><span class="window-hills"></span><span class="window-hills far"></span></div><span class="window-sill"></span></div>
+    <div class="room-bed" aria-label="Cama con almohada y cobija"><div class="bed-head"></div><div class="bed-pillow"></div><div class="bed-blanket"></div><div class="bed-foot"></div></div>
+    <button id="bedroom-exit" class="furniture room-exit" data-action="exit" style="left:156px" type="button"><span class="exit-shape">✦</span><strong>MI ESPACIO</strong><small>VOLVER</small></button>
+    <button class="furniture workstation" data-action="projects" style="left:810px" type="button" aria-label="Abrir mi GitHub">
+      <span class="screen-frame"><span class="cat-screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" width="78" height="78" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.07 5.07 0 0 0 4 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 8 18.13V22"/></svg></span><span class="screen-line">GITHUB</span></span>
+      <span class="desk"><span class="keyboard-art"></span></span><strong>MI GITHUB</strong><small>MI PERFIL Y REPOSITORIOS</small><em>VER GITHUB · E</em>
+    </button>
+    <button class="furniture passion-frame" data-action="passions" style="left:1380px" type="button" aria-label="Abrir mis pasiones">
+       <span class="saturn-icon"><span class="planet-ball"></span><span class="planet-ring"></span></span><strong>MIS PASIONES</strong><small>LO QUE ME INSPIRA</small><em>DESCUBRIR · E</em>
+    </button>
+    <button class="furniture about-frame" data-action="about" style="left:1860px" type="button" aria-label="Leer sobre mí">
+       <span class="clock-dial"><span class="clock-center"></span><span class="clock-hand short"></span><span class="clock-hand long"></span></span><strong>SOBRE MÍ</strong><em>CONOCER · E</em>
+    </button>
+    <div class="floor-board"></div><div class="floor-plinth"></div>
+    <div id="bedroom-shadow" class="bedroom-shadow"></div><div id="bedroom-astronaut" class="bedroom-astronaut" role="img" aria-label="Astronauta de traje blanco animado"><svg viewBox="0 0 110 178" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+       <defs><linearGradient id="suit"><stop stop-color="#fff"/><stop offset=".65" stop-color="#d4edff"/><stop offset="1" stop-color="#8dbad8"/></linearGradient><linearGradient id="visor"><stop stop-color="#bffaff"/><stop offset=".52" stop-color="#205a89"/><stop offset="1" stop-color="#0c1638"/></linearGradient></defs>
+       <rect x="28" y="72" width="54" height="62" rx="13" fill="url(#suit)" stroke="#698cad" stroke-width="3"/>
+       <g class="astro-arm arm-left"><path d="M30 81 Q9 88 12 111 L9 129" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="9" cy="130" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-arm arm-right"><path d="M80 81 Q101 90 96 111 L101 130" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="100" cy="129" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-leg leg-left"><path d="M42 126 35 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M35 150 25 165 Q24 169 35 169 L47 169 Q47 162 43 155" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <g class="astro-leg leg-right"><path d="M69 126 75 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M75 150 67 165 Q65 169 80 169 L93 169 Q94 162 84 154" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <rect x="42" y="74" width="27" height="39" rx="7" fill="#e2f7ff" stroke="#6e9ebd" stroke-width="2"/><path d="M48 84h14M48 90h14" stroke="#45b9df" stroke-width="3"/><circle cx="56" cy="103" r="4" fill="#ffce55"/>
+       <circle cx="55" cy="42" r="38" fill="url(#suit)" stroke="#8ab1d3" stroke-width="4"/><path d="M27 31Q36 12 56 15Q86 12 89 39Q89 65 55 67Q25 63 27 31Z" fill="url(#visor)" stroke="#426991" stroke-width="3"/><path d="M35 32q12-15 32-9" fill="none" stroke="#efffff" stroke-width="5" stroke-linecap="round" opacity=".85"/><path d="M70 48l7-9" stroke="#9be7ff" stroke-width="2" opacity=".8"/><circle cx="15" cy="47" r="5" fill="#80d9e4"/><circle cx="96" cy="47" r="5" fill="#80d9e4"/>
+      </svg></div>
+   </div>
+   <div id="room-prompt" class="room-prompt" role="status" aria-live="polite"><span class="prompt-key">E</span><div><strong id="room-prompt-title">INTERACTUAR</strong><small>Acércate al objeto</small></div><button type="button" id="room-prompt-enter">ABRIR ↗</button></div>
+   <nav class="touch-room" aria-label="Controles táctiles"><button data-key="a" type="button">◀</button><button data-key="d" type="button">▶</button><button data-key="w" type="button">↑</button><button id="room-mobile-e" type="button">E</button></nav>
+  </main>
+  <footer class="room-footer flex flex-wrap gap-3 justify-between px-4 sm:px-8 py-3"><div><kbd>A</kbd> <kbd>D</kbd> CAMINAR　 <kbd>W</kbd> SALTAR　 <kbd>E</kbd> INTERACTUAR　 <kbd>ESC</kbd> CERRAR</div><small>PERSONAL · NO CONECTADO A APIS</small></footer>
+ </div>
+ <div class="info-overlay hidden" id="room-overlay" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><div class="info-panel"><button id="close-info" class="close-info" type="button" aria-label="Cerrar">✕</button><div class="panel-eyebrow" id="dialog-eyebrow">MI HABITACIÓN</div><h2 id="dialog-title"></h2><div id="dialog-body"></div></div></div>
+</body>
+</html>

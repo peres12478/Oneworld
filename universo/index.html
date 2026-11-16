@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050e26">
+ <meta name="description" content="Explora el universo: datos astronómicos desde una API, laboratorio de física y minijuego de asteroides.">
+ <title>ASTRA · Universo y laboratorio</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="css/universo.css">
+ <script type="module" src="js/main.js"></script>
+ <script src="js/space-music.js" defer></script>
+</head>
+<body>
+ <div class="app flex flex-col min-h-screen" id="app">
+  <header class="topbar flex items-center justify-between gap-3 flex-wrap">
+   <a href="../index.html" class="brand" id="home-link" aria-label="Regresar al mundo principal"><span class="brand-logo">✧</span><span><small>UNIVERSO 01</small><strong>ASTRA<span class="tint">/</span>LAB</strong></span></a>
+   <div class="top-right"><span id="api-state" class="connection waiting" role="status">● API: pendiente</span><span class="top-pill">MISIÓN EXPLORADOR <span class="asterisk">✳</span> 01</span><button class="mini-button sound-button" id="sound-button" type="button" aria-pressed="true" title="Activar o desactivar el sonido del universo">🔊 SONIDO ON</button><div class="space-music-controls" aria-label="Música del universo"><button id="space-music-toggle" class="mini-button space-music-btn" type="button" aria-pressed="false">▶ MÚSICA</button><label title="Volumen de música">Vol.<input type="range" id="space-music-volume" min="0" max="100" value="32" aria-label="Volumen de la música"></label></div><button class="mini-button" id="help-button" type="button">? CONTROLES</button></div>
+  </header>
+  <main class="content">
+   <section class="screen hangar active" id="screen-hangar" aria-label="Hangar espacial explorable">
+    <div class="hangar-stars" aria-hidden="true"></div><div class="planet-far" aria-hidden="true"></div><div class="planet-ring" aria-hidden="true"></div>
+    <div class="hangar-heading"><span class="eyebrow">✧ ESTACIÓN ORBITAL · BASE 01</span><h1>EL UNIVERSO<br><em>TE ESPERA.</em></h1><p>Una aventura para descubrir, investigar y aprender.</p></div>
+    <div class="hangar-world" id="hangar-world">
+     <div class="station-windows" aria-hidden="true"></div>
+     <button class="hangar-home-door" id="site-home" data-destination="home" style="left:92px" type="button" aria-label="Regresar al mundo inicial">
+      <span class="home-door-arch" aria-hidden="true"><span class="home-door-star">✦</span></span><strong>MI ESPACIO</strong><small>VOLVER AL MUNDO PRINCIPAL</small><span class="site-pad">REGRESAR <b>E</b></span>
+     </button>
+     <button class="hangar-site" id="site-explore" data-destination="explore" style="left:365px" type="button" aria-label="Subir al cohete y explorar el universo">
+       <span class="site-halo cyan"></span><img src="assets/rocket.svg" class="rocket-on-pad" alt="Cohete de exploración" draggable="false"><strong>COHETE EXPLORADOR</strong><small>PLANETAS · LUNAS · AGUJEROS NEGROS</small><span class="site-pad">EMBARCAR <b>E</b></span>
+     </button>
+     <button class="hangar-site" id="site-lab" data-destination="lab" style="left:1120px" type="button" aria-label="Entrar al laboratorio de física">
+       <span class="site-halo violet"></span><span class="site-building lab-building"><span class="lab-antenna"></span><span class="lab-window">E = mc²</span><span class="lab-door"></span></span><strong>LABORATORIO</strong><small>LEYES Y FÓRMULAS DE FÍSICA</small><span class="site-pad">INVESTIGAR <b>E</b></span>
+     </button>
+     <button class="hangar-site" id="site-arcade" data-destination="arcade" style="left:1880px" type="button" aria-label="Iniciar minijuego de asteroides">
+       <span class="site-halo amber"></span><span class="site-building arcade-building"><span class="arcade-screen">✺<span>ASTEROIDS</span></span><span class="arcade-controls">● ● ●</span></span><strong>MINIJUEGO ARCADE</strong><small>COHETE DE JUGUETE · ASTEROIDES</small><span class="site-pad">JUGAR <b>E</b></span>
+     </button>
+     <div class="hangar-ground"></div><div class="hangar-rail"></div><div id="astronaut-shadow" class="astronaut-shadow"></div>
+     <div id="astronaut" class="astronaut" role="img" aria-label="Astronauta stickman de traje blanco animado">
+      <svg viewBox="0 0 110 178" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+       <defs><linearGradient id="suit"><stop stop-color="#fff"/><stop offset=".65" stop-color="#d4edff"/><stop offset="1" stop-color="#8dbad8"/></linearGradient><linearGradient id="visor"><stop stop-color="#bffaff"/><stop offset=".52" stop-color="#205a89"/><stop offset="1" stop-color="#0c1638"/></linearGradient></defs>
+       <rect x="28" y="72" width="54" height="62" rx="13" fill="url(#suit)" stroke="#698cad" stroke-width="3"/>
+       <g class="astro-arm arm-left"><path d="M30 81 Q9 88 12 111 L9 129" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="9" cy="130" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-arm arm-right"><path d="M80 81 Q101 90 96 111 L101 130" stroke="#cfe7f8" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="100" cy="129" r="8" fill="#f7fcff" stroke="#6e9ebd" stroke-width="3"/></g>
+       <g class="astro-leg leg-left"><path d="M42 126 35 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M35 150 25 165 Q24 169 35 169 L47 169 Q47 162 43 155" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <g class="astro-leg leg-right"><path d="M69 126 75 158" stroke="#deefff" stroke-width="17" stroke-linecap="round"/><path d="M75 150 67 165 Q65 169 80 169 L93 169 Q94 162 84 154" fill="#eff9ff" stroke="#7497b4" stroke-width="3"/></g>
+       <rect x="42" y="74" width="27" height="39" rx="7" fill="#e2f7ff" stroke="#6e9ebd" stroke-width="2"/><path d="M48 84h14M48 90h14" stroke="#45b9df" stroke-width="3"/><circle cx="56" cy="103" r="4" fill="#ffce55"/>
+       <circle cx="55" cy="42" r="38" fill="url(#suit)" stroke="#8ab1d3" stroke-width="4"/><path d="M27 31Q36 12 56 15Q86 12 89 39Q89 65 55 67Q25 63 27 31Z" fill="url(#visor)" stroke="#426991" stroke-width="3"/><path d="M35 32q12-15 32-9" fill="none" stroke="#efffff" stroke-width="5" stroke-linecap="round" opacity=".85"/><path d="M70 48l7-9" stroke="#9be7ff" stroke-width="2" opacity=".8"/><circle cx="15" cy="47" r="5" fill="#80d9e4"/><circle cx="96" cy="47" r="5" fill="#80d9e4"/>
+      </svg>
+     </div>
+    </div>
+    <div class="hangar-caption"><span>PLATAFORMA ORBITAL</span><span id="near-label">CAMINA HACIA UNA ESTACIÓN</span></div>
+    <div class="hangar-prompt" id="hangar-prompt"><span class="keycap">E</span><div><strong id="hangar-prompt-title">SUBIR AL COHETE</strong><small>Acércate para interactuar</small></div><button id="hangar-enter" type="button">ENTRAR ↗</button></div>
+   </section>
+   <section class="screen galaxy" id="screen-explore" aria-label="Exploración espacial">
+    <div class="panel-header"><div><span class="eyebrow">MISIÓN 01 · TELESCOPIO DIGITAL</span><h2>EXPLORACIÓN <em>ESPACIAL</em></h2><p>Navega con tu cohete, selecciona un objeto y pulsa <b>Q</b> para investigarlo.</p></div><button class="back-button" data-back type="button">← VOLVER AL HANGAR</button></div>
+    <div class="galaxy-tools"><div class="category-row" role="group" aria-label="Tipo de cuerpo astronómico"><button data-category="planet" class="chosen" type="button">🪐 Planetas</button><button data-category="moon" type="button">☾ Lunas</button><button data-category="black_hole" type="button">◉ Agujeros negros</button></div><div class="galaxy-status"><span id="sky-count">Consultando API…</span><button id="reload-space" type="button" class="outline-button">↻ ACTUALIZAR</button></div></div>
+    <div class="sky-window" id="sky-window"><div class="sky-nebula"></div><div class="sky-grid"></div><div class="orbit-arc"></div>
+      <div class="visual-object" id="visual-object"><span class="object-aura"></span><div id="celestial-art" class="celestial-art planet-art"><span></span></div><span class="planet-orbit"></span></div>
+      <div class="sky-label"><span id="object-sequence">OBJETO 01</span><strong id="object-name">Esperando datos de la API</strong><small id="object-type">SPACE CATALOG</small></div>
+      <div class="flying-rocket"><img src="assets/rocket.svg" alt="Cohete de exploración" draggable="false"><span>ASTRA–01</span><div class="flying-jet"></div></div>
+      <button id="prev-object" class="arrow-nav left" aria-label="Objeto anterior" type="button">❮</button><button id="next-object" class="arrow-nav right" aria-label="Objeto siguiente" type="button">❯</button>
+      <div id="empty-space" class="empty-space hidden"><strong>Sin datos astronómicos todavía</strong><p>Comprueba la conexión y pulsa actualizar.</p></div>
+      <div class="sky-controls">A / D O ◀ ▶ <span>CAMBIAR OBJETO</span> <b>Q</b> INVESTIGAR <b>E</b> INSPECCIONAR</div>
+    </div>
+    <div class="sky-footer"><div class="sky-record"><span>FUENTE EN LÍNEA</span><strong>SpaceCatalog API</strong><small>Los objetos y sus datos se consultan por HTTP. El escenario es ilustrativo, no a escala.</small></div><div class="sky-actions"><button id="inspect-object" class="main-action" type="button">Q · INVESTIGAR OBJETO ↗</button><button id="load-more" class="outline-button" type="button">CARGAR MÁS</button></div></div>
+   </section>
+   <section class="screen laboratory" id="screen-lab" aria-label="Laboratorio de física">
+    <div class="panel-header"><div><span class="eyebrow">ESTACIÓN DE INVESTIGACIÓN · GRADOS 10.º Y 11.º</span><h2>LABORATORIO DE <em>FÍSICA</em></h2><p>Explora leyes y fórmulas. Pulsa Q para buscar y selecciona una ficha para estudiarla.</p></div><button class="back-button" data-back type="button">← VOLVER AL HANGAR</button></div>
+    <button id="practice-door" class="practice-door" type="button" aria-label="Entrar al aula de prácticas y simuladores de física">
+      <span class="practice-door-art" aria-hidden="true"><span class="practice-orbit">◌</span><span class="practice-cube">⚗</span></span>
+      <span class="practice-door-copy"><small>NUEVA SALA · APRENDIZAJE INTERACTIVO</small><strong>PRÁCTICAS DE FÍSICA</strong><span>5 experimentos con controles, gráficas y resultados calculados</span></span>
+      <span class="practice-door-cta">ENTRAR ↗</span>
+    </button>
+    <div class="lab-api-banner" aria-live="polite" aria-label="Conexión a las APIs del laboratorio">
+      <div><strong id="lab-api-status">○ API: sin comprobar</strong><small id="lab-api-details">Las 43 fórmulas son material escolar local. Wikipedia y Wikidata se consultan en línea.</small></div>
+      <button id="lab-retry-api" type="button" class="outline-button">↻ COMPROBAR API</button>
+    </div>
+    <div class="lab-top"><div class="lab-signal"><span class="lab-pulse">⌬</span><div><strong>ARCHIVO CIENTÍFICO</strong><small>Fórmulas curriculares + documentación adicional en Wikipedia API</small></div></div><div class="lab-count" id="formula-count">0 FÓRMULAS</div></div>
+    <div class="lab-toolbar"><label class="search-box"><span>⌕</span><input id="formula-search" type="search" placeholder="Q · Buscar: Newton, velocidad, ondas..." aria-label="Buscar fórmulas"></label><div class="lab-categories" id="lab-categories" aria-label="Categorías de física"></div></div>
+    <div class="formula-grid" id="formula-grid"></div>
+    <div class="lab-legend">43 FÓRMULAS EDUCATIVAS LOCALES · CONSULTAS EN VIVO A WIKIPEDIA Y EXPRESIONES DE WIKIDATA (P2534) SI ESTÁN DISPONIBLES</div>
+   </section>
+   <section class="screen practice-screen" id="screen-practices" aria-label="Prácticas y simuladores de física">
+    <div class="panel-header"><div><span class="eyebrow">ASTRA LAB · AULA EXPERIMENTAL</span><h2>PRÁCTICAS <em>DE FÍSICA</em></h2><p>Modifica las magnitudes y observa las leyes físicas en movimiento. Todos los cálculos son locales y educativos.</p></div><button class="back-button" data-back="lab" type="button">← VOLVER AL LABORATORIO</button></div>
+    <div class="practice-selector" id="practice-selector" role="group" aria-label="Seleccionar práctica">
+      <button data-practice="projectile" class="chosen" type="button">01 · Tiro parabólico</button>
+      <button data-practice="newton" type="button">02 · Ley de Newton</button>
+      <button data-practice="hooke" type="button">03 · Ley de Hooke</button>
+      <button data-practice="pendulum" type="button">04 · Péndulo</button>
+      <button data-practice="ohm" type="button">05 · Ley de Ohm</button>
+    </div>
+    <div class="practice-layout">
+     <div class="practice-sim-panel">
+      <div class="practice-topline"><div><span class="eyebrow" id="practice-topic">CINEMÁTICA</span><h3 id="practice-title">Tiro parabólico</h3></div><span id="practice-equation" class="practice-equation">x = v₀ cos(θ) t</span></div>
+      <canvas id="practice-canvas" width="900" height="490" aria-label="Visualización interactiva del experimento de física"></canvas>
+      <div class="practice-actions"><button type="button" class="main-action" id="practice-play">▶ INICIAR</button><button type="button" class="outline-button" id="practice-reset">↻ REINICIAR</button><span class="practice-time" id="practice-time">t = 0,00 s</span></div>
+      <p class="practice-note" id="practice-note">Simulación educativa idealizada.</p>
+     </div>
+     <aside class="practice-settings"><span class="eyebrow">PANEL DE EXPERIMENTO</span><h3>CONTROLES Y RESULTADOS</h3><p id="practice-description">Elige las condiciones iniciales y observa la trayectoria.</p><div class="practice-inputs" id="practice-inputs"></div><div class="practice-results" id="practice-results" aria-live="polite"></div><small>Modelo idealizado. Las fórmulas se calculan con los parámetros visibles; las imágenes no están a escala real.</small></aside>
+    </div>
+   </section>
+   <section class="screen arcade" id="screen-arcade" aria-label="Minijuego de asteroides">
+    <div class="panel-header"><div><span class="eyebrow">JUEGO ARCADE · MISIÓN 02</span><h2>DEFENSA DE <em>ASTEROIDES</em></h2><p>Destruye asteroides con el cohete de juguete. A / D para moverte, Espacio o F para disparar.</p></div><button class="back-button" data-back type="button">← VOLVER AL HANGAR</button></div>
+    <div class="arcade-layout"><div class="game-case"><div class="game-header"><span>ASTRA ARCADE <b>✳</b></span><span>PUNTOS <strong id="game-score">0000</strong></span><span>VIDAS <strong id="game-lives">♥♥♥</strong></span></div><canvas id="asteroid-canvas" width="900" height="510" aria-label="Juego de disparos espaciales contra asteroides"></canvas><div id="game-overlay" class="game-overlay"><div class="overlay-icon">✦</div><strong id="game-message">ASTEROID DEFENDER</strong><p id="game-submessage">Controla tu cohete de juguete y protege la órbita.</p><button id="game-start" type="button" class="main-action">INICIAR MISIÓN ↗</button></div></div><div class="game-sidebar"><div class="game-label">MISIÓN ARCADE / 001</div><h3>PEQUEÑO COHETE.<br><em>GRAN MISIÓN.</em></h3><p>Los asteroides se acercan. Muévete para esquivarlos y dispara para ganar puntos.</p><div class="sidebar-control">← → / A D <span>MOVER</span></div><div class="sidebar-control">F / ESPACIO <span>DISPARAR</span></div><button id="game-restart" type="button" class="outline-button">↻ REINICIAR</button><small>Minijuego local: no consume la API ni guarda partidas.</small></div></div>
+   </section>
+  </main>
+  <footer class="bottom-bar"><div class="keys-legend" id="control-hint"><span><kbd>A</kbd><kbd>D</kbd> MOVER</span><span><kbd>W</kbd> SALTAR</span><span><kbd>E</kbd> ENTRAR</span><span><kbd>Q</kbd> INVESTIGAR</span></div><div class="footer-mark">ASTRA LAB <span>✳</span> EXPLORA · APRENDE · JUEGA</div></footer>
+  <nav class="touch-controls" id="touch-controls" aria-label="Controles para dispositivos móviles"><button id="touch-left" type="button" aria-label="Izquierda">◀</button><button id="touch-right" type="button" aria-label="Derecha">▶</button><button id="touch-jump" type="button" aria-label="Saltar">↑</button><button id="touch-action" type="button" aria-label="Interactuar">E</button><button id="touch-query" type="button" aria-label="Investigar">Q</button></nav>
+  <div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detail-title"><div class="modal-sheet"><button id="close-detail" class="modal-close" aria-label="Cerrar" type="button">✕</button><div class="modal-mark">ASTRA/ARCHIVO <span>✳</span></div><span id="detail-kind" class="eyebrow">EXPLORACIÓN</span><h2 id="detail-title">Información</h2><div id="detail-content" class="detail-content"></div><div class="modal-bottom"><span id="detail-source">FUENTE</span><button id="detail-dismiss" class="outline-button" type="button">CERRAR · ESC</button></div></div></div>
+  <div id="help-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Controles"><div class="modal-sheet smaller"><button id="close-help" class="modal-close" aria-label="Cerrar" type="button">✕</button><span class="eyebrow">MANUAL DE PILOTO</span><h2>CONTROLES</h2><div class="help-grid"><p><b>HANGAR:</b> A/D caminar, W saltar, Shift correr, E interactuar.</p><p><b>ESPACIO:</b> A/D cambiar de objeto, Q o E investigar, teclas 1/2/3 cambiar categoría.</p><p><b>LABORATORIO:</b> Q enfocar buscador. Pulsa la puerta Prácticas para experimentar con 5 simuladores.</p><p><b>PRÁCTICAS:</b> selecciona un experimento, ajusta los parámetros y usa Iniciar / Pausar / Reiniciar.</p><p><b>ARCADE:</b> A/D mover cohete, Espacio/F disparar, Esc volver.</p></div><button id="help-dismiss" class="main-action" type="button">ENTENDIDO</button></div></div>
+ </div>
+</body>
+</html>

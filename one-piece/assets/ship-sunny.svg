@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 360" role="img">
+<defs><linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#cf9662"/><stop offset=".44" stop-color="#945434"/><stop offset="1" stop-color="#432b31"/></linearGradient><linearGradient id="white" x1="0" y1="0" x2=".28" y2="1"><stop stop-color="#fff9e6"/><stop offset="1" stop-color="#dbc9a8"/></linearGradient><linearGradient id="red" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#ca5152"/><stop offset="1" stop-color="#5b1738"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#fff0a4"/><stop offset="1" stop-color="#c28735"/></linearGradient><filter id="shadow" x="-25%" width="150%" y="-45%" height="200%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#17304a" flood-opacity=".4"/></filter></defs>
+<g fill="none" stroke-linecap="round"><path d="M50 322q110 -12 185 0t167 0 167 0" stroke="#aef4f3" stroke-width="5" opacity=".8"/><path d="M95 335q75 -9 119 0m215-3q68 -5 107 0" stroke="#eaffeb" stroke-width="3" opacity=".6"/></g>
+<g filter="url(#shadow)">
+<title>Thousand Sunny: barco rojo y blanco con cabeza de león dorada</title>
+<path d="M58 250L544 239Q533 302 462 311L141 316Q80 297 58 250Z" fill="#bc4a3a" stroke="#54312e" stroke-width="7"/>
+<path d="M68 250Q289 260 531 245" stroke="#fff9e5" stroke-width="16" fill="none"/>
+<path d="M88 279Q300 295 510 277" fill="none" stroke="#ffdca3" stroke-width="8"/>
+<path d="M116 293Q300 314 481 292" fill="none" stroke="#673b30" stroke-width="6"/>
+<path d="M97 228v-30h90l19 43Z" fill="#f8e7cb" stroke="#6c4234" stroke-width="5"/>
+<path d="M105 199Q127 170 157 185Q181 181 199 207" fill="#8bc88a" stroke="#456b59" stroke-width="5"/>
+<rect x="123" y="201" width="25" height="24" rx="4" fill="#f8c86d" stroke="#6d4639" stroke-width="4"/>
+<path d="M91 251Q282 243 523 251" fill="none" stroke="#f9f4d6" stroke-width="10"/><g stroke="#ede8c8" stroke-width="5"><path d="M115 251v24"/><path d="M154 251v24"/><path d="M193 251v24"/><path d="M232 251v24"/><path d="M271 251v24"/><path d="M310 251v24"/><path d="M349 251v24"/><path d="M388 251v24"/><path d="M427 251v24"/><path d="M466 251v24"/><path d="M505 251v24"/></g>
+<path d="M270 51V256M431 124V254" stroke="#704a36" stroke-width="11"/>
+<path d="M273 64Q171 88 165 219Q218 212 272 234Z" fill="#fdf7e9" stroke="#81624a" stroke-width="5"/>
+<path d="M280 67Q361 94 390 210Q337 203 280 231Z" fill="#f8f1d9" stroke="#81624a" stroke-width="5"/>
+<path d="M428 134Q485 155 516 216Q473 209 430 225Z" fill="#fff9e5" stroke="#81624a" stroke-width="5"/>
+<path d="M268 56v-32l79 6-4 40Z" fill="#162a3a" stroke="#e6c078" stroke-width="4"/>
+<g transform="translate(303 42) scale(.36)" stroke="#26343f" stroke-width="3" stroke-linejoin="round"><path d="M-27 -15L27 21 M27 -15L-27 21" stroke-width="6" stroke="#f4f2dd"/><circle r="24" fill="#f8f4df"/><path d="M-20 21Q-27 12-22 0h44Q28 16 18 21Z" fill="#f3f0d9"/><circle cx="-8" cy="-2" r="4.5" fill="#28343e"/><circle cx="8" cy="-2" r="4.5" fill="#28343e"/><path d="M-6 10q7 6 13 0" fill="none" stroke="#24323a" stroke-width="2"/><path d="M-27 -17q26-10 54 0l-6 6q-19-5-42 0Z" fill="#e1b544"/><path d="M-20 -13q20-7 41 0" stroke="#bd4643" stroke-width="4"/></g>
+<g transform="translate(241 160) scale(.6)" stroke="#26343f" stroke-width="3" stroke-linejoin="round"><path d="M-27 -15L27 21 M27 -15L-27 21" stroke-width="6" stroke="#f4f2dd"/><circle r="24" fill="#f8f4df"/><path d="M-20 21Q-27 12-22 0h44Q28 16 18 21Z" fill="#f3f0d9"/><circle cx="-8" cy="-2" r="4.5" fill="#28343e"/><circle cx="8" cy="-2" r="4.5" fill="#28343e"/><path d="M-6 10q7 6 13 0" fill="none" stroke="#24323a" stroke-width="2"/><path d="M-27 -17q26-10 54 0l-6 6q-19-5-42 0Z" fill="#e1b544"/><path d="M-20 -13q20-7 41 0" stroke="#bd4643" stroke-width="4"/></g>
+<g stroke="#695046" stroke-width="2" fill="none" opacity=".93"><path d="M274 52L105 261 M275 54L509 258 M275 55L382 247 M426 112L270 255"/><path d="M235 89L235 253M321 88L321 257" stroke-dasharray="3 5"/><path d="M239 97l-8 146m94-150l7 146"/></g>
+<g fill="#243c45" stroke="#f5d69b" stroke-width="6"><circle cx="168" cy="277" r="11"/><circle cx="253" cy="277" r="11"/><circle cx="339" cy="277" r="11"/><circle cx="429" cy="277" r="11"/></g>
+<path d="M96 252q20-28 42 0" fill="none" stroke="#f2f0e5" stroke-width="6"/>
+<!-- Figura de proa con melena de rayos, sonrisa y naricita -->
+<g transform="translate(543 234)"><path d="M0-46L11-30 31-37 26-18 44-9 26 4 36 25 15 22 0 43-16 23-37 28-26 6-44-8-25-19-31-37-10-28Z" fill="#f4af36" stroke="#8a4a2b" stroke-width="5"/>
+<circle r="28" fill="#ffe38e" stroke="#995c36" stroke-width="4"/><path d="M-18-9q7-5 13 0M6-9q8-5 14 0" stroke="#543c36" stroke-width="3" fill="none"/><circle cx="-10" cy="-3" r="3" fill="#43363b"/><circle cx="12" cy="-3" r="3" fill="#43363b"/>
+<ellipse cy="8" rx="5" ry="4" fill="#995832"/><path d="M-13 15q13 13 26 0" fill="none" stroke="#a75b32" stroke-width="3"/>
+</g>
+</g></svg>

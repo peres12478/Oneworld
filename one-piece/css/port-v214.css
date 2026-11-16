@@ -1,0 +1,71 @@
+/* V2.14: Grand Line harbor, drawable ships, Franky's repair workshop. */
+.hidden,[hidden]{display:none!important}
+.room-screen:not(.hachinosu-mode) .room-viewport{background:radial-gradient(circle at 78% 21%,#fff4d2ab 0 4%,transparent 14%),linear-gradient(180deg,#6ac4e9 0%,#83d7f1 25%,#abdcee 56%,#3188a7 77%,#075578 100%)}
+.room-screen:not(.hachinosu-mode) .room-moon{top:13%;right:20%;width:152px;background:radial-gradient(circle at 40% 38%,#fffde0,#ffe5a6 75%,#fff3ba 100%);opacity:.88;box-shadow:0 0 60px #ffe7a8aa,0 0 150px #ffecab55}
+.room-screen:not(.hachinosu-mode) .room-distant-mountains{background:#378e92;bottom:160px;opacity:.62;clip-path:polygon(0 90%,8% 70%,17% 83%,25% 34%,30% 44%,37% 95%,48% 58%,58% 85%,66% 38%,76% 74%,88% 33%,100% 79%,100% 100%,0 100%)}
+.room-screen:not(.hachinosu-mode) .room-mist{bottom:120px;background:linear-gradient(transparent,#f1eec066)}
+.room-screen:not(.hachinosu-mode) .room-hanging-stars{opacity:0}
+.room-screen:not(.hachinosu-mode) .room-back-pillars,.room-screen:not(.hachinosu-mode) .room-arch{display:none}
+.room-screen:not(.hachinosu-mode) .room-floor{height:114px;background:linear-gradient(180deg,#d7b27a 0 8px,#a56b4e 8px 22px,#523c42 23px 100%);border-top:7px solid #f4d69b;box-shadow:0 -20px 0 #296b88a8,0 -32px 0 #2da7c87d,0 -44px 40px #4dc6d966}
+.room-screen:not(.hachinosu-mode) .room-floor:before{inset:15px 0 0;background:repeating-linear-gradient(90deg,#332f3936 0 7px,transparent 7px 147px),repeating-linear-gradient(0deg,transparent 0 27px,#382c303b 29px 33px)}
+.room-screen:not(.hachinosu-mode) .room-floor:after{top:-11px;height:12px;border-color:#ffe7af;background:repeating-linear-gradient(90deg,#dfba86 0 94px,#89674e 96px,#f0d09a 100px)}
+.room-screen:not(.hachinosu-mode) .room-platform{border-color:#976c4b;background:linear-gradient(#e5c48c 0 6px,#a46f4c 6px 100%)}
+.port-cloud{position:absolute;z-index:1;width:430px;height:92px;border-radius:50%;background:#fff6e1a6;filter:blur(17px);pointer-events:none;animation:port-cloud-drift 27s linear infinite alternate}
+.port-cloud-one{top:105px;left:13%;transform:scale(.8)}.port-cloud-two{top:180px;left:53%;width:280px;height:68px;opacity:.6;animation-duration:32s}
+@keyframes port-cloud-drift{to{translate:135px 0;opacity:.4}}
+.port-sea{position:absolute;bottom:98px;left:0;right:0;height:170px;z-index:1;pointer-events:none;background:repeating-linear-gradient(170deg,#d8f7f425 0 3px,transparent 4px 30px),linear-gradient(transparent,#1d92ad65 75%,#126786bd);animation:sea-breath 5s ease-in-out infinite alternate}
+@keyframes sea-breath{to{filter:brightness(1.23);transform:translateY(6px)}}
+.port-hills{position:absolute;bottom:127px;width:100%;height:190px;background:repeating-linear-gradient(120deg,#7bb7a3 0 78px,#5d9da7 79px 115px,#7ab5a0 116px 170px);opacity:.29;clip-path:polygon(0 77%,5% 32%,10% 66%,16% 19%,26% 78%,34% 29%,42% 75%,50% 10%,59% 75%,68% 39%,73% 74%,81% 19%,90% 78%,97% 37%,100% 78%,100% 100%,0 100%)}
+.port-lighthouse{position:absolute;left:2150px;bottom:110px;width:68px;height:300px;border-radius:15px 15px 0 0;text-align:center;font-size:35px;color:#fff1bd;padding-top:29px;background:repeating-linear-gradient(0deg,#f4ecd0 0 51px,#cf6e5d 52px 93px);border:5px solid #815b55;box-shadow:0 0 75px #ffde9b6b}
+.port-lighthouse:before{content:'';position:absolute;top:-30px;left:-20px;width:96px;height:40px;border-radius:30px 30px 0 0;background:#c75348;border:5px solid #633e46}.port-lighthouse:after{content:'';position:absolute;top:4px;right:-220px;width:220px;height:14px;background:linear-gradient(90deg,#fff2ac99,transparent);filter:blur(10px);transform:rotate(-16deg)}
+.port-rope{position:absolute;inset:0;opacity:.35;background:linear-gradient(155deg,transparent 59%,#3e333161 59.15%,transparent 59.3%);pointer-events:none}
+.room-door-scene.room-ship,.room-screen.hachinosu-mode .hachinosu-exit.room-ship{height:255px;width:360px;bottom:104px;border:0;border-radius:0;background:none;box-shadow:none;filter:none;opacity:1;z-index:4;display:block;overflow:visible}
+.room-door-hachinosu.room-ship{left:350px!important}
+.room-door-characters.room-ship{left:1260px!important}
+.room-door-fruits.room-ship{left:2790px!important}
+.room-ship .ship-glow{position:absolute;inset:35px 20px 10px;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,#d2ffff83,transparent 74%);filter:blur(22px);animation:ship-glow 3.3s ease-in-out infinite alternate}
+@keyframes ship-glow{to{opacity:.55;transform:scale(1.07)}}
+.room-ship .ship-graphic{position:absolute;left:0;top:8px;width:100%;height:189px;transform-origin:center bottom;animation:ship-bob 3.6s ease-in-out infinite alternate;filter:drop-shadow(0 9px 11px #06293b78)}
+.room-ship .ship-graphic img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+@keyframes ship-bob{to{transform:translateY(6px) rotate(-.8deg)}}
+.room-ship .ship-sign{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);z-index:5;width:245px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;background:linear-gradient(135deg,#112c43f2,#143e53f4);border:3px solid #f2d295;border-radius:14px;padding:9px 14px 10px;box-shadow:0 9px 0 #633f36,0 15px 25px #03132194;color:#fff3d0}
+.ship-sign small{font:800 10px var(--font-title);letter-spacing:1.7px;color:#8ee0e7}.ship-sign strong{font:900 13px var(--font-title);white-space:nowrap;letter-spacing:1px}.ship-sign span{font:700 9px system-ui;color:#f5bf7c}
+.room-ship .ship-pier{position:absolute;bottom:-33px;left:20px;right:20px;height:34px;background:repeating-linear-gradient(90deg,#9b6445 0 28px,#d39a60 28px 37px,#80543e 38px 51px);border:4px solid #51382f;border-radius:7px;box-shadow:0 12px 22px #04182c55}
+.ship-cracks{position:absolute;left:5%;top:5%;width:90%;height:90%;font-size:100px;font-family:Arial;text-align:center;color:#ffdb8a;opacity:0;transform:rotate(-20deg);text-shadow:0 0 22px #ff916c;pointer-events:none}
+.room-ship.is-broken .ship-graphic img{filter:grayscale(.7) brightness(.54);transform:translateY(12px) rotate(9deg);transition:filter .35s,transform .35s}.room-ship.is-broken .ship-sign{border-color:#ff7b7b;background:#4b202d}.room-ship.is-broken .ship-sign span{color:#ff8e94}.room-ship.is-broken .ship-glow{background:radial-gradient(ellipse,#f0446477,transparent 74%)}.room-ship.is-broken .ship-cracks{opacity:1}
+.room-ship.just-broken .ship-graphic{animation:ship-damage .7s ease-in-out}@keyframes ship-damage{25%{transform:rotate(-8deg) translateY(-20px)}55%{transform:rotate(8deg) translateY(10px)}80%{transform:rotate(-3deg) translateY(4px)}}
+.room-screen.hachinosu-mode .port-cloud,.room-screen.hachinosu-mode .port-sea,.room-screen.hachinosu-mode .port-hills,.room-screen.hachinosu-mode .port-lighthouse,.room-screen.hachinosu-mode .port-rope{display:none}
+.room-screen.hachinosu-mode .hachinosu-exit.room-ship{left:839px;bottom:105px;width:350px;height:260px}
+.room-screen.hachinosu-mode .hachinosu-exit .ship-sign{bottom:-19px}
+.room-screen.hachinosu-mode .room-viewport{background:radial-gradient(ellipse 44% 56% at 67% 51%,#7c2e5a 0,transparent 75%),linear-gradient(180deg,#17102e 0%,#372341 56%,#453148 80%,#1f2138 100%)}
+.room-screen.hachinosu-mode .room-moon{background:radial-gradient(circle,#ffe5a8,#e58a83 76%);opacity:.55}
+.room-screen .room-title-panel{max-width:450px}
+.room-screen:not(.hachinosu-mode) .room-title-panel h2 em{color:#ffe1a6}
+.room-screen:not(.hachinosu-mode) .room-title-panel{background:linear-gradient(90deg,#093d5a75,transparent);border-left:4px solid #f6ca87;padding:13px 16px;top:96px}
+.room-screen:not(.hachinosu-mode) .room-title-panel p{color:#e9f9f2;text-shadow:0 2px 8px #063a58}
+.room-screen:not(.hachinosu-mode) .room-eyebrow{color:#ffefa6}
+.ship-break-toast{position:absolute;top:38%;left:50%;transform:translateX(-50%);z-index:12;background:#09233ff2;color:#ffefaa;border:3px solid #ffc477;border-radius:16px;padding:18px 30px;font:900 clamp(13px,2vw,20px) var(--font-title);text-align:center;box-shadow:0 0 50px #fcb75c74;pointer-events:none}
+.franky-helper{display:flex;align-items:center;gap:14px;padding:10px 14px;border:1px solid #eac17c8c;background:linear-gradient(105deg,#11445a,#182642);border-radius:13px;margin:16px 0 12px;box-shadow:0 8px 24px #0006}
+.franky-helper img{width:82px;height:87px;object-fit:cover;border-radius:10px;border:2px solid #f4d68f;background:#57afcc;flex-shrink:0}
+.franky-helper div{display:flex;flex-direction:column;gap:5px}.franky-helper strong{color:#ffebbc;font:900 13px var(--font-title)}.franky-helper small{font-size:11px;line-height:1.5;color:#bce9ee}
+.door-puzzle-modal{--ship-puzzle:url('../assets/ship-merry-poster.svg')}
+.door-puzzle-piece{background-image:var(--ship-puzzle);background-size:300% 300%}
+.door-puzzle-reference{background-image:var(--ship-puzzle);background-size:100% 100%}
+.defeat-banner{position:absolute;z-index:15;left:50%;top:83px;transform:translateX(-50%);width:min(710px,95vw);padding:17px 54px 17px 24px;border:2px solid #f19b91;border-radius:15px;background:linear-gradient(125deg,#501e34,#151c39);color:#fff2e5;box-shadow:0 12px 44px #000b;display:flex;align-items:center;flex-wrap:wrap;gap:5px 15px}
+.defeat-banner strong{font:900 20px var(--font-title);color:#ffa69e}.defeat-banner span{font:600 12px/1.5 system-ui}.defeat-banner button{position:absolute;right:15px;top:12px;border:0;background:#ffd4a7;color:#452734;border-radius:6px;padding:7px;cursor:pointer}
+.boss-defeat-overlay{position:absolute;z-index:25;inset:0;display:grid;place-items:center;pointer-events:none;background:radial-gradient(circle,#681a4991,#110d29d7 72%)}.boss-defeat-overlay div{padding:30px;text-align:center;animation:defeat-pop .4s ease-out;background:#0d192edf;border:3px solid #ff937d;border-radius:25px;box-shadow:0 15px 65px #000c}.boss-defeat-overlay b{display:block;color:#ffaf8a;font:900 clamp(30px,5vw,70px) var(--font-title)}.boss-defeat-overlay strong{display:block;color:#fff4d0;font:900 clamp(18px,3vw,35px) var(--font-title);margin:10px 0}.boss-defeat-overlay span{font-size:13px;color:#f7c1b5}@keyframes defeat-pop{from{transform:scale(.65);opacity:0}}
+.blackbeard-vortex{position:absolute;z-index:7;pointer-events:none;width:270px;height:96px;border-radius:50%;border:4px solid #905fda;display:grid;place-items:center;transform-origin:center 100%;background:radial-gradient(ellipse,#010614 7%,#17051f 37%,#382d73 50%,#a377d855 62%,transparent 68%);box-shadow:0 0 34px #c37aff8f,inset 0 0 24px #734de9;transition:opacity .3s}.blackbeard-vortex b{color:#f6d3e4;font-size:40px;text-shadow:0 0 20px #fff}.blackbeard-vortex small{position:absolute;top:-31px;color:#ffe1c0;text-shadow:0 2px 8px #000;font:900 15px system-ui;white-space:nowrap}.vortex-charging{opacity:.65;animation:vortex-grow .26s infinite alternate}.vortex-active{opacity:1;animation:vortex-spin .7s linear infinite}.vortex-ending{opacity:0;transform:scale(.2)}@keyframes vortex-grow{to{transform:scale(1.05);filter:brightness(1.5)}}@keyframes vortex-spin{50%{filter:hue-rotate(36deg) brightness(1.3)}}
+[data-gear-toggle][hidden],.form-toggle.hidden{display:none!important}
+@media(max-width:850px){.port-cloud{opacity:.5}.room-screen:not(.hachinosu-mode) .room-title-panel{top:83px;max-width:250px}.room-ship .ship-sign{width:222px}.defeat-banner{top:70px}.franky-helper img{width:63px;height:76px}.franky-helper strong{font-size:11px}.room-ship .ship-graphic{height:185px}}
+@media(prefers-reduced-motion:reduce){.room-ship .ship-graphic,.room-ship .ship-glow,.port-cloud,.port-sea,.blackbeard-vortex{animation:none!important}}
+
+/* V2.16: nuevas siluetas dibujadas en alta definición, sin estirar las imágenes. */
+.room-screen:not(.hachinosu-mode) .room-ship.room-door-scene{width:425px;height:285px;bottom:102px}
+.room-ship .ship-graphic{left:0;top:-18px;height:245px;width:100%;filter:drop-shadow(0 10px 8px #16334b80)}
+.room-ship .ship-graphic img{width:100%;height:100%;object-fit:contain;image-rendering:auto}
+.room-ship .ship-sign{bottom:-9px}
+.room-screen.hachinosu-mode .hachinosu-exit.room-ship{width:415px;height:290px;bottom:102px}
+@media(max-width:850px){.room-screen:not(.hachinosu-mode) .room-ship.room-door-scene{height:268px;width:400px}.room-ship .ship-graphic{height:227px}}
+
+/* Puzzle usa imagenes PNG locales: eliminar restos de los fondos SVG antiguos. */
+.door-puzzle-piece,.door-puzzle-reference{background-image:none!important;background-color:#15334b}

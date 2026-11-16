@@ -1,0 +1,94 @@
+/* V2.18 — Destinos de Namek y exploración API inspirada en el mundo de One Piece */
+[hidden]{display:none!important}
+.db-top{gap:12px}
+.db-connection{flex:1;justify-content:center;min-width:265px}
+.api-badge{border:1px solid #8baf9e;border-radius:999px;padding:7px 11px;background:#1c3e50;color:#f7edce;font-weight:900;font-size:11px;letter-spacing:.035em;white-space:nowrap}
+.api-badge.connected{background:#123c36;border-color:#89cfa5;color:#b4ffcc}
+.api-badge.partial{background:#493c1a;border-color:#e5bd69;color:#ffe2a0}
+.api-badge.disconnected{background:#5c2830;border-color:#f0989c;color:#ffc8c9}
+.api-badge.pending{background:#273c54;color:#bfd8ef}
+.api-counts{color:#c8e3e0;font-size:11px;font-weight:800}
+.db-stage{min-height:490px;--floor:98px}
+.db-world{overflow:visible}
+.capsule-layer,.explorer-beacons{position:absolute;inset:0;pointer-events:none}
+.saiyan-pod{position:absolute;bottom:calc(var(--floor) + 15px);width:285px;height:250px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:end;gap:3px;filter:drop-shadow(0 6px 12px #1138448c)}
+.saiyan-pod img{display:block;width:240px;height:174px;object-fit:contain;animation:pod-bob 3.2s ease-in-out infinite alternate}
+.saiyan-pod[data-kind="transformations"] img{animation-delay:.4s}
+.saiyan-pod[data-kind="battle"] img{animation-delay:.9s}
+.saiyan-pod .pod-name{display:block;min-width:220px;text-align:center;font:900 14px Impact,'Arial Narrow',sans-serif;letter-spacing:.075em;background:#0a2940ec;border:2px solid #f0d092;color:#ffe2a2;padding:9px 14px;border-radius:9px;text-shadow:0 2px 2px #000}
+.saiyan-pod small{font-size:10px;letter-spacing:.13em;font-weight:900;text-shadow:0 1px 3px #000;color:#f5ffcb}
+.saiyan-pod:after{content:'';width:220px;height:14px;position:absolute;bottom:-16px;border-radius:50%;background:#1e45507c;filter:blur(9px)}
+.escape-pod .home-hatch{width:145px;height:156px;border:12px solid #876748;background:radial-gradient(#c8e6ed,#6da3aa 60%,#163f58);display:grid;place-items:center;font-size:66px;border-radius:95px 95px 20px 20px;color:#fff3ae;text-shadow:0 4px 4px #123}
+@keyframes pod-bob{to{transform:translateY(-5px)}}
+.mode-battle .capsule-layer,.mode-explore .capsule-layer{display:none!important}
+.mode-hub .explorer-beacons,.mode-battle .explorer-beacons,.mode-hub .explorer-return,.mode-battle .explorer-return{display:none!important}
+.mode-explore .boss,.mode-hub .boss{display:none!important}
+.mode-hub .battle-hud,.mode-explore .battle-hud{display:none!important}
+.scene-indicator{position:absolute;z-index:15;top:15px;right:20px;max-width:290px;background:#0a2b3fdb;border:1px solid #c8c19a80;border-radius:11px;padding:12px 15px;color:#f5f3d1;display:flex;flex-direction:column;gap:4px;pointer-events:none;box-shadow:0 6px 16px #0005}
+.scene-indicator #location-label{color:#ffe7a3;letter-spacing:.1em;font-weight:900;font-size:11px}
+.scene-indicator #scene-hint{font-size:11px;line-height:1.45}
+.mode-battle .scene-indicator{top:110px}
+.explorer-beacon{position:absolute;bottom:calc(var(--floor) + 20px);width:158px;height:207px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:end;text-align:center;gap:4px;pointer-events:auto;cursor:pointer}
+.explorer-beacon:before{content:'';position:absolute;inset:7px 14px 15px;z-index:-1;background:linear-gradient(#3b7e8c9a,#0c3047d9);border:2px solid #f7de9f7a;border-radius:23px 23px 12px 12px;box-shadow:0 15px 25px #062e3766}
+.explorer-beacon:after{content:'E · INSPECCIONAR';color:#ffe3aa;position:absolute;bottom:-18px;font-size:9px;font-weight:900;letter-spacing:.07em;opacity:.8}
+.beacon-avatar{display:block;height:128px;width:120px;object-fit:contain;filter:drop-shadow(0 4px 5px #042a4288)}
+.beacon-title{color:#fff6d1;max-width:140px;font-size:11px;line-height:1.17;font-weight:900;text-shadow:0 2px 3px #061925;overflow-wrap:break-word}
+.beacon-meta{color:#c3e7df;font-size:9px;max-width:133px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.editorial-label{font-size:8px;color:#ffcd92;font-weight:900}
+.explorer-return{position:absolute;bottom:calc(var(--floor) + 25px);left:125px;width:174px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#fff1be;font-weight:900;font-size:12px;text-shadow:0 2px 3px #102431;letter-spacing:.06em}
+.return-orb{width:120px;height:152px;border:10px solid #bb9762;border-radius:70px 70px 7px 7px;background:radial-gradient(#bce8e8,#74b6bf 45%,#0c3d58);display:grid;place-items:center;font-size:66px;box-shadow:0 0 25px #cfebcf6b}
+.explorer-return small{font-size:10px}
+.fighter.hero.thinking:after{content:''}
+.thinking-question{display:none;position:absolute;top:-36px;right:0;color:#ffef90;font-size:53px;font-weight:900;transform:scaleX(var(--face));text-shadow:0 3px 5px #193d52;animation:think-bob .6s ease-in-out infinite alternate}
+.fighter.hero.thinking .thinking-question{display:block}
+.fighter.hero.thinking img{animation:none!important;transform:rotate(-2deg)}
+.fighter.hero.transforming .hero-aura{opacity:1!important;filter:drop-shadow(0 0 42px #fff700)}
+@keyframes think-bob{to{translate:0 -9px}}
+.db-search-layer{z-index:45;align-items:center}
+.db-search-layer .catalog-panel{width:min(850px,97%);max-height:88dvh;overflow:hidden;display:flex;flex-direction:column}
+.db-search-layer .catalog-filters{flex-shrink:0}
+.db-search-layer .catalog-grid{overflow-y:auto;max-height:50dvh;min-height:80px;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));padding:15px;gap:9px}
+.db-search-layer .catalog-card{min-height:160px;padding:9px 5px}
+.db-search-layer .catalog-card img{height:92px;max-width:100%;object-fit:contain}
+.db-search-layer .catalog-card strong{font-size:12px;line-height:1.25}
+.db-search-layer .catalog-footer{margin-top:auto}
+.db-detail-layer{position:fixed;inset:0;z-index:52;padding:18px;display:grid;place-items:center;background:#04121add;backdrop-filter:blur(7px)}
+.db-detail-modal{width:min(820px,100%);max-height:90dvh;overflow-y:auto;border:2px solid #efd498;border-radius:19px;background:linear-gradient(135deg,#0d3c50,#061b2a);color:#f8f0d8;padding:20px;box-shadow:0 20px 70px #000a}
+.db-detail-close{margin-left:auto;display:block}
+.db-detail-modal .catalog-detail{margin:10px 0;border-color:#749aa6;background:#12394c}
+.db-detail-modal .detail-flex{align-items:flex-start;gap:24px}
+.db-detail-modal .detail-img{width:190px;max-width:35%;height:245px;object-fit:contain}
+.db-detail-copy{min-width:0;flex:1;max-height:65dvh;overflow-y:auto}
+.db-detail-copy h3{font-size:clamp(26px,4vw,42px);color:#ffe1a2;font-weight:900;line-height:1.1;margin:6px 0 16px}
+.db-description{color:#e1edea;white-space:pre-line;line-height:1.6;font-size:13px;max-height:300px;overflow:auto}
+.detail-source{font-size:11px;font-weight:900;color:#94eaba;letter-spacing:.03em}
+.detail-tip{font-size:11px;color:#bdd1d4;text-align:right;margin-top:9px}
+.mode-hub .rock-a,.mode-hub .rock-b{opacity:.3}
+.mode-battle .rock-c,.mode-battle .rock-d{opacity:.12}
+@media(max-width:800px){.db-connection{width:100%;order:3;justify-content:flex-start}.api-counts{font-size:10px}.scene-indicator{top:11px;right:10px;width:190px;padding:8px;font-size:10px}.scene-indicator #scene-hint{font-size:10px}.mode-battle .scene-indicator{top:110px}.db-stage{min-height:420px}.saiyan-pod{transform:translateX(-50%) scale(.9)}.db-detail-modal{padding:12px}.db-detail-modal .detail-flex{flex-direction:column;align-items:center}.db-detail-modal .detail-img{height:130px;max-width:70%}.db-detail-copy{max-height:52dvh}.db-search-layer .catalog-panel{max-height:90dvh}.db-search-layer .catalog-grid{max-height:43dvh}}
+/* Stickman rigs: articulated arms/legs, rather than a static sprite walking up/down. */
+.fighter .rig-frame{position:absolute;inset:0;pointer-events:none}
+.fighter .rig-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.fighter.hero.walking img,.fighter.hero.running img,.fighter.hero.jumping img,.fighter.boss.attacking img{animation:none;transform:none}
+.fighter.hero.walking .rig-frame{animation:hero-step .23s ease-in-out infinite alternate}
+.fighter.hero.running .rig-frame{animation:hero-step .14s ease-in-out infinite alternate}
+.fighter.hero.jumping .rig-frame{transform:rotate(-8deg)}
+.rig-arm-left{transform-origin:40% 47%}.rig-arm-right{transform-origin:60% 47%}
+.rig-leg-left{transform-origin:46% 63%}.rig-leg-right{transform-origin:54% 63%}
+.fighter.hero.walking .rig-arm-left,.fighter.hero.running .rig-arm-left{animation:db-left-arm .32s ease-in-out infinite alternate}
+.fighter.hero.walking .rig-arm-right,.fighter.hero.running .rig-arm-right{animation:db-right-arm .32s ease-in-out infinite alternate}
+.fighter.hero.walking .rig-leg-left,.fighter.hero.running .rig-leg-left{animation:db-left-leg .31s ease-in-out infinite alternate}
+.fighter.hero.walking .rig-leg-right,.fighter.hero.running .rig-leg-right{animation:db-right-leg .31s ease-in-out infinite alternate}
+.fighter.hero.running .rig-arm-left,.fighter.hero.running .rig-arm-right,.fighter.hero.running .rig-leg-left,.fighter.hero.running .rig-leg-right{animation-duration:.20s}
+.fighter.boss.attacking .rig-arm-right{animation:boss-arm-blast .27s ease-out}
+@keyframes db-left-arm{from{transform:rotate(-17deg)}to{transform:rotate(19deg)}}
+@keyframes db-right-arm{from{transform:rotate(17deg)}to{transform:rotate(-19deg)}}
+@keyframes db-left-leg{from{transform:rotate(19deg)}to{transform:rotate(-20deg)}}
+@keyframes db-right-leg{from{transform:rotate(-19deg)}to{transform:rotate(20deg)}}
+@keyframes boss-arm-blast{from{transform:rotate(-7deg)}50%{transform:rotate(-44deg)}to{transform:rotate(0)}}
+
+.fighter.hero.thinking .rig-arm-left{transform:rotate(-87deg)!important;animation:none!important}
+.fighter.hero.thinking .rig-arm-right{transform:rotate(87deg)!important;animation:none!important}
+.fighter.hero.thinking .rig-leg-left,.fighter.hero.thinking .rig-leg-right{animation:none!important}
+#switch-fighter:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:460px){.db-connection{min-width:0}.api-badge{font-size:9px}.api-counts{font-size:9px}.mobile-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));left:8px;right:8px;gap:5px;bottom:10px}.mobile-controls button{min-width:0;width:100%;height:38px;font-size:12px}.scene-indicator{max-width:160px}}

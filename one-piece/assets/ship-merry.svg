@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 360" role="img">
+<defs><linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#cf9662"/><stop offset=".44" stop-color="#945434"/><stop offset="1" stop-color="#432b31"/></linearGradient><linearGradient id="white" x1="0" y1="0" x2=".28" y2="1"><stop stop-color="#fff9e6"/><stop offset="1" stop-color="#dbc9a8"/></linearGradient><linearGradient id="red" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#ca5152"/><stop offset="1" stop-color="#5b1738"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#fff0a4"/><stop offset="1" stop-color="#c28735"/></linearGradient><filter id="shadow" x="-25%" width="150%" y="-45%" height="200%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#17304a" flood-opacity=".4"/></filter></defs>
+<g fill="none" stroke-linecap="round"><path d="M50 322q110 -12 185 0t167 0 167 0" stroke="#aef4f3" stroke-width="5" opacity=".8"/><path d="M95 335q75 -9 119 0m215-3q68 -5 107 0" stroke="#eaffeb" stroke-width="3" opacity=".6"/></g>
+<g filter="url(#shadow)">
+<title>Going Merry: carabela del Sombrero de Paja con proa de carnero</title>
+<!-- Casco y cubierta -->
+<path d="M68 244 Q288 250 515 241 L548 260 Q518 302 466 312 L132 309 Q86 295 68 244Z" fill="url(#wood)" stroke="#52372f" stroke-width="7"/>
+<path d="M72 247Q305 260 525 248" stroke="#fff9e1" stroke-width="13" fill="none"/>
+<path d="M87 276Q289 286 520 273" stroke="#e6b579" stroke-width="6" fill="none"/><path d="M133 302Q300 319 470 302" stroke="#462d2b" stroke-width="5" fill="none"/>
+<path d="M103 220L202 217L222 245H87Z" fill="#d49358" stroke="#684733" stroke-width="5"/>
+<path d="M104 210L124 188H180L197 210" fill="#cf6d44" stroke="#65402b" stroke-width="5"/>
+<rect x="135" y="197" width="23" height="18" rx="8" fill="#a5ecf7" stroke="#f9deb3" stroke-width="5"/>
+<path d="M91 251Q282 243 523 251" fill="none" stroke="#f9f4d6" stroke-width="10"/><g stroke="#ede8c8" stroke-width="5"><path d="M115 251v24"/><path d="M154 251v24"/><path d="M193 251v24"/><path d="M232 251v24"/><path d="M271 251v24"/><path d="M310 251v24"/><path d="M349 251v24"/><path d="M388 251v24"/><path d="M427 251v24"/><path d="M466 251v24"/><path d="M505 251v24"/></g>
+<!-- Velas y mástiles -->
+<path d="M273 62V259 M425 140V259" stroke="#574034" stroke-width="11" stroke-linecap="round"/>
+<path d="M273 63 Q170 94 159 213 Q210 209 272 229Z" fill="url(#white)" stroke="#695043" stroke-width="5"/>
+<path d="M278 72Q365 106 385 214Q334 205 279 231Z" fill="#fff6dc" stroke="#695043" stroke-width="5"/>
+<path d="M429 145Q488 167 523 220Q476 211 429 230Z" fill="#f2b67c" stroke="#6b4940" stroke-width="5"/>
+<path d="M446 153Q466 165 479 185 M451 185L492 210" stroke="#d46b52" stroke-width="8"/>
+<path d="M182 108L274 63L376 110 M382 215L425 141" fill="none" stroke="#594438" stroke-width="2.5"/>
+<path d="M270 60v-35l77 11-3 38Z" fill="#192c3c" stroke="#e8c381" stroke-width="4"/>
+<g transform="translate(308 49) scale(.38)" stroke="#26343f" stroke-width="3" stroke-linejoin="round"><path d="M-27 -15L27 21 M27 -15L-27 21" stroke-width="6" stroke="#f4f2dd"/><circle r="24" fill="#f8f4df"/><path d="M-20 21Q-27 12-22 0h44Q28 16 18 21Z" fill="#f3f0d9"/><circle cx="-8" cy="-2" r="4.5" fill="#28343e"/><circle cx="8" cy="-2" r="4.5" fill="#28343e"/><path d="M-6 10q7 6 13 0" fill="none" stroke="#24323a" stroke-width="2"/><path d="M-27 -17q26-10 54 0l-6 6q-19-5-42 0Z" fill="#e1b544"/><path d="M-20 -13q20-7 41 0" stroke="#bd4643" stroke-width="4"/></g>
+<g transform="translate(240 157) scale(.60)" stroke="#26343f" stroke-width="3" stroke-linejoin="round"><path d="M-27 -15L27 21 M27 -15L-27 21" stroke-width="6" stroke="#f4f2dd"/><circle r="24" fill="#f8f4df"/><path d="M-20 21Q-27 12-22 0h44Q28 16 18 21Z" fill="#f3f0d9"/><circle cx="-8" cy="-2" r="4.5" fill="#28343e"/><circle cx="8" cy="-2" r="4.5" fill="#28343e"/><path d="M-6 10q7 6 13 0" fill="none" stroke="#24323a" stroke-width="2"/><path d="M-27 -17q26-10 54 0l-6 6q-19-5-42 0Z" fill="#e1b544"/><path d="M-20 -13q20-7 41 0" stroke="#bd4643" stroke-width="4"/></g>
+<g stroke="#695046" stroke-width="2" fill="none" opacity=".93"><path d="M274 52L105 261 M275 54L509 258 M275 55L382 247 M426 112L270 255"/><path d="M235 89L235 253M321 88L321 257" stroke-dasharray="3 5"/><path d="M239 97l-8 146m94-150l7 146"/></g>
+<!-- Portillos, bordas y cabos -->
+<g fill="#65b6c8" stroke="#f4d5a1" stroke-width="5"><circle cx="169" cy="275" r="8"/><circle cx="237" cy="275" r="8"/><circle cx="305" cy="275" r="8"/><circle cx="373" cy="275" r="8"/><circle cx="443" cy="275" r="8"/></g>
+<path d="M123 234q13 -24 26 0M147 234q13 -24 26 0" fill="none" stroke="#f6eee0" stroke-width="5"/>
+<!-- Carnero blanco en proa, con cuernos espirales -->
+<path d="M511 244q14 -19 17 -36 6 -17 20 -13 21 0 17 26l-6 25 16 5-5 35-29-8-21-19Z" fill="#f2efe6" stroke="#765d4f" stroke-width="5"/>
+<path d="M543 217q-23-29-39-8-10 22 13 28 16 2 17-16-3-11-13-6" fill="none" stroke="#c7c4ba" stroke-width="10"/>
+<ellipse cx="562" cy="236" rx="13" ry="12" fill="#f7f3e8" stroke="#765d4f" stroke-width="4"/><circle cx="558" cy="233" r="3.3" fill="#242b35"/>
+<path d="M570 245q-13 11-23 4" fill="none" stroke="#72564a" stroke-width="3"/><path d="M518 250l-15 17" stroke="#f4eee0" stroke-width="6"/>
+</g></svg>

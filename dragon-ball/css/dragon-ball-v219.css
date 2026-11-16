@@ -1,0 +1,39 @@
+/* V2.19: personajes y cápsulas basados en las seis imágenes entregadas.
+   Las ilustraciones se mantienen enteras: no hay extremidades recortadas sueltas. */
+.fighter.hero{width:180px;height:255px}
+.fighter.boss{width:215px;height:259px}
+.fighter .rig-frame{transform-origin:50% 95%}
+.fighter .rig-frame img{object-fit:contain}
+.fighter .rig-frame img[hidden]{display:none!important}
+.fighter.hero.walking .rig-frame{animation:v219-step .31s ease-in-out infinite alternate}
+.fighter.hero.running .rig-frame{animation:v219-step .20s ease-in-out infinite alternate}
+.fighter.hero.walking .rig-frame img,.fighter.hero.running .rig-frame img{animation:none!important;transform:none!important}
+.fighter.hero.jumping .rig-frame{transform:rotate(-6deg)}
+.fighter.hero.jumping .rig-frame img{transform:none!important}
+.fighter.boss.attacking .rig-frame{animation:v219-boss-shot .27s ease-out}
+.fighter.boss.attacking .rig-frame img{animation:none!important}
+.fighter.boss.charging-death-ball .boss-aura{opacity:1;background:radial-gradient(ellipse,#f189ffb3 10%,#ad39d577 46%,transparent 72%);filter:drop-shadow(0 0 25px #f068f9);animation:pulse-aura .45s infinite alternate}
+.fighter.boss.charging-death-ball .rig-frame{animation:v219-charge .35s ease-in-out infinite alternate}
+.fighter.boss.charging-death-ball img{animation:none!important}
+@keyframes v219-step{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-5px) rotate(2deg)}}
+@keyframes v219-boss-shot{from{transform:rotate(0)}45%{transform:rotate(-8deg) translateY(-4px)}to{transform:rotate(0)}}
+@keyframes v219-charge{from{transform:translateY(0) scale(1)}to{transform:translateY(-3px) scale(1.03)}}
+.fighter-choice img{object-fit:contain;filter:drop-shadow(0 10px 12px #071626)}
+.saiyan-pod img{width:198px;height:173px;object-fit:contain;filter:drop-shadow(0 10px 12px #09202f9c)}
+.saiyan-pod[data-kind="battle"] img{filter:drop-shadow(0 0 15px #dc5fda80)}
+.saiyan-pod[data-kind="characters"] img{filter:drop-shadow(0 0 13px #77d4ff85)}
+.saiyan-pod[data-kind="transformations"] img{filter:drop-shadow(0 0 13px #ffda688a)}
+/* Señal épica breve sin tapar los combatientes. */
+.mode-battle .battle-banner{font-size:clamp(23px,2.7vw,40px);left:380px;top:25%;width:390px}
+/* Carga gravitatoria de 3 segundos; no daña antes del lanzamiento. */
+.death-ball-charge{position:absolute;z-index:14;transform:translate(-50%,-50%);width:180px;height:180px;display:grid;place-items:center;pointer-events:none;filter:drop-shadow(0 0 25px #b641fd)}
+.death-ball-charge::before{content:"";position:absolute;inset:-34px;border:3px dashed #e4adf7a8;border-radius:50%;animation:v219-spiral 1.4s linear infinite;box-shadow:0 0 19px #d43fe7}
+.death-ball-charge::after{content:"";position:absolute;inset:-23px;border:5px solid #d35cff88;border-radius:50%;animation:v219-spiral 2s linear infinite reverse}
+.death-ball-orb{display:block;width:135px;height:135px;border-radius:50%;transform:scale(var(--growth,.28));background:radial-gradient(circle at 32% 29%,#fff5ff 0%,#f9a9f9 12%,#d758ed 36%,#5c166f 69%,#180524 93%);box-shadow:0 0 35px #f066ff,0 0 85px #ca33e9,inset -17px -14px 22px #21092a;animation:v219-orb-shimmer .35s ease-in-out infinite alternate}
+.death-ball-countdown{position:absolute;bottom:-30px;white-space:nowrap;background:#180824e8;border:1px solid #ffc0ff;border-radius:9px;padding:4px 10px;font-weight:900;font-size:14px;color:#fff4fb;text-shadow:0 1px 3px #440b56}
+.projectile.death-ball-shot{width:142px;height:142px;border-radius:50%;background:radial-gradient(circle at 30% 28%,#fff8ff,#f1b5ff 17%,#bb42e7 36%,#6b177d 65%,#1e032c 95%);box-shadow:0 0 25px #f9bfff,0 0 54px #bc44eb,0 0 94px #ae45ff;transform:translate(-50%,-50%);animation:v219-deathball-pulse .23s ease-in-out infinite alternate;z-index:15}
+.projectile.death-ball-shot::after{content:"";position:absolute;inset:-18px;border:3px dashed #fac5ff;border-radius:50%;animation:v219-spiral .8s linear infinite}
+@keyframes v219-orb-shimmer{to{filter:brightness(1.24)}}
+@keyframes v219-deathball-pulse{to{filter:brightness(1.27) saturate(1.23)}}
+@keyframes v219-spiral{to{transform:rotate(360deg)}}
+@media(max-width:700px){.fighter.hero{width:155px;height:225px}.fighter.boss{width:180px;height:235px}.saiyan-pod img{width:170px;height:161px}.death-ball-charge{scale:.85}}
