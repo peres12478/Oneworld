@@ -1,5 +1,5 @@
 # OneWorld Develop · Versión 2.26 — Dos modos
-
+## Miguel Ángel Pérez García
 Este paquete parte de **`Oneworld-Develop.zip`** recibido del usuario y conserva sus datos personales.
 
 ## ¿Qué cambió?
